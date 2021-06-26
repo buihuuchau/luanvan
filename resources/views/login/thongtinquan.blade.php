@@ -18,26 +18,27 @@
 	<div class="container">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h2 class="text-center">Đăng ký quán</h2>
+				<h2 class="text-center">Thông tin quán</h2>
 			</div>
 			<div class="panel-body">
 				<form action="{{ route('dodangkyquan')}}" method="post" enctype="multipart/form-data">
 					{{csrf_field()}}
 					<div class="form-group">
 					<label>Tài khoản:</label>
-					<input required="true" type="text" class="form-control" name="accquan">
+					<input required="true" type="text" class="form-control" name="accquan" value="{{$quan->accquan}}">
 					</div>
 					<div class="form-group">
 					<label>Mật khẩu:</label>
-					<input required="true" type="password" class="form-control" name="pwdquan">
+					<input required="true" type="password" class="form-control" name="pwdquan" value="{{$quan->pwdquan}}">
 					</div>
 					<div class="form-group">
 					<label>Tên quán:</label>
-					<input type="text" class="form-control" name="tenquan">
+					<input required="true" type="text" class="form-control" name="tenquan" value="{{$quan->tenquan}}">
 					</div>
 					<div class="form-group">
 					<label>Hình ảnh quán:</label>
-					<input type="file" class="form-control" name="hinhquan">
+					<input required="true" type="file" class="form-control" name="hinhquan">
+					<img src="{{$quan->hinhquan}}" alt="" width="200px" height="200px">
 					</div>
 					<div class="form-group">
 					<label>Địa chỉ quán:</label>

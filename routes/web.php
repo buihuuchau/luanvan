@@ -35,6 +35,10 @@ Route::prefix('/')->group(function () {
         'as' => 'dodangnhapquan',
         'uses' => 'App\Http\Controllers\quanController@dodangnhapquan'
     ]);
+    Route::get('/thongtinquan', [
+        'as' => 'thongtinquan',
+        'uses' => 'App\Http\Controllers\quanController@thongtinquan'
+    ]);
 });
 // QUAN LY QUAN
 

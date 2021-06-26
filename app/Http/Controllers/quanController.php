@@ -5,6 +5,8 @@ use DB;
 // use App\Traits\StorageImageTrait;
 Use Alert;
 use Illuminate\Support\Facades\Redirect;
+use Session;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class quanController extends Controller
@@ -20,7 +22,8 @@ class quanController extends Controller
         $quan['pwdquan'] = $pwdquan;
         $quan['tenquan'] = $request->tenquan;
         $hinhquan = $request->file('hinhquan')->store('public/hinhanh');
-        $quan['hinhquan'] = $hinhquan;
+        $linkhinhquan = 'storage'.substr($hinhquan, 6);
+        $quan['hinhquan'] = $linkhinhquan;
         $quan['diachiquan'] = $request->diachiquan;
         $quan['ngaythanhlap'] = $request->ngaythanhlap;
         $check = DB::table('quan')
@@ -40,14 +43,24 @@ class quanController extends Controller
     public function dodangnhapquan(Request $request){
         $accquan = $request->accquan;
         $pwdquan = md5($request->pwdquan);
-        $data = DB::table('quan')
+        $check = DB::table('quan')
                 ->where('accquan',$accquan)
                 ->where('pwdquan',$pwdquan)
                 ->first();
-        if($data){
-            echo "co taikhoan";
+        if($check){
+            $id = $check->id;
+            Session::put('idquan', $id);
+            return redirect(route('thongtinquan'));
         }
-        else{echo "tai khoan sai";}
-        // return view('login.thongtinquan');
+        else{
+            return back();
+        } 
+    }
+    public function thongtinquan(){
+        $id = Session::get('idquan');
+        $quan = DB::table('quan')
+                ->where('id', $id)
+                ->first();
+        return view('login.thongtinquan',compact('quan'));
     }
 }
