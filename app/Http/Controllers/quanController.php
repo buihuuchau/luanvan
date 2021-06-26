@@ -19,6 +19,10 @@ class quanController extends Controller
         $quan = array();
         $quan['accquan'] = $request->accquan;
         $pwdquan = md5($request->pwdquan);
+        $rpwdquan = md5($request->rpwdquan);
+        if($pwdquan != $rpwdquan){
+            return '<script type="text/javascript">alert("2 mật khẩu không trùng khớp");</script>';
+        }
         $quan['pwdquan'] = $pwdquan;
         $quan['tenquan'] = $request->tenquan;
         $hinhquan = $request->file('hinhquan')->store('public/hinhanh');
@@ -56,11 +60,45 @@ class quanController extends Controller
             return back();
         } 
     }
+    public function dangxuatquan(){
+        Session::forget('idquan');
+        return view('login.dangnhapquan');
+    }
     public function thongtinquan(){
         $id = Session::get('idquan');
         $quan = DB::table('quan')
                 ->where('id', $id)
                 ->first();
         return view('login.thongtinquan',compact('quan'));
+    }
+    public function suathongtinquan(Request $request){
+        $id = Session::get('idquan');
+        $quan['tenquan'] = $request->tenquan;
+        if($request->file('hinhquan')!= null){
+            $hinhquan = $request->file('hinhquan')->store('public/hinhanh');
+            $linkhinhquan = 'storage'.substr($hinhquan, 6);
+            $quan['hinhquan'] = $linkhinhquan;
+        }
+        $quan['diachiquan'] = $request->diachiquan;
+        DB::table('quan')
+            ->where('id',$id)   
+            ->update($quan);     
+        return back();
+    }
+    public function doimatkhauquan(Request $request){
+        $id = Session::get('idquan');
+        $check = DB::table('quan')
+                ->where('id',$id)
+                ->first();
+        if($check->pwdquan === md5($request->opwdquan) && $request->npwdquan === $request->rnpwdquan){
+            $quan['pwdquan'] = md5($request->rnpwdquan);
+            DB::table('quan')
+                ->where('id',$id)
+                ->update($quan);
+            return back();
+        }
+        else{
+            return '<script type="text/javascript">alert("Mật khẩu không khớp");</script>'; 
+        }
     }
 }

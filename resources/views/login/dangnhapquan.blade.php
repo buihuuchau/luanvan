@@ -31,9 +31,13 @@
 					<label>Mật khẩu:</label>
 					<input required="true" type="password" class="form-control" name="pwdquan">
 					</div>
+					<div class="col text-center">
 					<button class="btn btn-success">Đăng nhập</button>
+					</div>
 				</form>
-				
+			</div>
+			<div class="col text-center">
+				<a href="{{ route('dangkyquan')}}"><button class="btn btn-danger">Chưa có tài khoản</button></a>
 			</div>
 		</div>
 	</div>

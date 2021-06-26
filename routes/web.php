@@ -31,6 +31,10 @@ Route::prefix('/')->group(function () {
         'as' => 'dangnhapquan',
         'uses' => 'App\Http\Controllers\quanController@dangnhapquan'
     ]);
+    Route::get('/dangxuatquan', [
+        'as' => 'dangxuatquan',
+        'uses' => 'App\Http\Controllers\quanController@dangxuatquan'
+    ]);
     Route::post('/dodangnhapquan', [
         'as' => 'dodangnhapquan',
         'uses' => 'App\Http\Controllers\quanController@dodangnhapquan'
@@ -38,6 +42,14 @@ Route::prefix('/')->group(function () {
     Route::get('/thongtinquan', [
         'as' => 'thongtinquan',
         'uses' => 'App\Http\Controllers\quanController@thongtinquan'
+    ]);
+    Route::post('/suathongtinquan', [
+        'as' => 'suathongtinquan',
+        'uses' => 'App\Http\Controllers\quanController@suathongtinquan'
+    ]);
+    Route::post('/doimatkhauquan', [
+        'as' => 'doimatkhauquan',
+        'uses' => 'App\Http\Controllers\quanController@doimatkhauquan'
     ]);
 });
 // QUAN LY QUAN

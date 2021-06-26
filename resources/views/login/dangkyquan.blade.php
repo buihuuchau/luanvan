@@ -31,6 +31,9 @@
 					<label>Mật khẩu:</label>
 					<input required="true" type="password" class="form-control" name="pwdquan">
 					</div>
+					<label>Nhập lại mật khẩu:</label>
+					<input required="true" type="password" class="form-control" name="rpwdquan">
+					</div>
 					<div class="form-group">
 					<label>Tên quán:</label>
 					<input required="true" type="text" class="form-control" name="tenquan">
@@ -53,7 +56,7 @@
 				</form>			
 			</div>
 			<div class="col text-center">
-				<a href="{{ route('dangnhapquan')}}"><button class="btn btn-primary">Đăng nhập</button></a>
+				<a href="{{ route('dangnhapquan')}}"><button class="btn btn-primary">Đã có tài khoản</button></a>
 			</div>
 		</div>
 	</div>
