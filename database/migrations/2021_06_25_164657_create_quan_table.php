@@ -20,7 +20,9 @@ class CreateQuanTable extends Migration
             $table->string('tenquan');
             $table->string('hinhquan');
             $table->string('diachiquan');
-            $table->datetime('ngaythanhlap');
+            $table->string('website');
+            $table->bigInteger('sdtquan');
+            $table->date('ngaythanhlap');
             $table->timestamps();
         });
     }

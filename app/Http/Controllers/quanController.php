@@ -19,16 +19,14 @@ class quanController extends Controller
         $quan = array();
         $quan['accquan'] = $request->accquan;
         $pwdquan = md5($request->pwdquan);
-        $rpwdquan = md5($request->rpwdquan);
-        if($pwdquan != $rpwdquan){
-            return '<script type="text/javascript">alert("2 mật khẩu không trùng khớp");</script>';
-        }
         $quan['pwdquan'] = $pwdquan;
         $quan['tenquan'] = $request->tenquan;
         $hinhquan = $request->file('hinhquan')->store('public/hinhanh');
         $linkhinhquan = 'storage'.substr($hinhquan, 6);
         $quan['hinhquan'] = $linkhinhquan;
         $quan['diachiquan'] = $request->diachiquan;
+        $quan['website'] = $request->website;
+        $quan['sdtquan'] = $request->sdtquan;
         $quan['ngaythanhlap'] = $request->ngaythanhlap;
         $check = DB::table('quan')
                 ->where('accquan',$request->accquan)
@@ -80,6 +78,8 @@ class quanController extends Controller
             $quan['hinhquan'] = $linkhinhquan;
         }
         $quan['diachiquan'] = $request->diachiquan;
+        $quan['website'] = $request->website;
+        $quan['sdtquan'] = $request->sdtquan;
         DB::table('quan')
             ->where('id',$id)   
             ->update($quan);     
@@ -90,7 +90,7 @@ class quanController extends Controller
         $check = DB::table('quan')
                 ->where('id',$id)
                 ->first();
-        if($check->pwdquan === md5($request->opwdquan) && $request->npwdquan === $request->rnpwdquan){
+        if($check->pwdquan === md5($request->opwdquan)){
             $quan['pwdquan'] = md5($request->rnpwdquan);
             DB::table('quan')
                 ->where('id',$id)
@@ -98,7 +98,7 @@ class quanController extends Controller
             return back();
         }
         else{
-            return '<script type="text/javascript">alert("Mật khẩu không khớp");</script>'; 
+            return '<script type="text/javascript">alert("Mật khẩu sai");</script>'; 
         }
     }
 }

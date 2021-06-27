@@ -23,6 +23,7 @@ class CreateThanhvienTable extends Migration
             $table->date('namsinh');
             $table->string('sex');
             $table->string('diachi');
+            $table->bigInteger('sdt');
             $table->string('ngayvaolam');
             $table->string('idchucvu');
             $table->bigInteger('luong');

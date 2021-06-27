@@ -27,33 +27,52 @@
 					<label>Tài khoản:</label>
 					<input required="true" type="text" class="form-control" name="accquan">
 					</div>
+
 					<div class="form-group">
 					<label>Mật khẩu:</label>
-					<input required="true" type="password" class="form-control" name="pwdquan">
+					<input type="password" class="form-control" placeholder="mật khẩu phải chứa 8 ký tự trở lên có ít nhất một số và một chữ hoa và chữ thường"
+						id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="pwdquan" required>
 					</div>
+
+					<div class="form-group">
 					<label>Nhập lại mật khẩu:</label>
-					<input required="true" type="password" class="form-control" name="rpwdquan">
+					<input type="password" class="form-control" id="confirm_password" name="rpwdquan" required>
 					</div>
+
 					<div class="form-group">
 					<label>Tên quán:</label>
 					<input required="true" type="text" class="form-control" name="tenquan">
 					</div>
+
 					<div class="form-group">
 					<label>Hình ảnh quán:</label>
 					<input required="true" type="file" class="form-control" name="hinhquan">
 					</div>
+
 					<div class="form-group">
 					<label>Địa chỉ quán:</label>
 					<input required="true" type="text" class="form-control" name="diachiquan">
 					</div>
+
+					<div class="form-group">
+					<label>Website:</label>
+					<input required="true" type="url" class="form-control" name="website" pattern="https?://.+" placeholder="http:// or https://">
+					</div>
+
+					<div class="form-group">
+					<label>Số điện thoại:</label>
+					<input required="true" type="tel" class="form-control" name="sdtquan" placeholder="0123456789" pattern="[0-9]{10}">
+					</div>
+
 					<div class="form-group">
 					<label>Ngày thành lập:</label>
 					<input required="true" type="date" class="form-control" name="ngaythanhlap">
 					</div>
+
 					<div class="col text-center">
 					<button class="btn btn-danger">Đăng ký</button>
 					</div>
-				</form>			
+				</form>
 			</div>
 			<div class="col text-center">
 				<a href="{{ route('dangnhapquan')}}"><button class="btn btn-primary">Đã có tài khoản</button></a>
@@ -61,4 +80,21 @@
 		</div>
 	</div>
 </body>
+
+<script>
+	var password = document.getElementById("password"),
+	confirm_password = document.getElementById("confirm_password");
+
+	function validatePassword(){
+		if(password.value != confirm_password.value) {
+			confirm_password.setCustomValidity("2 mật khẩu khâc nhau");
+		}
+		else {
+			confirm_password.setCustomValidity('');
+		}
+	}
+	password.onchange = validatePassword;
+	confirm_password.onkeyup = validatePassword;
+</script>
+
 </html>
