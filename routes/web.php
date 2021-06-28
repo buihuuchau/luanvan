@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 // });
 // QUAN LY QUAN
 Route::prefix('/')->group(function () {
-    Route::get('/', [
+    Route::get('/dangkyquan', [
         'as' => 'dangkyquan',
         'uses' => 'App\Http\Controllers\quanController@dangkyquan'
     ]);
@@ -30,11 +30,7 @@ Route::prefix('/')->group(function () {
     Route::get('/dangnhapquan', [
         'as' => 'dangnhapquan',
         'uses' => 'App\Http\Controllers\quanController@dangnhapquan'
-    ]);
-    Route::get('/dangxuatquan', [
-        'as' => 'dangxuatquan',
-        'uses' => 'App\Http\Controllers\quanController@dangxuatquan'
-    ]);
+    ]); 
     Route::post('/dodangnhapquan', [
         'as' => 'dodangnhapquan',
         'uses' => 'App\Http\Controllers\quanController@dodangnhapquan'
@@ -42,6 +38,10 @@ Route::prefix('/')->group(function () {
     Route::get('/thongtinquan', [
         'as' => 'thongtinquan',
         'uses' => 'App\Http\Controllers\quanController@thongtinquan'
+    ]);
+    Route::get('/dangxuatquan', [
+        'as' => 'dangxuatquan',
+        'uses' => 'App\Http\Controllers\quanController@dangxuatquan'
     ]);
     Route::post('/suathongtinquan', [
         'as' => 'suathongtinquan',
@@ -53,6 +53,47 @@ Route::prefix('/')->group(function () {
     ]);
 });
 // QUAN LY QUAN
+
+// QUAN LY THANH VIEN
+Route::prefix('/')->group(function () {
+    Route::get('/quanlythanhvien', [
+        'as' => 'quanlythanhvien',
+        'uses' => 'App\Http\Controllers\thanhvienController@quanlythanhvien'
+    ]);
+    Route::get('/addthanhvien', [
+        'as' => 'addthanhvien',
+        'uses' => 'App\Http\Controllers\thanhvienController@addthanhvien'
+    ]);
+    Route::post('/doaddthanhvien', [
+        'as' => 'doaddthanhvien',
+        'uses' => 'App\Http\Controllers\thanhvienController@doaddthanhvien'
+    ]);
+    Route::get('/', [
+        'as' => 'dangnhapthanhvien',
+        'uses' => 'App\Http\Controllers\thanhvienController@dangnhapthanhvien'
+    ]);
+    Route::post('/dodangnhapthanhvien', [
+        'as' => 'dodangnhapthanhvien',
+        'uses' => 'App\Http\Controllers\thanhvienController@dodangnhapthanhvien'
+    ]);
+    Route::get('/thongtinthanhvien', [
+        'as' => 'thongtinthanhvien',
+        'uses' => 'App\Http\Controllers\thanhvienController@thongtinthanhvien'
+    ]);
+    Route::get('/dangxuatthanhvien', [
+        'as' => 'dangxuatthanhvien',
+        'uses' => 'App\Http\Controllers\thanhvienController@dangxuatthanhvien'
+    ]);       
+    Route::post('/suathongtinthanhvien', [
+        'as' => 'suathongtinthanhvien',
+        'uses' => 'App\Http\Controllers\thanhvienController@suathongtinthanhvien'
+    ]);
+    Route::post('/doimatkhau', [
+        'as' => 'doimatkhau',
+        'uses' => 'App\Http\Controllers\thanhvienController@doimatkhau'
+    ]);
+});
+// QUAN LY THANH VIEN
 
 // QUAN LY BAN
 Route::prefix('/')->group(function () {

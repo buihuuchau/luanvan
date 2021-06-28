@@ -13,10 +13,9 @@ class quanController extends Controller
 {
     // use StorageImageTrait;
     public function dangkyquan(){
-        return view('login.dangkyquan');
+        return view('quan.dangkyquan');
     }
     public function dodangkyquan(Request $request){
-        $quan = array();
         $quan['accquan'] = $request->accquan;
         $pwdquan = md5($request->pwdquan);
         $quan['pwdquan'] = $pwdquan;
@@ -32,16 +31,15 @@ class quanController extends Controller
                 ->where('accquan',$request->accquan)
                 ->first();
         if($check){
-            // return '<script type="text/javascript">alert("Tài khoản đã tồn tại");</script>';
             return back()->withErrors(['Tài khoản đã tồn tại']);
         }
         else{
             DB::table('quan')->insert($quan);
-            return view('login.dangnhapquan');
+            return redirect()->route('dangnhapquan');
         }
     }
     public function dangnhapquan(){
-        return view('login.dangnhapquan');
+        return view('quan.dangnhapquan');
     }
     public function dodangnhapquan(Request $request){
         $accquan = $request->accquan;
@@ -51,27 +49,28 @@ class quanController extends Controller
                 ->where('pwdquan',$pwdquan)
                 ->first();
         if($check){
-            $id = $check->id;
-            Session::put('idquan', $id);
+            Session::forget('ssidthanhvien');
+            $ssidquan = $check->id;
+            Session::put('ssidquan', $ssidquan);
             return redirect()->route('thongtinquan');
         }
         else{
             return back()->withErrors('Tài khoản hoặc mật khẩu không chính xác');
         } 
     }
-    public function dangxuatquan(){
-        Session::forget('idquan');
-        return view('login.dangnhapquan');
-    }
     public function thongtinquan(){
-        $id = Session::get('idquan');
+        $ssidquan = Session::get('ssidquan');
         $quan = DB::table('quan')
-                ->where('id', $id)
+                ->where('id', $ssidquan)
                 ->first();
-        return view('login.thongtinquan',compact('quan'));
+        return view('quan.thongtinquan',compact('quan'));
+    }
+    public function dangxuatquan(){
+        Session::forget('ssidquan');
+        return redirect()->route('dangnhapquan');
     }
     public function suathongtinquan(Request $request){
-        $id = Session::get('idquan');
+        $ssidquan = Session::get('ssidquan');
         $quan['tenquan'] = $request->tenquan;
         if($request->file('hinhquan')!= null){
             $hinhquan = $request->file('hinhquan')->store('public/hinhanh');
@@ -82,24 +81,24 @@ class quanController extends Controller
         $quan['website'] = $request->website;
         $quan['sdtquan'] = $request->sdtquan;
         DB::table('quan')
-            ->where('id',$id)   
+            ->where('id',$ssidquan)   
             ->update($quan);     
         return back();
     }
     public function doimatkhauquan(Request $request){
-        $id = Session::get('idquan');
+        $ssidquan = Session::get('ssidquan');
         $check = DB::table('quan')
-                ->where('id',$id)
+                ->where('id',$ssidquan)
                 ->first();
         if($check->pwdquan === md5($request->opwdquan)){
             $quan['pwdquan'] = md5($request->rnpwdquan);
             DB::table('quan')
-                ->where('id',$id)
+                ->where('id',$ssidquan)
                 ->update($quan);
             return back();
         }
         else{
-            return '<script type="text/javascript">alert("Mật khẩu sai");</script>'; 
+            return back()->withErrors('Mật khẩu sai');
         }
     }
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Registation Form * Form Tutorial</title>
+	<title>Đăng ký quán</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
@@ -73,12 +73,12 @@
 					</div>
 
 					<div class="col text-center">
-					<button class="btn btn-danger">Đăng ký</button>
+					<button class="btn btn-danger">Đăng ký quán</button>
 					</div>
 				</form>
 			</div>
 			<div class="col text-center">
-				<a href="{{ route('dangnhapquan')}}"><button class="btn btn-primary">Đã có tài khoản</button></a>
+				<a href="{{ route('dangnhapquan')}}"><button class="btn btn-primary">Đã có tài khoản quán</button></a>
 			</div>
 		</div>
 	</div>

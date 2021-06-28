@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Registation Form * Form Tutorial</title>
+	<title>Đăng nhập quán</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
@@ -35,12 +35,12 @@
 					<input required="true" type="password" class="form-control" name="pwdquan">
 					</div>
 					<div class="col text-center">
-					<button class="btn btn-success">Đăng nhập</button>
+					<button class="btn btn-success">Đăng nhập quán</button>
 					</div>
 				</form>
 			</div>
 			<div class="col text-center">
-				<a href="{{ route('dangkyquan')}}"><button class="btn btn-danger">Chưa có tài khoản</button></a>
+				<a href="{{ route('dangkyquan')}}"><button class="btn btn-danger">Chưa có tài khoản quán</button></a>
 			</div>
 		</div>
 	</div>

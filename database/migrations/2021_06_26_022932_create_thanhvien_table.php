@@ -25,8 +25,8 @@ class CreateThanhvienTable extends Migration
             $table->string('diachi');
             $table->bigInteger('sdt');
             $table->string('ngayvaolam');
-            $table->string('idchucvu');
             $table->bigInteger('luong');
+            $table->bigInteger('idvaitro');
             $table->timestamps();
         });
     }
