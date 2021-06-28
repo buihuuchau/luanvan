@@ -32,11 +32,12 @@ class quanController extends Controller
                 ->where('accquan',$request->accquan)
                 ->first();
         if($check){
-            return '<script type="text/javascript">alert("Tài khoản đã tồn tại");</script>';
+            // return '<script type="text/javascript">alert("Tài khoản đã tồn tại");</script>';
+            return back()->withErrors(['Tài khoản đã tồn tại']);
         }
         else{
             DB::table('quan')->insert($quan);
-            return back();
+            return view('login.dangnhapquan');
         }
     }
     public function dangnhapquan(){
@@ -52,10 +53,10 @@ class quanController extends Controller
         if($check){
             $id = $check->id;
             Session::put('idquan', $id);
-            return redirect(route('thongtinquan'));
+            return redirect()->route('thongtinquan');
         }
         else{
-            return back();
+            return back()->withErrors('Tài khoản hoặc mật khẩu không chính xác');
         } 
     }
     public function dangxuatquan(){

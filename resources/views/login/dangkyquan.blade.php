@@ -23,6 +23,9 @@
 			<div class="panel-body">
 				<form action="{{ route('dodangkyquan')}}" method="post" enctype="multipart/form-data">
 					{{csrf_field()}}
+					@if($errors->any())
+						<h3>{{$errors->first()}}</h3>
+					@endif
 					<div class="form-group">
 					<label>Tài khoản:</label>
 					<input required="true" type="text" class="form-control" name="accquan">
