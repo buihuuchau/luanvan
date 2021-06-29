@@ -3,6 +3,11 @@
 @section('title')
   <title>Quản lý thành viên</title>
 @endsection
+@section('home')
+	<li class="nav-item d-none d-sm-inline-block">
+		<a href="{{route('thongtinquan')}}" class="nav-link">Home</a>
+    </li>
+@endsection
 @section('dangxuat')
 	<ul class="navbar-nav ml-right">
       	<li class="nav-item d-none d-sm-inline-block">
@@ -42,12 +47,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Starter Page</h1>
+                <h1 class="m-0">Quản lý thành viên</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Starter Page</li>
+                <li class="breadcrumb-item"><a href="{{route('thongtinquan')}}">Home</a></li>
+                <li class="breadcrumb-item"><a href="">Quản lý thành viên</a></li>
+                <!-- <li class="breadcrumb-item active"></li> -->
                 </ol>
             </div><!-- /.col -->
             </div><!-- /.row -->
@@ -99,7 +105,11 @@
 								<td>{{$row->ngayvaolam}}</td>
 								<td>{{$row->luong}} vnđ</td>
 								<td>{{$row->tenvaitro}}</td>
-								<td></td>
+								<td>
+									<a href="{{route('editthongtinthanhvien',['id'=>$row->id])}}">Sửa thành viên</a><br>
+									<a href="{{route('deletethongtinthanhvien',['id'=>$row->id])}}"
+										onclick="return confirm('Bạn có chắc chắn muốn xóa')";>Xóa thành viên</a>
+								</td>
 							</tr>
 							@endforeach
 							</tbody>

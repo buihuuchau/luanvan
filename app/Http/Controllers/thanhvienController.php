@@ -19,7 +19,7 @@ class thanhvienController extends Controller
         $thanhvien = DB::table('thanhvien')
                     ->where('thanhvien.idquan', $ssidquan)
                     ->join('vaitro', 'thanhvien.idvaitro', '=', 'vaitro.id')
-                    ->select('thanhvien.*','vaitro.*')
+                    ->select('thanhvien.*','vaitro.tenvaitro')
                     ->get();
         return view('thanhvien.quanlythanhvien', compact('quan','thanhvien'));
     }
@@ -59,6 +59,48 @@ class thanhvienController extends Controller
             return redirect()->route('dangnhapthanhvien');
         }
     }
+    public function editthongtinthanhvien($id){
+        $ssidquan = Session::get('ssidquan');
+        $thanhvien = DB::table('thanhvien')
+                    ->where('thanhvien.id',$id)
+                    ->where('thanhvien.idquan',$ssidquan)
+                    ->join('vaitro', 'thanhvien.idvaitro', '=', 'vaitro.id')
+                    ->join('quan', 'thanhvien.idquan', '=', 'quan.id')
+                    ->select('thanhvien.*','vaitro.tenvaitro','quan.hinhquan','quan.tenquan')
+                    ->first();
+        $vaitro = DB::table('vaitro')
+                    ->where('vaitro.idquan',$thanhvien->idquan)
+                    ->get();
+        return view('thanhvien.editthanhvien', compact('thanhvien','vaitro'));
+    }
+    public function doeditthongtinthanhvien(Request $request){
+        $ssidquan = Session::get('ssidquan');
+        $id = $request->id;
+        $thanhvien['hoten'] = $request->hoten;
+        if($request->file('hinhtv')!=null){
+            $hinhtv = $request->file('hinhtv')->store('public/hinhanh');
+            $linkhinhtv = 'storage'.substr($hinhtv, 6);
+            $thanhvien['hinhtv'] = $linkhinhtv;
+        }
+        $thanhvien['namsinh'] = $request->namsinh;
+        $thanhvien['diachi'] = $request->diachi;
+        $thanhvien['sdt'] = $request->sdt;
+        $thanhvien['luong'] = $request->luong;
+        $thanhvien['idvaitro'] = $request->idvaitro;
+        DB::table('thanhvien')
+            ->where('id',$id)
+            ->where('idquan',$ssidquan)
+            ->update($thanhvien);
+        return back();
+    }
+    public function deletethongtinthanhvien($id){
+        $ssidquan = Session::get('ssidquan');
+        DB::table('thanhvien')
+            ->where('id',$id)
+            ->where('idquan',$ssidquan)
+            ->delete();
+        return back();
+    }
     public function dangnhapthanhvien(){
         return view('thanhvien.dangnhapthanhvien');
     }
@@ -85,7 +127,7 @@ class thanhvienController extends Controller
                     ->where('thanhvien.id', $ssidthanhvien)
                     ->join('quan','thanhvien.idquan', '=', 'quan.id')
                     ->join('vaitro','thanhvien.idvaitro', '=', 'vaitro.id')
-                    ->select('thanhvien.*','quan.*','vaitro.*')
+                    ->select('thanhvien.*','quan.hinhquan','quan.tenquan','vaitro.tenvaitro')
                     ->first();
         return view('thanhvien.thongtinthanhvien',compact('thanhvien'));
     }

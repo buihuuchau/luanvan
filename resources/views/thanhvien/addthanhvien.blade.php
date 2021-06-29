@@ -54,7 +54,7 @@
 
                     <div class="form-group">
                     <label>Năm sinh:</label>
-                    <input type="date" class="form-control" name="namsinh">
+                    <input required="true" type="date" class="form-control" name="namsinh">
                     </div>
 
                     <div class="form-group">

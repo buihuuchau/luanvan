@@ -68,6 +68,18 @@ Route::prefix('/')->group(function () {
         'as' => 'doaddthanhvien',
         'uses' => 'App\Http\Controllers\thanhvienController@doaddthanhvien'
     ]);
+    Route::get('/editthongtinthanhvien/{id}', [
+        'as' => 'editthongtinthanhvien',
+        'uses' => 'App\Http\Controllers\thanhvienController@editthongtinthanhvien'
+    ]);
+    Route::post('/doeditthongtinthanhvien', [
+        'as' => 'doeditthongtinthanhvien',
+        'uses' => 'App\Http\Controllers\thanhvienController@doeditthongtinthanhvien'
+    ]);
+    Route::get('/deletethongtinthanhvien/{id}', [
+        'as' => 'deletethongtinthanhvien',
+        'uses' => 'App\Http\Controllers\thanhvienController@deletethongtinthanhvien'
+    ]);
     Route::get('/', [
         'as' => 'dangnhapthanhvien',
         'uses' => 'App\Http\Controllers\thanhvienController@dangnhapthanhvien'
