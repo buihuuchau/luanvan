@@ -107,6 +107,35 @@ Route::prefix('/')->group(function () {
 });
 // QUAN LY THANH VIEN
 
+// QUAN LY KHU VUC
+Route::prefix('/')->group(function () {
+    Route::get('/quanlykhuvuc', [
+        'as' => 'quanlykhuvuc',
+        'uses' => 'App\Http\Controllers\quanlykhuvucController@quanlykhuvuc'
+    ]);
+    Route::get('/addkhuvuc', [
+        'as' => 'addkhuvuc',
+        'uses' => 'App\Http\Controllers\quanlykhuvucController@addkhuvuc'
+    ]);
+    Route::post('/doaddkhuvuc', [
+        'as' => 'doaddkhuvuc',
+        'uses' => 'App\Http\Controllers\quanlykhuvucController@doaddkhuvuc'
+    ]);
+    Route::get('/editkhuvuc/{id}', [
+        'as' => 'editkhuvuc',
+        'uses' => 'App\Http\Controllers\quanlykhuvucController@editkhuvuc'
+    ]);
+    Route::post('/doeditkhuvuc', [
+        'as' => 'doeditkhuvuc',
+        'uses' => 'App\Http\Controllers\quanlykhuvucController@doeditkhuvuc'
+    ]);
+    Route::get('/deletekhuvuc/{id}', [
+        'as' => 'deletekhuvuc',
+        'uses' => 'App\Http\Controllers\quanlykhuvucController@deletekhuvuc'
+    ]);
+});
+// QUAN LY KHU VUC
+
 // QUAN LY BAN
 Route::prefix('/')->group(function () {
     Route::get('/quanlyban', [

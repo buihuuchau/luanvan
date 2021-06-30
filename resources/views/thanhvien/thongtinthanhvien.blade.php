@@ -3,6 +3,11 @@
 @section('title')
   <title>Thông tin thành viên</title>
 @endsection
+@section('home')
+	<li class="nav-item d-none d-sm-inline-block">
+		<a href="{{route('thongtinthanhvien')}}" class="nav-link">Home</a>
+    </li>
+@endsection
 @section('dangxuat')
 	<ul class="navbar-nav ml-right">
       	<li class="nav-item d-none d-sm-inline-block">
@@ -32,10 +37,18 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           	<li class="nav-item">
+            	<a href="{{route('quanlykhuvuc')}}" class="nav-link">
+              	<i class="nav-icon fas fa-th"></i>
+              	<p>
+               		Quản lý khu vực
+              	</p>
+            	</a>
+          	</li>
+			<li class="nav-item">
             	<a href="{{route('quanlyban')}}" class="nav-link">
               	<i class="nav-icon fas fa-th"></i>
               	<p>
-               		Chức năng
+               		Quản lý bàn
               	</p>
             	</a>
           	</li>
@@ -55,7 +68,7 @@
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Thông tin thành viên</a></li>
+                <li class="breadcrumb-item"><a href="">Thông tin thành viên</a></li>
                 </ol>
             </div><!-- /.col -->
             </div><!-- /.row -->
