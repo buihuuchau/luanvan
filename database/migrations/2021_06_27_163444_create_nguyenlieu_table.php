@@ -19,7 +19,7 @@ class CreateNguyenlieuTable extends Migration
             $table->string('tennguyenlieu');
             $table->string('xuatxu');
             $table->string('donvitinh');
-            $table->bigInteger('hidden')->default(0)->comment(0: Hiện - 1: Ẩn);
+            $table->bigInteger('hidden')->default(0)->comment('0: Hiện - 1: Ẩn');
             $table->timestamps();
         });
     }
