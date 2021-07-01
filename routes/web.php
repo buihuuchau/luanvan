@@ -180,3 +180,40 @@ Route::prefix('/')->group(function () {
     ]);
 });
 // QUAN LY BAN
+
+// QUAN LY NGUYEN LIEU
+Route::prefix('/')->group(function () {
+    Route::get('/quanlynguyenlieu', [
+        'as' => 'quanlynguyenlieu',
+        'uses' => 'App\Http\Controllers\quanlynguyenlieuController@quanlynguyenlieu'
+    ]);
+    Route::get('/addnguyenlieu', [
+        'as' => 'addnguyenlieu',
+        'uses' => 'App\Http\Controllers\quanlynguyenlieuController@addnguyenlieu'
+    ]);
+    Route::post('/doaddnguyenlieu', [
+        'as' => 'doaddnguyenlieu',
+        'uses' => 'App\Http\Controllers\quanlynguyenlieuController@doaddnguyenlieu'
+    ]);
+    Route::get('/editnguyenlieu/{id}', [
+        'as' => 'editnguyenlieu',
+        'uses' => 'App\Http\Controllers\quanlynguyenlieuController@editnguyenlieu'
+    ]);
+    Route::post('/doeditnguyenlieu', [
+        'as' => 'doeditnguyenlieu',
+        'uses' => 'App\Http\Controllers\quanlynguyenlieuController@doeditnguyenlieu'
+    ]);
+    Route::get('/hiddennguyenlieu/{id}', [
+        'as' => 'hiddennguyenlieu',
+        'uses' => 'App\Http\Controllers\quanlynguyenlieuController@hiddennguyenlieu'
+    ]);
+    Route::get('/shownguyenlieu/{id}', [
+        'as' => 'shownguyenlieu',
+        'uses' => 'App\Http\Controllers\quanlynguyenlieuController@shownguyenlieu'
+    ]);
+    Route::get('/deletenguyenlieu/{id}', [
+        'as' => 'deletenguyenlieu',
+        'uses' => 'App\Http\Controllers\quanlynguyenlieuController@deletenguyenlieu'
+    ]);
+});   
+// QUAN LY NGUYEN LIEU

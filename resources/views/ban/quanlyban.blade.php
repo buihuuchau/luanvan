@@ -31,30 +31,6 @@
         </div>
     </div>
 @endsection
-@section('chucnang')
-	<nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          	<li class="nav-item">
-            	<a href="{{route('quanlykhuvuc')}}" class="nav-link">
-              	<i class="nav-icon fas fa-th"></i>
-              	<p>
-               		Quản lý khu vực
-              	</p>
-            	</a>
-          	</li>
-              <li class="nav-item">
-            	<a href="{{route('quanlyban')}}" class="nav-link">
-              	<i class="nav-icon fas fa-th"></i>
-              	<p>
-               		Quản lý bàn
-              	</p>
-            	</a>
-          	</li>
-        </ul>
-    </nav>
-@endsection
 
 @section('content')
       <!-- Content Wrapper. Contains page content -->
@@ -69,7 +45,7 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{route('thongtinthanhvien')}}">Thông tin thành viên</a></li>
-                <li class="breadcrumb-item"><a href="{{route('quanlyban')}}">Quản lý bàn</a></li>
+                <li class="breadcrumb-item"><a href="">Quản lý bàn</a></li>
                 </ol>
             </div><!-- /.col -->
             </div><!-- /.row -->
@@ -128,7 +104,8 @@
 										@endif
 
 										@if($sudung!=$row->id)
-										<a href="{{route('deleteban',['id'=>$row->id])}}">Xóa bàn</a>
+										<a href="{{route('deleteban',['id'=>$row->id])}}"
+											onclick="return confirm('Bạn có chắc chắn muốn xóa')";>Xóa bàn</a>
 										@endif
 									</td>
 								</tr>

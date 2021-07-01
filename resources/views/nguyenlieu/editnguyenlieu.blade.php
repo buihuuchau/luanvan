@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-  <title>Sửa bàn</title>
+  <title>Sửa nguyên liệu</title>
 @endsection
 @section('home')
 	<li class="nav-item d-none d-sm-inline-block">
@@ -31,6 +31,30 @@
         </div>
     </div>
 @endsection
+@section('chucnang')
+	<nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          	<li class="nav-item">
+            	<a href="{{route('quanlykhuvuc')}}" class="nav-link">
+              	<i class="nav-icon fas fa-th"></i>
+              	<p>
+               		Quản lý khu vực
+              	</p>
+            	</a>
+          	</li>
+              <li class="nav-item">
+            	<a href="{{route('quanlyban')}}" class="nav-link">
+              	<i class="nav-icon fas fa-th"></i>
+              	<p>
+               		Quản lý bàn
+              	</p>
+            	</a>
+          	</li>
+        </ul>
+    </nav>
+@endsection
 
 @section('content')
       <!-- Content Wrapper. Contains page content -->
@@ -40,13 +64,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Sửa bàn bàn</h1>
+                <h1 class="m-0">Sửa nguyên liệu</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{route('thongtinthanhvien')}}">Thông tin thành viên</a></li>
-                <li class="breadcrumb-item"><a href="{{route('quanlykhuvuc')}}">Quản lý bàn</a></li>
-                <li class="breadcrumb-item"><a href="">Sửa bàn</a></li>
+                <li class="breadcrumb-item"><a href="{{route('quanlynguyenlieu')}}">Quản lý nguyên liệu</a></li>
+                <li class="breadcrumb-item"><a href="">Sửa nguyên liệu</a></li>
                 </ol>
             </div><!-- /.col -->
             </div><!-- /.row -->
@@ -58,27 +82,20 @@
       <div class="container-fluid">
         <div class="row">
 
-            <form action="{{route('doeditban')}}" method="post">
+            <form action="{{route('doeditnguyenlieu')}}" method="post">
 				{{csrf_field()}}
 				@if($errors->any())
 					<h3>{{$errors->first()}}</h3>
 				@endif
-                <input type="hidden" name="id" value="{{$ban->id}}">
+                <input type="hidden" name="id" value="{{$nguyenlieu->id}}">
                 <div class="form-group">
-                    <label>Chọn khu vực</label>
-                    <select class="form-control" name="idkhuvuc">
-                    @foreach($khuvuc as $key => $row)
-                        @if($ban->idkhuvuc == $row->id)
-                        <option value="{{$row->id}}" selected>{{$row->tenkhuvuc}}</option>
-                        @else
-                        <option value="{{$row->id}}">{{$row->tenkhuvuc}}</option>
-                        @endif
-                    @endforeach
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Tên bàn</label>
-                    <input type="text" class="form-control" name="tenban" value="{{$ban->tenban}}" required><br>
+                    <label>Tên nguyên liệu</label>
+                    <input type="text" class="form-control" name="tennguyenlieu" value="{{$nguyenlieu->tennguyenlieu}}" required><br>
+                    <label>Xuất xứ</label>
+                    <input type="text" class="form-control" name="xuatxu" value="{{$nguyenlieu->xuatxu}}" required><br>
+                    <label>Đơn vị tính</label>
+                    <input type="text" class="form-control" name="donvitinh" value="{{$nguyenlieu->donvitinh}}" required><br>
+
                     <button type="submit" class="btn btn-primary">Lưu chỉnh sửa</button>
                 </div>
             </form>

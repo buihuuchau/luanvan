@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-  <title>Thêm khu vực</title>
+  <title>Thêm nguyên liệu</title>
 @endsection
 @section('home')
 	<li class="nav-item d-none d-sm-inline-block">
@@ -40,13 +40,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Thêm khu vực</h1>
+                <h1 class="m-0">Thêm nguyên liệu</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{route('thongtinthanhvien')}}">Thông tin thành viên</a></li>
-                <li class="breadcrumb-item"><a href="{{route('quanlykhuvuc')}}">Quản lý khu vực</a></li>
-                <li class="breadcrumb-item"><a href="">Thêm khu vực</a></li>
+                <li class="breadcrumb-item"><a href="{{route('quanlynguyenlieu')}}">Quản lý nguyên liệu</a></li>
+                <li class="breadcrumb-item"><a href="">Thêm nguyên liệu</a></li>
                 </ol>
             </div><!-- /.col -->
             </div><!-- /.row -->
@@ -58,18 +58,23 @@
       <div class="container-fluid">
         <div class="row">
 
-            <form action="{{route('doaddkhuvuc')}}" method="post">
+            <form action="{{route('doaddnguyenlieu')}}" method="post">
 				{{csrf_field()}}
 				@if($errors->any())
 					<h3>{{$errors->first()}}</h3>
 				@endif
                 <div class="form-group">
-                    <label>Tên khu vực</label>
-                    <input type="text" class="form-control" name="tenkhuvuc" required><br>
+                    <label>Tên nguyên liệu</label>
+                    <input type="text" class="form-control" name="tennguyenlieu" required><br>
+                    <label>Xuất xứ</label>
+                    <input type="text" class="form-control" name="xuatxu" required><br>
+                    <label>Đơn vị tính</label>
+                    <input type="text" class="form-control" name="donvitinh" required><br>
+
                     <button type="submit" class="btn btn-primary">Thêm</button>
                 </div>
             </form>
-			
+
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-  <title>Quản lý khu vực</title>
+  <title>Quản lý nguyên liệu</title>
 @endsection
 @section('home')
 	<li class="nav-item d-none d-sm-inline-block">
@@ -40,12 +40,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Quản lý khu vực</h1>
+                <h1 class="m-0">Quản lý nguyên liệu</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{route('thongtinthanhvien')}}">Thông tin thành viên</a></li>
-                <li class="breadcrumb-item"><a href="">Quản lý khu vực</a></li>
+                <li class="breadcrumb-item"><a href="">Quản lý nguyên liệu</a></li>
                 </ol>
             </div><!-- /.col -->
             </div><!-- /.row -->
@@ -59,7 +59,7 @@
 
 			<div class="col-sm-12">
 				<div class="col-md-12 mb-4 text-right">
-					<a style="width:44px" class="btn btn-primary" href="{{route('addkhuvuc')}}">
+					<a style="width:44px" class="btn btn-primary" href="{{route('addnguyenlieu')}}">
 						<i class="fas fa-plus"></i></a>
 				</div>
 				<div class="card">
@@ -68,19 +68,23 @@
 							<thead>
 								<tr role="row">
 									<th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">No.</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TÊN KHU VỰC</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TÊN NGUYÊN LIỆU</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >XUẤT XỨ</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ĐƠN VỊ TÍNH</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ẨN / HIỆN</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THAO TÁC</th>
 								</tr>
 							</thead>
 							<tbody>
-							@foreach ($khuvuc as $key => $row)
+							@foreach ($nguyenlieu as $key => $row)
 								<tr class="odd">
 									<td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td>
-									<td>{{$row->tenkhuvuc}}</td>
-
-									@foreach ($ban as $key2 => $row2)
-										<?php	if($row2->idkhuvuc==$row->id)	$sudung = $row->id;?>				
+									<td>{{$row->tennguyenlieu}}</td>
+									<td>{{$row->xuatxu}}</td>
+									<td>{{$row->donvitinh}}</td>
+									@foreach ($kho as $key2 => $row2)
+										<?php	if($row2->idnguyenlieu==$row->id)	$sudung = $row->id;
+										?>				
 									@endforeach
 									
 									@if($row->hidden==0 && $sudung!=$row->id)
@@ -91,19 +95,19 @@
 										<td bgcolor="gray" style="color:white">Vô hiệu hóa</td>
 									@endif
 									<td>
-                                        <a href="{{route('editkhuvuc',['id'=>$row->id])}}">Sửa khu vực</a><br>
+										<a href="{{route('editnguyenlieu',['id'=>$row->id])}}">Sửa nguyên liệu</a><br>
 
 										@if($row->hidden==0)
-                                        <a href="{{route('hiddenkhuvuc',['id'=>$row->id])}}">Ẩn khu vực</a><br>
+										<a href="{{route('hiddennguyenlieu',['id'=>$row->id])}}">Ẩn nguyên liệu</a><br>
 										@else
-										<a href="{{route('showkhuvuc',['id'=>$row->id])}}">Hiện khu vực</a><br>
+										<a href="{{route('shownguyenlieu',['id'=>$row->id])}}">Hiện nguyên liệu</a><br>
 										@endif
 
 										@if($sudung!=$row->id)
-										<a href="{{route('deletekhuvuc',['id'=>$row->id])}}"
-											onclick="return confirm('Bạn có chắc chắn muốn xóa')";>Xóa khu vực</a>
+										<a href="{{route('deletenguyenlieu',['id'=>$row->id])}}"
+											onclick="return confirm('Bạn có chắc chắn muốn xóa')";>Xóa nguyên liệu</a>
 										@endif
-                                    </td>
+									</td>
 								</tr>
 							@endforeach
 							</tbody>
@@ -111,6 +115,7 @@
 					</div>
 				</div>
 			</div>
+
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->

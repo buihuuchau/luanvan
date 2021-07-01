@@ -45,6 +45,7 @@ class quanlybanController extends Controller
 
         $khuvuc = DB::table('khuvuc')
                     ->where('idquan',$thanhvien->idquan)
+                    ->where('hidden',0)
                     ->get();
 
         return view('ban.addban',compact('thanhvien','khuvuc'));
