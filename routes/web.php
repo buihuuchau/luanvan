@@ -158,5 +158,25 @@ Route::prefix('/')->group(function () {
         'as' => 'doaddban',
         'uses' => 'App\Http\Controllers\quanlybanController@doaddban'
     ]);
+    Route::get('/editban/{id}', [
+        'as' => 'editban',
+        'uses' => 'App\Http\Controllers\quanlybanController@editban'
+    ]);
+    Route::post('/doeditban', [
+        'as' => 'doeditban',
+        'uses' => 'App\Http\Controllers\quanlybanController@doeditban'
+    ]);
+    Route::get('/hiddenban/{id}', [
+        'as' => 'hiddenban',
+        'uses' => 'App\Http\Controllers\quanlybanController@hiddenban'
+    ]);
+    Route::get('/showban/{id}', [
+        'as' => 'showban',
+        'uses' => 'App\Http\Controllers\quanlybanController@showban'
+    ]);
+    Route::get('/deleteban/{id}', [
+        'as' => 'deleteban',
+        'uses' => 'App\Http\Controllers\quanlybanController@deleteban'
+    ]);
 });
 // QUAN LY BAN

@@ -13,6 +13,7 @@ class quanlykhuvucController extends Controller
 {
     public function quanlykhuvuc(){
         $ssidthanhvien = Session::get('ssidthanhvien');
+        
         $thanhvien = DB::table('thanhvien')
             ->where('thanhvien.id',$ssidthanhvien)
             ->join('quan','thanhvien.idquan','=','quan.id')
@@ -24,12 +25,14 @@ class quanlykhuvucController extends Controller
         $ban = DB::table('ban')
                 ->where('idquan',$thanhvien->idquan)
                 ->get();
+        $sudung = null;
 
-        return view('khuvuc.quanlykhuvuc',compact('thanhvien','khuvuc','ban'));
+        return view('khuvuc.quanlykhuvuc',compact('thanhvien','khuvuc','ban','sudung'));
     }
 
     public function addkhuvuc(){
         $ssidthanhvien = Session::get('ssidthanhvien');
+
         $thanhvien = DB::table('thanhvien')
             ->where('thanhvien.id',$ssidthanhvien)
             ->join('quan','thanhvien.idquan','=','quan.id')
@@ -57,7 +60,7 @@ class quanlykhuvucController extends Controller
         else{
             $khuvuc['idquan'] = $thanhvien->idquan;
             $khuvuc['tenkhuvuc'] = $request->tenkhuvuc;
-            $khuvuc = DB::table('khuvuc')->insert($khuvuc);
+            DB::table('khuvuc')->insert($khuvuc);
             return back();
         }       
         

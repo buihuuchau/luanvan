@@ -5,7 +5,7 @@
 @endsection
 @section('home')
 	<li class="nav-item d-none d-sm-inline-block">
-		<a href="{{route('thongtinquan')}}" class="nav-link">Home</a>
+		<a href="{{route('thongtinthanhvien')}}" class="nav-link">Home</a>
     </li>
 @endsection
 @section('dangxuat')
@@ -37,6 +37,14 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           	<li class="nav-item">
+            	<a href="{{route('quanlykhuvuc')}}" class="nav-link">
+              	<i class="nav-icon fas fa-th"></i>
+              	<p>
+               		Quản lý khu vực
+              	</p>
+            	</a>
+          	</li>
+              <li class="nav-item">
             	<a href="{{route('quanlyban')}}" class="nav-link">
               	<i class="nav-icon fas fa-th"></i>
               	<p>
@@ -84,16 +92,45 @@
 							<thead>
 								<tr role="row">
 									<th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">No.</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ID QUÁN</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TÊN KHU VỰC</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TÊN BÀN</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TRẠNG THÁI</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ẨN / HIỆN</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THAO TÁC</th>
 								</tr>
 							</thead>
 							<tbody>
-							@foreach ($khuvuc as $key => $row)
+							@foreach ($ban as $key => $row)
 								<tr class="odd">
 									<td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td>
-									<td>{{$row->idquan}}</td>
 									<td>{{$row->tenkhuvuc}}</td>
+									<td>{{$row->tenban}}</td>
+									<td>{{$row->trangthai}}</td>
+									@foreach ($hoadon as $key2 => $row2)
+										<?php	if($row2->idban==$row->id)	$sudung = $row->id;
+										?>				
+									@endforeach
+									
+									@if($row->hidden==0 && $sudung!=$row->id)
+										<td>Chưa được sử dụng</td>
+									@elseif($row->hidden==0 && $sudung==$row->id)
+										<td bgcolor="lightgreen">Đang được sử dụng</td>
+									@else
+										<td bgcolor="gray" style="color:white">Vô hiệu hóa</td>
+									@endif
+									<td>
+										<a href="{{route('editban',['id'=>$row->id])}}">Sửa bàn</a><br>
+
+										@if($row->hidden==0)
+										<a href="{{route('hiddenban',['id'=>$row->id])}}">Ẩn bàn</a><br>
+										@else
+										<a href="{{route('showban',['id'=>$row->id])}}">Hiện bàn</a><br>
+										@endif
+
+										@if($sudung!=$row->id)
+										<a href="{{route('deleteban',['id'=>$row->id])}}">Xóa bàn</a>
+										@endif
+									</td>
 								</tr>
 							@endforeach
 							</tbody>
@@ -101,6 +138,7 @@
 					</div>
 				</div>
 			</div>
+
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->

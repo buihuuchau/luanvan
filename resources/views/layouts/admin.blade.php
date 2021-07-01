@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/datatables-buttons/css/buttons.bootstrap4.css') }}">
+  <!-- MyCSS -->
+  <link rel="stylesheet" href="{{ asset('AdminLTE/dist/css/mystyle.css')}}">
   @yield('css')
 </head>
 <body class="hold-transition sidebar-mini">
@@ -64,6 +66,27 @@
       "responsive": true,
     });
   });
+</script>
+<!-- Nut tang giam so luong -->
+<script>
+$('input.input-qty').each(function() {
+  var $this = $(this),
+    qty = $this.parent().find('.is-form'),
+    min = Number($this.attr('min')),
+    max = Number($this.attr('max'))
+  if (min == 0) {
+    var d = 0
+  } else d = min
+  $(qty).on('click', function() {
+    if ($(this).hasClass('minus')) {
+      if (d > min) d += -1
+    } else if ($(this).hasClass('plus')) {
+      var x = Number($this.val()) + 1
+      if (x <= max) d += 1
+    }
+    $this.attr('value', d).val(d)
+  })
+})
 </script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-  <title>Quản lý khu vực</title>
+  <title>Sửa bàn</title>
 @endsection
 @section('home')
 	<li class="nav-item d-none d-sm-inline-block">
@@ -17,14 +17,14 @@
 @endsection
 @section('quan')
 	<a href="{{route('dangnhapquan')}}" class="brand-link">
-  		<img src="{{$thanhvien->hinhquan}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+  		<img src="{!!asset($thanhvien->hinhquan)!!}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       	<span class="brand-text font-weight-light">{{$thanhvien->tenquan}}</span>
 	</a>
 @endsection
 @section('avatar')
 	<div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          	<img src="{{$thanhvien->hinhtv}}" class="img-circle elevation-2" alt="User Image">
+          	<img src="{!!asset($thanhvien->hinhtv)!!}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           	<a href="{{route('thongtinthanhvien')}}" class="d-block">{{$thanhvien->hoten}}</a>
@@ -64,12 +64,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Quản lý khu vực</h1>
+                <h1 class="m-0">Quản lý bàn</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{route('thongtinthanhvien')}}">Thông tin thành viên</a></li>
-                <li class="breadcrumb-item"><a href="{{route('quanlykhuvuc')}}">Quản lý khu vực</a></li>
+                <li class="breadcrumb-item"><a href="{{route('quanlykhuvuc')}}">Quản lý bàn</a></li>
                 </ol>
             </div><!-- /.col -->
             </div><!-- /.row -->
@@ -81,59 +81,31 @@
       <div class="container-fluid">
         <div class="row">
 
-			<div class="col-sm-12">
-				<div class="col-md-12 mb-4 text-right">
-					<a style="width:44px" class="btn btn-primary" href="{{route('addkhuvuc')}}">
-						<i class="fas fa-plus"></i></a>
-				</div>
-				<div class="card">
-					<div class="card-body">
-						<table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
-							<thead>
-								<tr role="row">
-									<th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">No.</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TÊN KHU VỰC</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ẨN / HIỆN</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THAO TÁC</th>
-								</tr>
-							</thead>
-							<tbody>
-							@foreach ($khuvuc as $key => $row)
-								<tr class="odd">
-									<td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td>
-									<td>{{$row->tenkhuvuc}}</td>
+            <form action="{{route('doeditban')}}" method="post">
+				{{csrf_field()}}
+				@if($errors->any())
+					<h3>{{$errors->first()}}</h3>
+				@endif
+                <input type="number" name="id" value="{{$ban->id}}">
+                <div class="form-group">
+                    <label>Chọn khu vực</label>
+                    <select class="form-control" name="idkhuvuc">
+                    @foreach($khuvuc as $key => $row)
+                        @if($ban->idkhuvuc == $row->id)
+                        <option value="{{$row->id}}" selected>{{$row->tenkhuvuc}}</option>
+                        @else
+                        <option value="{{$row->id}}">{{$row->tenkhuvuc}}</option>
+                        @endif
+                    @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Tên bàn</label>
+                    <input type="text" class="form-control" name="tenban" value="{{$ban->tenban}}" required><br>
+                    <button type="submit" class="btn btn-primary">Lưu chỉnh sửa</button>
+                </div>
+            </form>
 
-									@foreach ($ban as $key2 => $row2)
-										<?php	if($row2->idkhuvuc==$row->id)	$sudung = $row->id;?>				
-									@endforeach
-									
-									@if($row->hidden==0 && $sudung!=$row->id)
-										<td>Chưa được sử dụng</td>
-									@elseif($row->hidden==0 && $sudung==$row->id)
-										<td bgcolor="lightgreen">Đang được sử dụng</td>
-									@else
-										<td bgcolor="gray" style="color:white">Vô hiệu hóa</td>
-									@endif
-									<td>
-                                        <a href="{{route('editkhuvuc',['id'=>$row->id])}}">Sửa khu vực</a><br>
-
-										@if($row->hidden==0)
-                                        <a href="{{route('hiddenkhuvuc',['id'=>$row->id])}}">Ẩn khu vực</a><br>
-										@else
-										<a href="{{route('showkhuvuc',['id'=>$row->id])}}">Hiện khu vực</a><br>
-										@endif
-
-										@if($sudung!=$row->id)
-										<a href="{{route('deletekhuvuc',['id'=>$row->id])}}">Xóa khu vực</a>
-										@endif
-                                    </td>
-								</tr>
-							@endforeach
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->

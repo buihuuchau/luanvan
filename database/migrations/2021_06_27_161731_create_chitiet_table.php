@@ -17,6 +17,8 @@ class CreateChitietTable extends Migration
             $table->id();
             $table->bigInteger('idhoadon')->unsigned();
             $table->bigInteger('idmon')->unsigned();
+            $table->bigInteger('soluong')->unsigned();
+            $table->bigInteger('thanhtien');
             $table->timestamps();
         });
     }
