@@ -129,6 +129,14 @@ Route::prefix('/')->group(function () {
         'as' => 'doeditkhuvuc',
         'uses' => 'App\Http\Controllers\quanlykhuvucController@doeditkhuvuc'
     ]);
+    Route::get('/hiddenkhuvuc/{id}', [
+        'as' => 'hiddenkhuvuc',
+        'uses' => 'App\Http\Controllers\quanlykhuvucController@hiddenkhuvuc'
+    ]);
+    Route::get('/showkhuvuc/{id}', [
+        'as' => 'showkhuvuc',
+        'uses' => 'App\Http\Controllers\quanlykhuvucController@showkhuvuc'
+    ]);
     Route::get('/deletekhuvuc/{id}', [
         'as' => 'deletekhuvuc',
         'uses' => 'App\Http\Controllers\quanlykhuvucController@deletekhuvuc'

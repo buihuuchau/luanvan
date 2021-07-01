@@ -93,17 +93,61 @@
 								<tr role="row">
 									<th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">No.</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TÊN KHU VỰC</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ẨN / HIỆN</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THAO TÁC</th>
 								</tr>
 							</thead>
 							<tbody>
+							<!-- @foreach ($khuvuc as $key => $row)
+								<tr class="odd">
+									<td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td>
+									<td>{{$row->tenkhuvuc}}</td>
+									@if($row->hidden==0)
+									<td>Đang được sử dụng</td>
+									@else
+									<td bgcolor="gray" style="color:white">Vô hiệu hóa</td>
+									@endif
+									<td>
+                                        <a href="{{route('editkhuvuc',['id'=>$row->id])}}">Sửa khu vực</a><br>
+										@if($row->hidden==0)
+                                        <a href="{{route('hiddenkhuvuc',['id'=>$row->id])}}">Ẩn khu vực</a><br>
+										@else
+										<a href="{{route('showkhuvuc',['id'=>$row->id])}}">Hiện khu vực</a><br>
+										@endif
+										@if($row->hidden==0)
+                                        <a href="{{route('deletekhuvuc',['id'=>$row->id])}}">Xóa khu vực</a>
+										@endif
+                                    </td>
+								</tr>
+							@endforeach -->
 							@foreach ($khuvuc as $key => $row)
 								<tr class="odd">
 									<td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td>
 									<td>{{$row->tenkhuvuc}}</td>
+
+									@foreach ($ban as $key2 => $row2)
+										<?php	if($row2->idkhuvuc==$row->id)	$sudung = $row->id;?>				
+									@endforeach
+									
+									@if($row->hidden==0 && $sudung!=$row->id)
+										<td>Chưa được sử dụng</td>
+									@elseif($row->hidden==0 && $sudung==$row->id)
+										<td bgcolor="lightgreen">Đang được sử dụng</td>
+									@else
+										<td bgcolor="gray" style="color:white">Vô hiệu hóa</td>
+									@endif
 									<td>
                                         <a href="{{route('editkhuvuc',['id'=>$row->id])}}">Sửa khu vực</a><br>
-                                        <a href="{{route('deletekhuvuc',['id'=>$row->id])}}">Xóa khu vực</a>
+
+										@if($row->hidden==0)
+                                        <a href="{{route('hiddenkhuvuc',['id'=>$row->id])}}">Ẩn khu vực</a><br>
+										@else
+										<a href="{{route('showkhuvuc',['id'=>$row->id])}}">Hiện khu vực</a><br>
+										@endif
+
+										@if($sudung!=$row->id)
+										<a href="{{route('deletekhuvuc',['id'=>$row->id])}}">Xóa khu vực</a>
+										@endif
                                     </td>
 								</tr>
 							@endforeach

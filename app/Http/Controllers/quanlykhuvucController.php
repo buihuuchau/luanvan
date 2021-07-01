@@ -21,7 +21,11 @@ class quanlykhuvucController extends Controller
         $khuvuc = DB::table('khuvuc')
                 ->where('idquan',$thanhvien->idquan)
                 ->get();
-        return view('khuvuc.quanlykhuvuc',compact('thanhvien','khuvuc'));
+        $ban = DB::table('ban')
+                ->where('idquan',$thanhvien->idquan)
+                ->get();
+
+        return view('khuvuc.quanlykhuvuc',compact('thanhvien','khuvuc','ban'));
     }
 
     public function addkhuvuc(){
@@ -98,6 +102,41 @@ class quanlykhuvucController extends Controller
                 ->update($khuvuc);
             return redirect()->route('quanlykhuvuc');
         }
+    }
+
+    public function hiddenkhuvuc($id){
+        $ssidthanhvien = Session::get('ssidthanhvien');
+        $khuvuc['hidden'] = 1;
+
+        $thanhvien = DB::table('thanhvien')
+            ->where('thanhvien.id',$ssidthanhvien)
+            ->join('quan','thanhvien.idquan','=','quan.id')
+            ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
+            ->first();
+
+        DB::table('khuvuc')
+            ->where('id',$id)
+            ->where('idquan',$thanhvien->idquan)
+            ->update($khuvuc);
+        
+        return back();
+    }
+    public function showkhuvuc($id){
+        $ssidthanhvien = Session::get('ssidthanhvien');
+        $khuvuc['hidden'] = 0;
+
+        $thanhvien = DB::table('thanhvien')
+            ->where('thanhvien.id',$ssidthanhvien)
+            ->join('quan','thanhvien.idquan','=','quan.id')
+            ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
+            ->first();
+
+        DB::table('khuvuc')
+            ->where('id',$id)
+            ->where('idquan',$thanhvien->idquan)
+            ->update($khuvuc);
+        
+        return back();
     }
 
     public function deletekhuvuc($id){

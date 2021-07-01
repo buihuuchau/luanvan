@@ -15,10 +15,10 @@ class CreateHoadonTable extends Migration
     {
         Schema::create('hoadon', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('idquan');
-            $table->bigInteger('idkhuvuc');
-            $table->bigInteger('idban');
-            $table->bigInteger('idthanhvien');
+            $table->bigInteger('idquan')->unsigned();
+            $table->bigInteger('idkhuvuc')->unsigned();
+            $table->bigInteger('idban')->unsigned();
+            $table->bigInteger('idthanhvien')->unsigned();
             $table->datetime('thoigian');
             $table->bigInteger('thanhtien');
             $table->bigInteger('trangthai')->comment('0: Chưa xong - 1: Đã thanh toán');

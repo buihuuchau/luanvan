@@ -15,7 +15,7 @@ class CreateNguyenlieuTable extends Migration
     {
         Schema::create('nguyenlieu', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('idquan');
+            $table->bigInteger('idquan')->unsigned();
             $table->string('tennguyenlieu');
             $table->string('xuatxu');
             $table->string('donvitinh');

@@ -15,7 +15,7 @@ class CreateThucdonTable extends Migration
     {
         Schema::create('thucdon', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('idquan');
+            $table->bigInteger('idquan')->unsigned();
             $table->bigInteger('loaimon')->comment('1-món nước, 2-món ăn, 3-món phụ');
             $table->string('tenmon');
             $table->bigInteger('dongia');

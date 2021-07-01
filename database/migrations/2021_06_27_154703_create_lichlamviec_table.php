@@ -15,10 +15,10 @@ class CreateLichlamviecTable extends Migration
     {
         Schema::create('lichlamviec', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('idquan');
-            $table->bigInteger('idcalam');
-            $table->bigInteger('idkhuvuc');
-            $table->bigInteger('idthanhvien');
+            $table->bigInteger('idquan')->unsigned();
+            $table->bigInteger('idcalam')->unsigned();
+            $table->bigInteger('idkhuvuc')->unsigned();
+            $table->bigInteger('idthanhvien')->unsigned();
             $table->date('thoigian');
             $table->bigInteger('diemdanh')->default(0)->comment('0: Vắng - 1: Có mặt');
             $table->timestamps();

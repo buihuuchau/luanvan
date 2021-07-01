@@ -15,8 +15,8 @@ class CreateBanTable extends Migration
     {
         Schema::create('ban', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('idquan');
-            $table->bigInteger('idkhuvuc');
+            $table->bigInteger('idquan')->unsigned();
+            $table->bigInteger('idkhuvuc')->unsigned();
             $table->string('tenban');
             $table->bigInteger('trangthai')->default(0)->comment('0: Rãnh - 1: Bận');
             $table->bigInteger('hidden')->default(0)->comment('0: Hiện - 1: Ẩn');

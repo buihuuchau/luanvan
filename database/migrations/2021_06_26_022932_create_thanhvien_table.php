@@ -15,7 +15,7 @@ class CreateThanhvienTable extends Migration
     {
         Schema::create('thanhvien', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('idquan');
+            $table->bigInteger('idquan')->unsigned();
             $table->string('acc');
             $table->string('pwd');
             $table->string('hoten');

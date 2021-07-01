@@ -15,7 +15,7 @@ class CreateCalamTable extends Migration
     {
         Schema::create('calam', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('idquan');
+            $table->bigInteger('idquan')->unsigned();
             $table->string('tencalam');
             $table->timestamps();
         });

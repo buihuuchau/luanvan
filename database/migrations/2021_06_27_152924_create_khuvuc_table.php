@@ -15,7 +15,7 @@ class CreateKhuvucTable extends Migration
     {
         Schema::create('khuvuc', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('idquan');
+            $table->bigInteger('idquan')->unsigned();
             $table->string('tenkhuvuc');
             $table->string('hidden')->default('0')->comment('0: Hiện - 1: Ẩn');
             $table->timestamps();

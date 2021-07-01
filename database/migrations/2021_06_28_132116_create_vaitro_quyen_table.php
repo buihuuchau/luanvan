@@ -15,8 +15,8 @@ class CreateVaitroQuyenTable extends Migration
     {
         Schema::create('vaitro_quyen', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('idvaitro');
-            $table->bigInteger('idquyen');
+            $table->bigInteger('idvaitro')->unsigned();
+            $table->bigInteger('idquyen')->unsigned();
             $table->timestamps();
         });
     }

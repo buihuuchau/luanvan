@@ -15,8 +15,8 @@ class CreateKhoTable extends Migration
     {
         Schema::create('kho', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('idquan');
-            $table->bigInteger('idnguyenlieu');
+            $table->bigInteger('idquan')->unsigned();
+            $table->bigInteger('idnguyenlieu')->unsigned();
             $table->bigInteger('dongia');
             $table->bigInteger('soluong');
             $table->bigInteger('thanhtien');

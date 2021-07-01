@@ -15,7 +15,7 @@ class CreateVaitroTable extends Migration
     {
         Schema::create('vaitro', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('idquan');
+            $table->bigInteger('idquan')->unsigned();
             $table->string('tenvaitro');
             $table->timestamps();
         });
