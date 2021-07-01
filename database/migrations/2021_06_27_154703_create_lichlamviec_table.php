@@ -20,7 +20,7 @@ class CreateLichlamviecTable extends Migration
             $table->bigInteger('idkhuvuc');
             $table->bigInteger('idthanhvien');
             $table->date('thoigian');
-            $table->bigInteger('diemdanh')->default(0);
+            $table->bigInteger('diemdanh')->default(0)->comment(0: Vắng - 1: Có mặt);
             $table->timestamps();
         });
     }

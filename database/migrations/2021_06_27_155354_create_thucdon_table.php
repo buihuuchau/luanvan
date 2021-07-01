@@ -21,6 +21,7 @@ class CreateThucdonTable extends Migration
             $table->bigInteger('dongia');
             $table->string('hinhmon');
             $table->string('mota');
+            $table->bigInteger('hidden')->default('0')->comment(0: Hiện - 1: Ẩn);
             $table->timestamps();
         });
     }
