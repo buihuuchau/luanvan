@@ -7,6 +7,7 @@ Use Alert;
 use Illuminate\Support\Facades\Redirect;
 use Session;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class quanlynguyenlieuController extends Controller
@@ -20,7 +21,6 @@ class quanlynguyenlieuController extends Controller
             ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
             ->first();
         $nguyenlieu = DB::table('nguyenlieu')
-                ->orderBy('id','desc')
                 ->where('idquan',$thanhvien->idquan)
                 ->get();
         $kho = DB::table('kho')

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-  <title>Sửa bàn</title>
+  <title>Thêm kho</title>
 @endsection
 @section('home')
 	<li class="nav-item d-none d-sm-inline-block">
@@ -17,14 +17,14 @@
 @endsection
 @section('quan')
 	<a href="{{route('dangnhapquan')}}" class="brand-link">
-  		<img src="{!!asset($thanhvien->hinhquan)!!}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+  		<img src="{{$thanhvien->hinhquan}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       	<span class="brand-text font-weight-light">{{$thanhvien->tenquan}}</span>
 	</a>
 @endsection
 @section('avatar')
 	<div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          	<img src="{!!asset($thanhvien->hinhtv)!!}" class="img-circle elevation-2" alt="User Image">
+          	<img src="{{$thanhvien->hinhtv}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           	<a href="{{route('thongtinthanhvien')}}" class="d-block">{{$thanhvien->hoten}}</a>
@@ -40,13 +40,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Sửa bàn</h1>
+                <h1 class="m-0">Thêm kho</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{route('thongtinthanhvien')}}">Thông tin thành viên</a></li>
-                <li class="breadcrumb-item"><a href="{{route('quanlyban')}}">Quản lý bàn</a></li>
-                <li class="breadcrumb-item"><a href="">Sửa bàn</a></li>
+                <li class="breadcrumb-item"><a href="{{route('quanlykho')}}">Quản lý kho</a></li>
+                <li class="breadcrumb-item"><a href="">Thêm kho</a></li>
                 </ol>
             </div><!-- /.col -->
             </div><!-- /.row -->
@@ -58,28 +58,24 @@
       <div class="container-fluid">
         <div class="row">
 
-            <form action="{{route('doeditban')}}" method="post">
+            <form action="{{route('doaddkho')}}" method="post">
 				{{csrf_field()}}
-				@if($errors->any())
-					<h3>{{$errors->first()}}</h3>
-				@endif
-                <input type="hidden" name="id" value="{{$ban->id}}">
                 <div class="form-group">
-                    <label>Chọn khu vực</label>
-                    <select class="form-control" name="idkhuvuc">
-                    @foreach($khuvuc as $key => $row)
-                        @if($ban->idkhuvuc == $row->id)
-                        <option value="{{$row->id}}" selected>{{$row->tenkhuvuc}}</option>
-                        @else
-                        <option value="{{$row->id}}">{{$row->tenkhuvuc}}</option>
-                        @endif
+                    <label>Chọn nguyên liệu</label>
+                    <select class="form-control" name="idnguyenlieu">
+                    @foreach($nguyenlieu as $key => $row)
+                        <option value="{{$row->id}}">{{$row->tennguyenlieu}}/{{$row->donvitinh}}-{{$row->xuatxu}}</option>
                     @endforeach
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Tên bàn</label>
-                    <input type="text" class="form-control" name="tenban" value="{{$ban->tenban}}" required><br>
-                    <button type="submit" class="btn btn-primary">Lưu chỉnh sửa</button>
+                    <label>Đơn giá</label>
+                    <input type="number" class="form-control" name="dongia" placeholder="Tính tới hàng đơn vị" required><br>
+                </div>
+                <div class="form-group">
+                    <label>Số lượng</label>
+                    <input type="number" class="form-control" name="soluong" required><br>
+                    <button type="submit" class="btn btn-primary">Thêm</button>
                 </div>
             </form>
 

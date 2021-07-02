@@ -7,6 +7,7 @@ Use Alert;
 use Illuminate\Support\Facades\Redirect;
 use Session;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class thanhvienController extends Controller

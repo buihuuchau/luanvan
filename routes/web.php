@@ -217,3 +217,32 @@ Route::prefix('/')->group(function () {
     ]);
 });   
 // QUAN LY NGUYEN LIEU
+
+// QUAN LY KHO
+Route::prefix('/')->group(function () {
+    Route::get('/quanlykho', [
+        'as' => 'quanlykho',
+        'uses' => 'App\Http\Controllers\quanlykhoController@quanlykho'
+    ]);
+    Route::get('/addkho', [
+        'as' => 'addkho',
+        'uses' => 'App\Http\Controllers\quanlykhoController@addkho'
+    ]);
+    Route::post('/doaddkho', [
+        'as' => 'doaddkho',
+        'uses' => 'App\Http\Controllers\quanlykhoController@doaddkho'
+    ]);
+    Route::get('/hethangkho/{id}', [
+        'as' => 'hethangkho',
+        'uses' => 'App\Http\Controllers\quanlykhoController@hethangkho'
+    ]);
+    Route::get('/conhangkho/{id}', [
+        'as' => 'conhangkho',
+        'uses' => 'App\Http\Controllers\quanlykhoController@conhangkho'
+    ]);
+    Route::get('/deletekho/{id}', [
+        'as' => 'deletekho',
+        'uses' => 'App\Http\Controllers\quanlykhoController@deletekho'
+    ]);
+});
+// QUAN LY KHO

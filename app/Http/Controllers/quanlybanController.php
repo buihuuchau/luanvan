@@ -7,6 +7,7 @@ Use Alert;
 use Illuminate\Support\Facades\Redirect;
 use Session;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class quanlybanController extends Controller
@@ -44,6 +45,7 @@ class quanlybanController extends Controller
                     ->first();
 
         $khuvuc = DB::table('khuvuc')
+                    ->orderBy('tenkhuvuc')
                     ->where('idquan',$thanhvien->idquan)
                     ->where('hidden',0)
                     ->get();

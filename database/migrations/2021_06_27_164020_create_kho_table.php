@@ -21,6 +21,7 @@ class CreateKhoTable extends Migration
             $table->bigInteger('soluong');
             $table->bigInteger('thanhtien');
             $table->date('ngaynhap');
+            $table->date('ngayhet')->nullable();
             $table->bigInteger('trangthai')->default(1)->comment('1: còn hàng, 0: hết hàng');
             $table->timestamps();
         });
