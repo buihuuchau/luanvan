@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-  <title>Quản lý khu vực</title>
+  <title>Quản lý ca làm</title>
 @endsection
 @section('home')
 	<li class="nav-item d-none d-sm-inline-block">
@@ -40,12 +40,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Quản lý khu vực</h1>
+                <h1 class="m-0">Quản lý ca làm</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{route('thongtinthanhvien')}}">Thông tin thành viên</a></li>
-                <li class="breadcrumb-item"><a href="">Quản lý khu vực</a></li>
+                <li class="breadcrumb-item"><a href="">Quản lý ca làm</a></li>
                 </ol>
             </div><!-- /.col -->
             </div><!-- /.row -->
@@ -59,7 +59,7 @@
 
 			<div class="col-sm-12">
 				<div class="col-md-12 mb-4 text-right">
-					<a style="width:44px" class="btn btn-primary" href="{{route('addkhuvuc')}}">
+					<a style="width:44px" class="btn btn-primary" href="{{route('addcalam')}}">
 						<i class="fas fa-plus"></i></a>
 				</div>
 				<div class="card">
@@ -68,22 +68,23 @@
 							<thead>
 								<tr role="row">
 									<th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">No.</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TÊN KHU VỰC</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TÊN CA LÀM</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TỪ GIỜ</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ĐẾN GIỜ</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ẨN / HIỆN</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THAO TÁC</th>
 								</tr>
 							</thead>
 							<tbody>
-							@foreach ($khuvuc as $key => $row)
+							@foreach ($calam as $key => $row)
 								<tr class="odd">
 									<td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td>
-									<td>{{$row->tenkhuvuc}}</td>
-
-									@foreach ($ban as $key2 => $row2)
-										<?php	if($row2->idkhuvuc==$row->id)	$sudung = $row->id;?>				
-									@endforeach
-									@foreach ($lichlamviec as $key3 => $row3)
-										<?php	if($row3->idkhuvuc==$row->id)	$sudung = $row->id;?>				
+									<td>{{$row->tencalam}}</td>
+									<td>{{$row->tu}}</td>
+									<td>{{$row->den}}</td>
+									@foreach ($lichlamviec as $key2 => $row2)
+										<?php	if($row2->idcalam==$row->id)	$sudung = $row->id;
+										?>				
 									@endforeach
 									
 									@if($row->hidden==0 && $sudung!=$row->id)
@@ -94,19 +95,19 @@
 										<td bgcolor="gray" style="color:white">Vô hiệu hóa</td>
 									@endif
 									<td>
-                                        <a href="{{route('editkhuvuc',['id'=>$row->id])}}">Sửa khu vực</a><br>
+										<a href="{{route('editcalam',['id'=>$row->id])}}">Sửa ca làm</a><br>
 
 										@if($row->hidden==0)
-                                        <a href="{{route('hiddenkhuvuc',['id'=>$row->id])}}">Ẩn khu vực</a><br>
+										<a href="{{route('hiddencalam',['id'=>$row->id])}}">Ẩn ca làm</a><br>
 										@else
-										<a href="{{route('showkhuvuc',['id'=>$row->id])}}">Hiện khu vực</a><br>
+										<a href="{{route('showcalam',['id'=>$row->id])}}">Hiện ca làm</a><br>
 										@endif
 
 										@if($sudung!=$row->id)
-										<a href="{{route('deletekhuvuc',['id'=>$row->id])}}"
-											onclick="return confirm('Bạn có chắc chắn muốn xóa')";>Xóa khu vực</a>
+										<a href="{{route('deletecalam',['id'=>$row->id])}}"
+											onclick="return confirm('Bạn có chắc chắn muốn xóa')";>Xóa ca làm</a>
 										@endif
-                                    </td>
+									</td>
 								</tr>
 							@endforeach
 							</tbody>
@@ -114,6 +115,7 @@
 					</div>
 				</div>
 			</div>
+
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->

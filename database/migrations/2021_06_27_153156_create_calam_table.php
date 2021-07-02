@@ -17,6 +17,9 @@ class CreateCalamTable extends Migration
             $table->id();
             $table->bigInteger('idquan')->unsigned();
             $table->string('tencalam');
+            $table->time('tu');
+            $table->time('den');
+            $table->string('hidden')->default('0')->comment('0: Hiện - 1: Ẩn');
             $table->timestamps();
         });
     }

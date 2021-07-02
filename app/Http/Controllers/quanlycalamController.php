@@ -10,9 +10,9 @@ use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class quanlykhuvucController extends Controller
+class quanlycalamController extends Controller
 {
-    public function quanlykhuvuc(){
+    public function quanlycalam(){
         $ssidthanhvien = Session::get('ssidthanhvien');
         
         $thanhvien = DB::table('thanhvien')
@@ -20,10 +20,7 @@ class quanlykhuvucController extends Controller
             ->join('quan','thanhvien.idquan','=','quan.id')
             ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
             ->first();
-        $khuvuc = DB::table('khuvuc')
-                ->where('idquan',$thanhvien->idquan)
-                ->get();
-        $ban = DB::table('ban')
+        $calam = DB::table('calam')
                 ->where('idquan',$thanhvien->idquan)
                 ->get();
         $lichlamviec = DB::table('lichlamviec')
@@ -31,10 +28,10 @@ class quanlykhuvucController extends Controller
                 ->get();
         $sudung = null;
 
-        return view('khuvuc.quanlykhuvuc',compact('thanhvien','khuvuc','ban','lichlamviec','sudung'));
+        return view('calam.quanlycalam',compact('thanhvien','calam','lichlamviec','sudung'));
     }
 
-    public function addkhuvuc(){
+    public function addcalam(){
         $ssidthanhvien = Session::get('ssidthanhvien');
 
         $thanhvien = DB::table('thanhvien')
@@ -42,10 +39,10 @@ class quanlykhuvucController extends Controller
             ->join('quan','thanhvien.idquan','=','quan.id')
             ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
             ->first();
-        return view('khuvuc.addkhuvuc',compact('thanhvien'));
+        return view('calam.addcalam',compact('thanhvien'));
     }
 
-    public function doaddkhuvuc(Request $request){
+    public function doaddcalam(Request $request){
         $ssidthanhvien = Session::get('ssidthanhvien');
 
         $thanhvien = DB::table('thanhvien')
@@ -54,23 +51,25 @@ class quanlykhuvucController extends Controller
             ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
             ->first();
         
-        $check = DB::table('khuvuc')
+        $check = DB::table('calam')
             ->where('idquan',$thanhvien->idquan)
-            ->where('tenkhuvuc',$request->tenkhuvuc)
+            ->where('tencalam', $request->tencalam)
             ->first();
         if($check){
-            return back()->withErrors(['Khu vực đã tồn tại']);
+            return back()->withErrors(['Ca làm đã tồn tại']);
         }
         else{
-            $khuvuc['idquan'] = $thanhvien->idquan;
-            $khuvuc['tenkhuvuc'] = $request->tenkhuvuc;
-            DB::table('khuvuc')->insert($khuvuc);
+            $calam['idquan'] = $thanhvien->idquan;
+            $calam['tencalam'] = $request->tencalam;
+            $calam['tu'] = $request->tu;
+            $calam['den'] = $request->den;
+            DB::table('calam')->insert($calam);
             return back();
         }       
         
     }
 
-    public function editkhuvuc($id){
+    public function editcalam($id){
         $ssidthanhvien = Session::get('ssidthanhvien');
 
         $thanhvien = DB::table('thanhvien')
@@ -79,14 +78,14 @@ class quanlykhuvucController extends Controller
             ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
             ->first();
 
-        $khuvuc = DB::table('khuvuc')
+        $calam = DB::table('calam')
             ->where('id',$id)
             ->first();
                 
-        return view('khuvuc.editkhuvuc',compact('thanhvien','khuvuc'));
+        return view('calam.editcalam',compact('thanhvien','calam'));
     }
 
-    public function doeditkhuvuc(Request $request){
+    public function doeditcalam(Request $request){
         $ssidthanhvien = Session::get('ssidthanhvien');
 
         $thanhvien = DB::table('thanhvien')
@@ -95,25 +94,29 @@ class quanlykhuvucController extends Controller
             ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
             ->first();
         
-        $check = DB::table('khuvuc')
+        $check = DB::table('calam')
             ->where('idquan',$thanhvien->idquan)
-            ->where('tenkhuvuc',$request->tenkhuvuc)
+            ->where('tencalam',$request->tencalam)
+            ->where('tu',$request->tu)
+            ->where('den',$request->den)
             ->first();
         if($check){
-            return back()->withErrors(['Khu vực đã tồn tại']);
+            return back()->withErrors(['Ca làm đã tồn tại']);
         }
         else{
-            $khuvuc['tenkhuvuc'] = $request->tenkhuvuc;
-            $khuvuc = DB::table('khuvuc')
+            $calam['tencalam'] = $request->tencalam;
+            $calam['tu'] = $request->tu;
+            $calam['den'] = $request->den;
+            $calam = DB::table('calam')
                 ->where('id',$request->id)
-                ->update($khuvuc);
-            return redirect()->route('quanlykhuvuc');
+                ->update($calam);
+            return redirect()->route('quanlycalam');
         }
     }
 
-    public function hiddenkhuvuc($id){
+    public function hiddencalam($id){
         $ssidthanhvien = Session::get('ssidthanhvien');
-        $khuvuc['hidden'] = 1;
+        $calam['hidden'] = 1;
 
         $thanhvien = DB::table('thanhvien')
             ->where('thanhvien.id',$ssidthanhvien)
@@ -121,16 +124,16 @@ class quanlykhuvucController extends Controller
             ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
             ->first();
 
-        DB::table('khuvuc')
+        DB::table('calam')
             ->where('id',$id)
             ->where('idquan',$thanhvien->idquan)
-            ->update($khuvuc);
+            ->update($calam);
         
         return back();
     }
-    public function showkhuvuc($id){
+    public function showcalam($id){
         $ssidthanhvien = Session::get('ssidthanhvien');
-        $khuvuc['hidden'] = 0;
+        $calam['hidden'] = 0;
 
         $thanhvien = DB::table('thanhvien')
             ->where('thanhvien.id',$ssidthanhvien)
@@ -138,15 +141,15 @@ class quanlykhuvucController extends Controller
             ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
             ->first();
 
-        DB::table('khuvuc')
+        DB::table('calam')
             ->where('id',$id)
             ->where('idquan',$thanhvien->idquan)
-            ->update($khuvuc);
+            ->update($calam);
         
         return back();
     }
 
-    public function deletekhuvuc($id){
+    public function deletecalam($id){
         $ssidthanhvien = Session::get('ssidthanhvien');
 
         $thanhvien = DB::table('thanhvien')
@@ -155,7 +158,7 @@ class quanlykhuvucController extends Controller
             ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
             ->first();
 
-        DB::table('khuvuc')
+        DB::table('calam')
             ->where('id',$id)
             ->where('idquan',$thanhvien->idquan)
             ->delete();

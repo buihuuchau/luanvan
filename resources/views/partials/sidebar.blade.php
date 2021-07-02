@@ -52,6 +52,14 @@
               		</p>
             		</a>
           		</li>
+				<li class="nav-item">
+            		<a href="{{route('quanlycalam')}}" class="nav-link">
+              		<i class="nav-icon fas fa-th"></i>
+              		<p>
+               			Quản lý ca làm
+              		</p>
+            		</a>
+          		</li>
         	</ul>
     	</nav>
     	<!-- /.sidebar-menu -->

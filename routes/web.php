@@ -246,3 +246,40 @@ Route::prefix('/')->group(function () {
     ]);
 });
 // QUAN LY KHO
+
+// QUAN LY CA LAM
+Route::prefix('/')->group(function () {
+    Route::get('/quanlycalam', [
+        'as' => 'quanlycalam',
+        'uses' => 'App\Http\Controllers\quanlycalamController@quanlycalam'
+    ]);
+    Route::get('/addcalam', [
+        'as' => 'addcalam',
+        'uses' => 'App\Http\Controllers\quanlycalamController@addcalam'
+    ]);
+    Route::post('/doaddcalam', [
+        'as' => 'doaddcalam',
+        'uses' => 'App\Http\Controllers\quanlycalamController@doaddcalam'
+    ]);
+    Route::get('/editcalam/{id}', [
+        'as' => 'editcalam',
+        'uses' => 'App\Http\Controllers\quanlycalamController@editcalam'
+    ]);
+    Route::post('/doeditcalam', [
+        'as' => 'doeditcalam',
+        'uses' => 'App\Http\Controllers\quanlycalamController@doeditcalam'
+    ]);
+    Route::get('/hiddencalam/{id}', [
+        'as' => 'hiddencalam',
+        'uses' => 'App\Http\Controllers\quanlycalamController@hiddencalam'
+    ]);
+    Route::get('/showcalam/{id}', [
+        'as' => 'showcalam',
+        'uses' => 'App\Http\Controllers\quanlycalamController@showcalam'
+    ]);
+    Route::get('/deletecalam/{id}', [
+        'as' => 'deletecalam',
+        'uses' => 'App\Http\Controllers\quanlycalamController@deletecalam'
+    ]);
+});   
+// QUAN LY CA LAM
