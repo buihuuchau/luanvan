@@ -331,5 +331,29 @@ Route::prefix('/')->group(function () {
         'as' => 'xemlichlamviec',
         'uses' => 'App\Http\Controllers\quanlylichlamviecController@xemlichlamviec'
     ]);
+    Route::get('/diemdanhcomatlichlamviec/{id}', [
+        'as' => 'diemdanhcomatlichlamviec',
+        'uses' => 'App\Http\Controllers\quanlylichlamviecController@diemdanhcomatlichlamviec'
+    ]);
+    Route::get('/diemdanhvangmatlichlamviec/{id}', [
+        'as' => 'diemdanhvangmatlichlamviec',
+        'uses' => 'App\Http\Controllers\quanlylichlamviecController@diemdanhvangmatlichlamviec'
+    ]);
+    Route::get('/addlichlamviec', [
+        'as' => 'addlichlamviec',
+        'uses' => 'App\Http\Controllers\quanlylichlamviecController@addlichlamviec'
+    ]);
+    Route::post('/doaddlichlamviec', [
+        'as' => 'doaddlichlamviec',
+        'uses' => 'App\Http\Controllers\quanlylichlamviecController@doaddlichlamviec'
+    ]);
+    Route::get('/editlichlamviec', [
+        'as' => 'editlichlamviec',
+        'uses' => 'App\Http\Controllers\quanlylichlamviecController@editlichlamviec'
+    ]);
+    Route::get('/doeditlichlamviec/{id}', [
+        'as' => 'doeditlichlamviec',
+        'uses' => 'App\Http\Controllers\quanlylichlamviecController@doeditlichlamviec'
+    ]);
 });  
 // QUAN LY LICH LAM VIEC

@@ -60,8 +60,10 @@
 			<div class="col-sm-12">
 
 				<div class="col-md-12 mb-4 text-right">
-					<a style="width:44px" class="btn btn-primary" href="{{route('addkhuvuc')}}">
-						<i class="fas fa-plus"></i></a>
+					<a style="width:44px" class="btn btn-primary" href="{{route('addlichlamviec')}}">
+						<i class="fas fa-plus"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a style="width:44px" class="btn btn-primary" href="{{route('editlichlamviec')}}">
+						<i class="fas fa-edit"></i></a>    
 				</div>
 				
                 <table class="table table-bordered text-center">
@@ -95,8 +97,11 @@
                             <td>
                                 @foreach ($lichlamviec as $key3 => $row3)
                                     @if($row3->idkhuvuc == $row->id && $row3->idcalam == $row2->id)
-                                        <a href="">Điểm danh</a>    <a href="">Sửa</a><br>
-                                        <a href="">{{$row3->hoten}}--->{{$row3->diemdanh}}</a><br>
+                                        @if($row3->diemdanh==0)
+                                            <a style="color:red" href="{{route('diemdanhcomatlichlamviec',['id'=>$row3->id])}}">{{$row3->hoten}}--->Vắng mặt </a><br>
+                                        @else
+                                            <a style="color:green" href="{{route('diemdanhvangmatlichlamviec',['id'=>$row3->id])}}">{{$row3->hoten}}--->Có mặt </a><br>
+                                        @endif
                                     @endif
                                 @endforeach
                             </td>
