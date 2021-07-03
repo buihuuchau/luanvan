@@ -26,7 +26,8 @@ class CreateThanhvienTable extends Migration
             $table->bigInteger('sdt');
             $table->string('ngayvaolam');
             $table->bigInteger('luong');
-            $table->bigInteger('idvaitro');
+            $table->bigInteger('idvaitro')->unsigned();
+            $table->bigInteger('hidden')->default(1)->comment('0: Hiện - 1: Ẩn');
             $table->timestamps();
         });
     }

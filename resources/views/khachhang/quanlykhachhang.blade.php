@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-  <title>Quản lý bàn</title>
+  <title>Quản lý khách hàng</title>
 @endsection
 @section('home')
 	<li class="nav-item d-none d-sm-inline-block">
@@ -40,12 +40,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Quản lý bàn</h1>
+                <h1 class="m-0">Quản lý khách hàng</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{route('thongtinthanhvien')}}">Thông tin thành viên</a></li>
-                <li class="breadcrumb-item"><a href="">Quản lý bàn</a></li>
+                <li class="breadcrumb-item"><a href="">Quản lý khách hàng</a></li>
                 </ol>
             </div><!-- /.col -->
             </div><!-- /.row -->
@@ -59,7 +59,7 @@
 
 			<div class="col-sm-12">
 				<div class="col-md-12 mb-4 text-right">
-					<a style="width:44px" class="btn btn-primary" href="{{route('addban')}}">
+					<a style="width:44px" class="btn btn-primary" href="{{route('addkhachhang')}}">
 						<i class="fas fa-plus"></i></a>
 				</div>
 				<div class="card">
@@ -68,45 +68,20 @@
 							<thead>
 								<tr role="row">
 									<th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">No.</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TÊN KHU VỰC</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TÊN BÀN</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TRẠNG THÁI</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ẨN / HIỆN</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >HỌ TÊN</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >SỐ ĐIỆN THOẠI</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ĐIỂM</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THAO TÁC</th>
 								</tr>
 							</thead>
 							<tbody>
-							@foreach ($ban as $key => $row)
+							@foreach ($khachhang as $key => $row)
 								<tr class="odd">
 									<td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td>
-									<td>{{$row->tenkhuvuc}}</td>
-									<td>{{$row->tenban}}</td>
-									<td>{{$row->trangthai}}</td>
-									@foreach ($hoadon as $key2 => $row2)
-										<?php	if($row2->idban==$row->id)	$sudung = $row->id;	?>				
-									@endforeach
-									
-									@if($row->hidden==0 && $sudung!=$row->id)
-										<td>Chưa được sử dụng</td>
-									@elseif($row->hidden==0 && $sudung==$row->id)
-										<td bgcolor="lightgreen">Đang được sử dụng</td>
-									@else
-										<td bgcolor="gray" style="color:white">Vô hiệu hóa</td>
-									@endif
-									<td>
-										<a href="{{route('editban',['id'=>$row->id])}}">Sửa bàn</a><br>
-
-										@if($row->hidden==0)
-										<a href="{{route('hiddenban',['id'=>$row->id])}}">Ẩn bàn</a><br>
-										@else
-										<a href="{{route('showban',['id'=>$row->id])}}">Hiện bàn</a><br>
-										@endif
-
-										@if($sudung!=$row->id)
-										<a href="{{route('deleteban',['id'=>$row->id])}}"
-											onclick="return confirm('Bạn có chắc chắn muốn xóa')";>Xóa bàn</a>
-										@endif
-									</td>
+									<td>{{$row->hoten}}</td>
+									<td>{{$row->sdt}}</td>
+									<td>{{$row->diem}}</td>
+									<td><a href="{{route('editkhachhang',['id'=>$row->id])}}">Sửa thông tin</a></td>
 								</tr>
 							@endforeach
 							</tbody>

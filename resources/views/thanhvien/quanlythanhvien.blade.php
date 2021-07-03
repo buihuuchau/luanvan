@@ -68,6 +68,7 @@
 								<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >NGÀY VÀO LÀM</th>
 								<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >LƯƠNG</th>
 								<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >VAI TRÒ</th>
+								<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TRẠNG THÁI</th>
 								<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THAO TÁC</th>
 							</tr>
 							</thead>
@@ -88,11 +89,35 @@
 								<td>{{$row->ngayvaolam}}</td>
 								<td>{{$row->luong}} vnđ</td>
 								<td>{{$row->tenvaitro}}</td>
+								@foreach ($lichlamviec as $key2 => $row2)
+									<?php	if($row2->idthanhvien==$row->id)	$sudung = $row->id;	?>				
+								@endforeach
+								@foreach ($hoadon as $key3 => $row3)
+									<?php	if($row3->idthanhvien==$row->id)	$sudung = $row->id;	?>				
+								@endforeach
+								
+								@if($row->hidden==0 && $sudung!=$row->id)
+									<td>Thành viên mới</td>
+								@elseif($row->hidden==0 && $sudung==$row->id)
+									<td bgcolor="lightgreen">Đang hoạt động</td>
+								@else
+									<td bgcolor="gray" style="color:white">Vô hiệu hóa</td>
+								@endif
 								<td>
 									<a href="{{route('editthongtinthanhvien',['id'=>$row->id])}}">Sửa thành viên</a><br>
+
+									@if ($row->hidden==1)
+									<a href="{{route('kichhoatthanhvien',['id'=>$row->id])}}">Kích hoạt</a><br>
+									@else
+									<a href="{{route('vohieuhoathanhvien',['id'=>$row->id])}}">Vô hiệu hóa</a><br>
+									@endif
+
+									@if($sudung!=$row->id)
 									<a href="{{route('deletethongtinthanhvien',['id'=>$row->id])}}"
 										onclick="return confirm('Bạn có chắc chắn muốn xóa')";>Xóa thành viên</a>
+									@endif
 								</td>
+
 							</tr>
 							@endforeach
 							</tbody>

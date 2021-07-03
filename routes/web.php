@@ -58,54 +58,91 @@ Route::prefix('/')->group(function () {
 Route::prefix('/')->group(function () {
     Route::get('/quanlythanhvien', [
         'as' => 'quanlythanhvien',
-        'uses' => 'App\Http\Controllers\thanhvienController@quanlythanhvien'
+        'uses' => 'App\Http\Controllers\quanlythanhvienController@quanlythanhvien'
     ]);
     Route::get('/addthanhvien', [
         'as' => 'addthanhvien',
-        'uses' => 'App\Http\Controllers\thanhvienController@addthanhvien'
+        'uses' => 'App\Http\Controllers\quanlythanhvienController@addthanhvien'
     ]);
     Route::post('/doaddthanhvien', [
         'as' => 'doaddthanhvien',
-        'uses' => 'App\Http\Controllers\thanhvienController@doaddthanhvien'
+        'uses' => 'App\Http\Controllers\quanlythanhvienController@doaddthanhvien'
     ]);
     Route::get('/editthongtinthanhvien/{id}', [
         'as' => 'editthongtinthanhvien',
-        'uses' => 'App\Http\Controllers\thanhvienController@editthongtinthanhvien'
+        'uses' => 'App\Http\Controllers\quanlythanhvienController@editthongtinthanhvien'
     ]);
     Route::post('/doeditthongtinthanhvien', [
         'as' => 'doeditthongtinthanhvien',
-        'uses' => 'App\Http\Controllers\thanhvienController@doeditthongtinthanhvien'
+        'uses' => 'App\Http\Controllers\quanlythanhvienController@doeditthongtinthanhvien'
+    ]);
+    Route::post('/editmatkhau', [
+        'as' => 'editmatkhau',
+        'uses' => 'App\Http\Controllers\quanlythanhvienController@editmatkhau'
+    ]);
+    Route::get('/kichhoatthanhvien/{id}', [
+        'as' => 'kichhoatthanhvien',
+        'uses' => 'App\Http\Controllers\quanlythanhvienController@kichhoatthanhvien'
+    ]);
+    Route::get('/vohieuhoathanhvien/{id}', [
+        'as' => 'vohieuhoathanhvien',
+        'uses' => 'App\Http\Controllers\quanlythanhvienController@vohieuhoathanhvien'
     ]);
     Route::get('/deletethongtinthanhvien/{id}', [
         'as' => 'deletethongtinthanhvien',
-        'uses' => 'App\Http\Controllers\thanhvienController@deletethongtinthanhvien'
+        'uses' => 'App\Http\Controllers\quanlythanhvienController@deletethongtinthanhvien'
     ]);
     Route::get('/', [
         'as' => 'dangnhapthanhvien',
-        'uses' => 'App\Http\Controllers\thanhvienController@dangnhapthanhvien'
+        'uses' => 'App\Http\Controllers\quanlythanhvienController@dangnhapthanhvien'
     ]);
     Route::post('/dodangnhapthanhvien', [
         'as' => 'dodangnhapthanhvien',
-        'uses' => 'App\Http\Controllers\thanhvienController@dodangnhapthanhvien'
+        'uses' => 'App\Http\Controllers\quanlythanhvienController@dodangnhapthanhvien'
     ]);
     Route::get('/thongtinthanhvien', [
         'as' => 'thongtinthanhvien',
-        'uses' => 'App\Http\Controllers\thanhvienController@thongtinthanhvien'
+        'uses' => 'App\Http\Controllers\quanlythanhvienController@thongtinthanhvien'
     ]);
     Route::get('/dangxuatthanhvien', [
         'as' => 'dangxuatthanhvien',
-        'uses' => 'App\Http\Controllers\thanhvienController@dangxuatthanhvien'
+        'uses' => 'App\Http\Controllers\quanlythanhvienController@dangxuatthanhvien'
     ]);       
     Route::post('/suathongtinthanhvien', [
         'as' => 'suathongtinthanhvien',
-        'uses' => 'App\Http\Controllers\thanhvienController@suathongtinthanhvien'
+        'uses' => 'App\Http\Controllers\quanlythanhvienController@suathongtinthanhvien'
     ]);
     Route::post('/doimatkhau', [
         'as' => 'doimatkhau',
-        'uses' => 'App\Http\Controllers\thanhvienController@doimatkhau'
+        'uses' => 'App\Http\Controllers\quanlythanhvienController@doimatkhau'
     ]);
 });
 // QUAN LY THANH VIEN
+
+// QUAN LY KHACH HANG
+Route::prefix('/')->group(function () {
+    Route::get('/quanlykhachhang', [
+        'as' => 'quanlykhachhang',
+        'uses' => 'App\Http\Controllers\quanlykhachhangController@quanlykhachhang'
+    ]);
+    Route::get('/addkhachhang', [
+        'as' => 'addkhachhang',
+        'uses' => 'App\Http\Controllers\quanlykhachhangController@addkhachhang'
+    ]);
+    Route::post('/doaddkhachhang', [
+        'as' => 'doaddkhachhang',
+        'uses' => 'App\Http\Controllers\quanlykhachhangController@doaddkhachhang'
+    ]);
+    Route::get('/editkhachhang/{id}', [
+        'as' => 'editkhachhang',
+        'uses' => 'App\Http\Controllers\quanlykhachhangController@editkhachhang'
+    ]);
+    Route::post('/doeditkhachhang', [
+        'as' => 'doeditkhachhang',
+        'uses' => 'App\Http\Controllers\quanlykhachhangController@doeditkhachhang'
+    ]);
+});
+// QUAN LY KHACH HANG
 
 // QUAN LY KHU VUC
 Route::prefix('/')->group(function () {

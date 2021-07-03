@@ -19,7 +19,7 @@ class CreateHoadonTable extends Migration
             $table->bigInteger('idkhuvuc')->unsigned();
             $table->bigInteger('idban')->unsigned();
             $table->bigInteger('idthanhvien')->unsigned();
-            $table->bigInteger('idkhachhang')->unsigned();
+            $table->bigInteger('idkhachhang')->unsigned()->nullable();
             $table->datetime('thoigian');
             $table->bigInteger('thanhtien');
             $table->bigInteger('trangthai')->comment('0: Chưa xong - 1: Đã thanh toán');

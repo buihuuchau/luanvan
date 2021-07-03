@@ -13,10 +13,18 @@
           	<!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                	<li class="nav-item">
             		<a href="{{route('quanlythanhvien')}}" class="nav-link">
-              		<i class="nav-icon fas fa-th"></i>
+              		<i class="nav-icon fas fa-user"></i>
               		<p>
                			Quản lý thành viên
                 		<!-- <span class="right badge badge-danger">New</span> -->
+              		</p>
+            		</a>
+          		</li>
+				<li class="nav-item">
+            		<a href="{{route('quanlykhachhang')}}" class="nav-link">
+              		<i class="nav-icon fas fa-user"></i>
+              		<p>
+               			Quản lý khách hàng
               		</p>
             		</a>
           		</li>

@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class thanhvienController extends Controller
+class quanlythanhvienController extends Controller
 {
     public function quanlythanhvien(){
         $ssidquan = Session::get('ssidquan');
@@ -22,7 +22,14 @@ class thanhvienController extends Controller
                     ->join('vaitro', 'thanhvien.idvaitro', '=', 'vaitro.id')
                     ->select('thanhvien.*','vaitro.tenvaitro')
                     ->get();
-        return view('thanhvien.quanlythanhvien', compact('quan','thanhvien'));
+        $lichlamviec = DB::table('lichlamviec')
+                    ->where('idquan',$ssidquan)
+                    ->get();
+        $hoadon = DB::table('hoadon')
+                    ->where('idquan',$ssidquan)
+                    ->get();
+        $sudung = null;
+        return view('thanhvien.quanlythanhvien', compact('quan','thanhvien','lichlamviec','hoadon','sudung'));
     }
     public function addthanhvien(){
         $ssidquan = Session::get('ssidquan');
@@ -94,6 +101,37 @@ class thanhvienController extends Controller
             ->update($thanhvien);
         return back();
     }
+    public function editmatkhau(Request $request){
+        $ssidquan = Session::get('ssidquan');
+        $thanhvien['pwd'] = md5($request->rnpwd);
+        DB::table('thanhvien')
+            ->where('idquan',$ssidquan)
+            ->where('id',$request->id)
+            ->update($thanhvien);
+        return back();
+    }
+    public function vohieuhoathanhvien($id){
+        $ssidquan = Session::get('ssidquan');
+        $thanhvien['hidden'] = 1;
+
+        $thanhvien = DB::table('thanhvien')
+            ->where('idquan',$ssidquan)
+            ->where('id',$id)
+            ->update($thanhvien);
+        
+        return back();
+    }
+    public function kichhoatthanhvien($id){
+        $ssidquan = Session::get('ssidquan');
+        $thanhvien['hidden'] = 0;
+
+        $thanhvien = DB::table('thanhvien')
+            ->where('idquan',$ssidquan)
+            ->where('id',$id)
+            ->update($thanhvien);
+        
+        return back();
+    }
     public function deletethongtinthanhvien($id){
         $ssidquan = Session::get('ssidquan');
         DB::table('thanhvien')
@@ -111,6 +149,7 @@ class thanhvienController extends Controller
         $check = DB::table('thanhvien')
                 ->where('acc',$acc)
                 ->where('pwd',$pwd)
+                ->where('hidden',0)
                 ->first();
         if($check){
             Session::forget('ssidquan');

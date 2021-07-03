@@ -77,6 +77,11 @@
 								<img src="{!!asset($thanhvien->hinhtv)!!}" alt="" width="30%" height="30%">
 
 								<div class="form-group">
+								<label>Tài khoản thành viên:</label>
+								<input required="true" type="text" class="form-control" name="hoten" value="{{$thanhvien->acc}}" disabled>
+								</div>
+
+								<div class="form-group">
 								<label>Họ tên thành viên:</label>
 								<input required="true" type="text" class="form-control" name="hoten" value="{{$thanhvien->hoten}}">
 								</div>
@@ -155,7 +160,32 @@
 								<div class="col text-center">
 								<button class="btn btn-danger">Lưu chỉnh sửa</button>
 								</div>
-							</form>	
+							</form>
+							<div class="panel panel-primary">
+								<div class="panel-heading">
+									<h2 class="text-center">Đổi mật khẩu</h2>
+								</div>
+								<div class="panel-body">
+									<form action="{{route('editmatkhau')}}" method="post" enctype="multipart/form-data">
+										{{csrf_field()}}
+										<input type="hidden" name="id" value="{{$thanhvien->id}}">
+										<div class="form-group">
+										<label>Mật khẩu mới:</label>
+										<input type="password" class="form-control" placeholder="mật khẩu phải chứa 8 ký tự trở lên có ít nhất một số và một chữ hoa và chữ thường"
+											id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="npwd" required>
+										</div>
+
+										<div class="form-group">
+										<label>Nhập lại mật khẩu mới:</label>
+										<input type="password" class="form-control" id="confirm_password" name="rnpwd" required>
+										</div>
+										<div class="col text-center">
+										<button class="btn btn-warning">Đổi mật khẩu</button>
+										</div>
+									</form>		
+								</div>
+							</div>
+
 						</div>
 					</div>					
 				</div>
@@ -168,4 +198,21 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+<script>
+	var password = document.getElementById("password"),
+	confirm_password = document.getElementById("confirm_password");
+
+	function validatePassword(){
+		if(password.value != confirm_password.value) {
+			confirm_password.setCustomValidity("2 mật khẩu khâc nhau");
+		}
+		else {
+			confirm_password.setCustomValidity('');
+		}
+	}
+	password.onchange = validatePassword;
+	confirm_password.onkeyup = validatePassword;
+</script>
+
 @endsection
