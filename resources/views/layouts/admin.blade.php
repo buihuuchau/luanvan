@@ -88,5 +88,12 @@ $('input.input-qty').each(function() {
   })
 })
 </script>
+<!-- show lua chon -->
+<script>
+function myFunction() {
+  alert('aloalo');
+}
+</script>
+
 </body>
 </html>

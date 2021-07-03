@@ -320,3 +320,16 @@ Route::prefix('/')->group(function () {
     ]);
 });   
 // QUAN LY CA LAM
+
+// QUAN LY LICH LAM VIEC
+Route::prefix('/')->group(function () {
+    Route::get('/quanlylichlamviec', [
+        'as' => 'quanlylichlamviec',
+        'uses' => 'App\Http\Controllers\quanlylichlamviecController@quanlylichlamviec'
+    ]);
+    Route::post('/xemlichlamviec', [
+        'as' => 'xemlichlamviec',
+        'uses' => 'App\Http\Controllers\quanlylichlamviecController@xemlichlamviec'
+    ]);
+});  
+// QUAN LY LICH LAM VIEC

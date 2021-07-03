@@ -68,6 +68,14 @@
               		</p>
             		</a>
           		</li>
+				<li class="nav-item">
+            		<a href="{{route('quanlylichlamviec')}}" class="nav-link">
+              		<i class="nav-icon fas fa-th"></i>
+              		<p>
+               			Quản lý lịch làm việc
+              		</p>
+            		</a>
+          		</li>
         	</ul>
     	</nav>
     	<!-- /.sidebar-menu -->
