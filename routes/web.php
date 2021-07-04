@@ -327,7 +327,7 @@ Route::prefix('/')->group(function () {
         'as' => 'quanlylichlamviec',
         'uses' => 'App\Http\Controllers\quanlylichlamviecController@quanlylichlamviec'
     ]);
-    Route::post('/xemlichlamviec', [
+    Route::get('/xemlichlamviec', [
         'as' => 'xemlichlamviec',
         'uses' => 'App\Http\Controllers\quanlylichlamviecController@xemlichlamviec'
     ]);
@@ -339,21 +339,21 @@ Route::prefix('/')->group(function () {
         'as' => 'diemdanhvangmatlichlamviec',
         'uses' => 'App\Http\Controllers\quanlylichlamviecController@diemdanhvangmatlichlamviec'
     ]);
-    Route::get('/addlichlamviec', [
-        'as' => 'addlichlamviec',
-        'uses' => 'App\Http\Controllers\quanlylichlamviecController@addlichlamviec'
-    ]);
-    Route::post('/doaddlichlamviec', [
-        'as' => 'doaddlichlamviec',
-        'uses' => 'App\Http\Controllers\quanlylichlamviecController@doaddlichlamviec'
-    ]);
     Route::get('/editlichlamviec', [
         'as' => 'editlichlamviec',
         'uses' => 'App\Http\Controllers\quanlylichlamviecController@editlichlamviec'
     ]);
-    Route::get('/doeditlichlamviec/{id}', [
-        'as' => 'doeditlichlamviec',
-        'uses' => 'App\Http\Controllers\quanlylichlamviecController@doeditlichlamviec'
+    Route::get('/addlichlamviec', [
+        'as' => 'addlichlamviec',
+        'uses' => 'App\Http\Controllers\quanlylichlamviecController@addlichlamviec'
+    ]);
+    Route::get('/changelichlamviec', [
+        'as' => 'changelichlamviec',
+        'uses' => 'App\Http\Controllers\quanlylichlamviecController@changelichlamviec'
+    ]);
+    Route::get('/copylichlamviec', [
+        'as' => 'copylichlamviec',
+        'uses' => 'App\Http\Controllers\quanlylichlamviecController@copylichlamviec'
     ]);
 });  
 // QUAN LY LICH LAM VIEC

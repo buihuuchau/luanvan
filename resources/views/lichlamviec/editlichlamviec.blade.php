@@ -57,43 +57,47 @@
     <div class="content">
       <div class="container-fluid">
         <div class="row">
+        
+            <div class="col-sm-5">
+                <h3>Các nhân viên của quán</h3>
+                <h5>Check để thêm vào DS</h5>
+                <form action="{{route('addlichlamviec')}}" method="get">
+                    {{csrf_field()}}
+                    <input type="hidden" name="idcalam" value="{{$idcalam}}">
+                    <input type="hidden" name="idkhuvuc" value="{{$idkhuvuc}}">
+                    <input type="hidden" name="thoigian" value="{{$thoigian}}">
+                    @foreach ($thanhvien2 as $key2 => $row2)
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="idthanhvien[]" value="{{$row2->id}}" id="{{$row2->hoten}}">
+                        <label class="form-check-label" for="{{$row2->hoten}}">
+                            {{$row2->hoten}}
+                        </label>
+                    </div> 
+                    @endforeach
+                    <button type="submit" class="btn btn-primary ">Thêm</button>
+                </form>
+            </div>
 
-            <form action="{{route('doaddlichlamviec')}}" method="post">
-				{{csrf_field()}}
-				@if($errors->any())
-					<h3>{{$errors->first()}}</h3>
-				@endif
-                <div class="form-group">
-                    <label>Chọn ngày</lable>
-                    <input class="form-control" type="date" name="thoigian">
-                </div>
-                <div class="form-group">
-                    <label>Chọn khu vực</label>
-                    <select class="form-control" name="idkhuvuc">
-                    @foreach($khuvuc as $key => $row)
-                        <option value="{{$row->id}}">{{$row->tenkhuvuc}}</option>
+            <div class="col-sm-5">
+                <h3>Các nhân viên đã được chọn</h3><br>
+                <h5>Check để xóa khỏi DS</h5>
+                <form action="{{route('changelichlamviec')}}" method="get">
+                    {{csrf_field()}}
+                    <input type="hidden" name="idcalam" value="{{$idcalam}}">
+                    <input type="hidden" name="idkhuvuc" value="{{$idkhuvuc}}">
+                    <input type="hidden" name="thoigian" value="{{$thoigian}}">
+                    @foreach ($lichlamviec as $key => $row)
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="idthanhvien[]" value="{{$row->id}}" id="{{$row->id}}">
+                            <label class="form-check-label" for="{{$row->id}}">
+                                {{$row->hoten}}
+                            </label>
+                        </div> 
                     @endforeach
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Chọn ca làm</label>
-                    <select class="form-control" name="idcalam">
-                    @foreach($calam as $key => $row)
-                        <option value="{{$row->id}}">{{$row->tencalam}}</option>
-                    @endforeach
-                    </select>
-                </div>
-                <div class="form-check form-check-inline">
-                    @foreach($thanhvien2 as $key => $row)
-                        <input class="form-check-input" type="checkbox" name="idthanhvien[]" id="{{$row->hoten}}" value="{{$row->id}}">
-                        <label class="form-check-label" for="{{$row->hoten}}"><h3>{{$row->hoten}}</h3></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    @endforeach
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Thêm</button>
-                </div>
-            </form>
-
+                    <button type="submit" class="btn btn-danger ">Xóa</button>
+                </form>
+            </div>
+            
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->

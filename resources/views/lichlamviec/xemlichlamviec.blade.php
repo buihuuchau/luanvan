@@ -57,30 +57,34 @@
       <div class="container-fluid">
         <div class="row">
 
-			<div class="col-sm-12">
-
-				<div class="col-md-12 mb-4 text-right">
-					<a style="width:44px" class="btn btn-primary" href="{{route('addlichlamviec')}}">
-						<i class="fas fa-plus"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a style="width:44px" class="btn btn-primary" href="{{route('editlichlamviec')}}">
-						<i class="fas fa-edit"></i></a>    
-				</div>
-				
-                <table class="table table-bordered text-center">
+                <div class="col-md-6">
                     <h4>Lịch làm việc của ngày:</h4>
-                    @foreach ($lichlamviec as $key3 => $row3)
-                        @if($key3==0)
-                        <h3>{{$row3->thoigian}}</h3>
-                        <form action="{{route('xemlichlamviec')}}" method="post">
-                            {{csrf_field()}}
-                            <div class="form-group">
-                                <label>Ngày: </label>
-                                <input type="date" name="thoigian" value="{{$row3->thoigian}}"required>
-                                <button type="submit" class="btn btn-primary">Kiểm tra</button>
-                            </div>
-                        </form>
-                        @endif
-                    @endforeach
+                    <h3>{{$date}}</h3>
+                    <form action="{{route('xemlichlamviec')}}" method="get">
+                        {{csrf_field()}}
+                        <div class="form-group">
+                            <label>Ngày: </label>
+                            <input type="date" name="thoigian" value="{{$date}}"required>
+                            <button type="submit" class="btn btn-primary">Kiểm tra</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <h4>Copy lịch làm việc từ ngày sang ngày:</h4>
+                    <h3><br></h3>
+                    <form action="{{route('copylichlamviec')}}" method="get">
+                        {{csrf_field()}}
+                        <div class="form-group">
+                            <label>Từ ngày: </label>
+                            <input type="date" name="tungay" value="{{$date}}"required>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <label>Sang ngày: </label>
+                            <input type="date" name="sangngay" value=""required>
+                            <button type="submit" class="btn btn-primary">Copy</button>
+                        </div>
+                    </form>
+                </div>
+
+                <table class="table table-bordered text-center">
                     <thead>
                         <tr>
                             <th scope="col">CA LÀM / KHU VỰC</th>
@@ -95,6 +99,13 @@
                             <th scope="row">{{$row2->tencalam}}<br>{{$row2->tu}}->{{$row2->den}}</th>
                             @foreach ($khuvuc as $key => $row)
                             <td>
+                                <form action="{{route('editlichlamviec')}}" method="get">
+                                    {{csrf_field()}}
+                                    <input type="hidden" name="thoigian" value="{{$date}}">
+                                    <input type="hidden" name="idkhuvuc" value="{{$row->id}}">
+                                    <input type="hidden" name="idcalam" value="{{$row2->id}}">
+                                    <button class="btn btn-warning" type="submit"><i class="fas fa-edit"></i>Sửa</button>
+                                </form>
                                 @foreach ($lichlamviec as $key3 => $row3)
                                     @if($row3->idkhuvuc == $row->id && $row3->idcalam == $row2->id)
                                         @if($row3->diemdanh==0)
@@ -110,8 +121,6 @@
                         @endforeach
                     </tbody>
                 </table>
-
-			</div>
 
         </div>
         <!-- /.row -->
