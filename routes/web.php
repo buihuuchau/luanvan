@@ -357,3 +357,32 @@ Route::prefix('/')->group(function () {
     ]);
 });  
 // QUAN LY LICH LAM VIEC
+
+//QUAN LY VAI TRO
+Route::prefix('/')->group(function () {
+    Route::get('/quanlyvaitro', [
+        'as' => 'quanlyvaitro',
+        'uses' => 'App\Http\Controllers\quanlyvaitroController@quanlyvaitro'
+    ]);
+    Route::get('/addvaitro', [
+        'as' => 'addvaitro',
+        'uses' => 'App\Http\Controllers\quanlyvaitroController@addvaitro'
+    ]);
+    Route::post('/doaddvaitro', [
+        'as' => 'doaddvaitro',
+        'uses' => 'App\Http\Controllers\quanlyvaitroController@doaddvaitro'
+    ]);
+    Route::get('/editvaitro/{id}', [
+        'as' => 'editvaitro',
+        'uses' => 'App\Http\Controllers\quanlyvaitroController@editvaitro'
+    ]);
+    Route::post('/doeditvaitro', [
+        'as' => 'doeditvaitro',
+        'uses' => 'App\Http\Controllers\quanlyvaitroController@doeditvaitro'
+    ]);
+    Route::get('/deletevaitro/{id}', [
+        'as' => 'deletevaitro',
+        'uses' => 'App\Http\Controllers\quanlyvaitroController@deletevaitro'
+    ]);
+});
+//QUAN LY VAI TRO

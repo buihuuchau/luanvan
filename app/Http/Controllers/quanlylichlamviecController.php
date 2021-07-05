@@ -111,13 +111,16 @@ class quanlylichlamviecController extends Controller
             ->where('lichlamviec.idcalam', $request->idcalam)
             ->where('lichlamviec.thoigian', $request->thoigian)
             ->join('thanhvien','lichlamviec.idthanhvien','=','thanhvien.id')
-            ->select('lichlamviec.idthanhvien','thanhvien.hoten','thanhvien.id')
+            ->join('vaitro', 'thanhvien.idvaitro','=','vaitro.id')
+            ->select('lichlamviec.idthanhvien','thanhvien.hoten','thanhvien.namsinh','thanhvien.id','vaitro.tenvaitro')
             ->get();
         
         $thanhvien2 = DB::table('thanhvien')
             ->orderBy('hoten')
-            ->where('idquan',$thanhvien->idquan)
+            ->where('thanhvien.idquan',$thanhvien->idquan)
             ->where('hidden',0)
+            ->join('vaitro','thanhvien.idvaitro','=','vaitro.id')
+            ->select('thanhvien.*','vaitro.tenvaitro')
             ->get();
         
         $thoigian = $request->thoigian;
