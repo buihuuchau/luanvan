@@ -56,6 +56,14 @@
             	</a>
           		</li>
 				<li class="nav-item">
+            		<a href="{{route('quanlythucdon')}}" class="nav-link">
+              		<i class="nav-icon fas fa-list"></i>
+              		<p>
+               			Quản lý thực đơn
+              		</p>
+            		</a>
+          		</li>
+				<li class="nav-item">
             		<a href="{{route('quanlynguyenlieu')}}" class="nav-link">
               		<i class="nav-icon fas fa-cookie"></i>
               		<p>
@@ -81,7 +89,7 @@
           		</li>
 				<li class="nav-item">
             		<a href="{{route('quanlylichlamviec')}}" class="nav-link">
-              		<i class="nav-icon fas fa-calendar-alt"></i><span class="oi oi-calendar"></span>
+              		<i class="nav-icon fas fa-calendar-alt"></i>
               		<p>
                			Quản lý lịch làm việc
               		</p>

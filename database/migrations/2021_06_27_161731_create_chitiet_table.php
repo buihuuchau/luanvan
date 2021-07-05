@@ -16,7 +16,7 @@ class CreateChitietTable extends Migration
         Schema::create('chitiet', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('idhoadon')->unsigned();
-            $table->bigInteger('idmon')->unsigned();
+            $table->bigInteger('idthucdon')->unsigned();
             $table->bigInteger('soluong')->unsigned();
             $table->bigInteger('thanhtien');
             $table->timestamps();

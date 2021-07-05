@@ -84,10 +84,10 @@
 								<tr class="odd">
 									<td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td>
 									<td>{{$row->tennguyenlieu}}</td>
-									<td>{{$row->dongia}}</td>
+									<td>{{number_format("$row->dongia",0,",",".");}}</td>
 									<td>{{$row->donvitinh}}</td>
-									<td>{{$row->soluong}}</td>
-									<td>{{$row->thanhtien}}</td>
+									<td>{{number_format("$row->soluong",0,",",".");}}</td>
+									<td>{{number_format("$row->thanhtien",0,",",".");}}</td>
 									<td>{{$row->ngaynhap}}</td>
 									<td>{{$row->ngayhet}}</td>
 									@if($row->trangthai==1)

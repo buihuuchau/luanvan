@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-  <title>Quản lý vai trò</title>
+  <title>Quản lý thực đơn</title>
 @endsection
 @section('home')
 	<li class="nav-item d-none d-sm-inline-block">
@@ -40,12 +40,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Quản lý vai trò</h1>
+                <h1 class="m-0">Quản lý thực đơn</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{route('thongtinthanhvien')}}">Thông tin thành viên</a></li>
-                <li class="breadcrumb-item"><a href="">Quản lý vai trò</a></li>
+                <li class="breadcrumb-item"><a href="">Quản lý thực đơn</a></li>
                 </ol>
             </div><!-- /.col -->
             </div><!-- /.row -->
@@ -59,7 +59,7 @@
 
 			<div class="col-sm-12">
 				<div class="col-md-12 mb-4 text-right">
-					<a style="width:44px" class="btn btn-primary" href="{{route('addvaitro')}}">
+					<a style="width:44px" class="btn btn-primary" href="{{route('addthucdon')}}">
 						<i class="fas fa-plus"></i></a>
 				</div>
 				<div class="card">
@@ -68,25 +68,54 @@
 							<thead>
 								<tr role="row">
 									<th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">No.</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TÊN VAI TRÒ</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >LOẠI MÓN</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TÊN MÓN</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ĐƠN GIÁ</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >HÌNH ẢNH</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >MÔ TẢ</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ẨN / HIỆN</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THAO TÁC</th>
 								</tr>
 							</thead>
 							<tbody>
-							@foreach ($vaitro as $key => $row)
+							@foreach ($thucdon as $key => $row)
 								<tr class="odd">
 									<td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td>
-									<td>{{$row->tenvaitro}}</td>
-									@foreach ($thanhvien2 as $key2 => $row2)
-										<?php	if($row2->idvaitro==$row->id)	$sudung = $row->id;	?>				
+									@if ($row->loaimon==1)
+										<td>Món nước</td>
+									@elseif($row->loaimon==2)
+										<td>Món ăn</td>
+									@elseif($row->loaimon==3)
+										<td>Món phụ</td>
+									@endif
+									
+									<td>{{$row->tenmon}}</td>
+									<td>{{number_format("$row->dongia",0,",",".");}}</td>
+									<td><img src="{{$row->hinhmon}}" alt="" width="40px" height="60px"></td>
+									<td>{{$row->mota}}</td>
+									@foreach ($chitiet as $key2 => $row2)
+										<?php	if($row2->idthucdon==$row->id)	$sudung = $row->id;	?>				
 									@endforeach
 									
+									@if($row->hidden==0 && $sudung!=$row->id)
+										<td>Đang được phục vụ</td>
+									@elseif($row->hidden==0 && $sudung==$row->id)
+										<td bgcolor="lightgreen">Đang được phục vụ</td>
+									@else
+										<td bgcolor="gray" style="color:white">Ngừng phục vụ</td>
+									@endif
 									<td>
-										<a href="{{route('editvaitro',['id'=>$row->id])}}">Sửa vai trò</a><br>
+										<a href="{{route('editthucdon',['id'=>$row->id])}}">Sửa thực đơn</a><br>
+
+										@if($row->hidden==0)
+										<a href="{{route('hiddenthucdon',['id'=>$row->id])}}">Ẩn thực đơn</a><br>
+										@else
+										<a href="{{route('showthucdon',['id'=>$row->id])}}">Hiện thực đơn</a><br>
+										@endif
 
 										@if($sudung!=$row->id)
-										<a href="{{route('deletevaitro',['id'=>$row->id])}}"
-											onclick="return confirm('Bạn có chắc chắn muốn xóa')";>Xóa vai trò</a>
+										<a href="{{route('deletethucdon',['id'=>$row->id])}}"
+											onclick="return confirm('Bạn có chắc chắn muốn xóa')";>Xóa thực đơn</a>
 										@endif
 									</td>
 								</tr>

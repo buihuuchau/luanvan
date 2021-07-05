@@ -386,3 +386,40 @@ Route::prefix('/')->group(function () {
     ]);
 });
 //QUAN LY VAI TRO
+
+// QUAN LY THUC DON
+Route::prefix('/')->group(function () {
+    Route::get('/quanlythucdon', [
+        'as' => 'quanlythucdon',
+        'uses' => 'App\Http\Controllers\quanlythucdonController@quanlythucdon'
+    ]);
+    Route::get('/addthucdon', [
+        'as' => 'addthucdon',
+        'uses' => 'App\Http\Controllers\quanlythucdonController@addthucdon'
+    ]);
+    Route::post('/doaddthucdon', [
+        'as' => 'doaddthucdon',
+        'uses' => 'App\Http\Controllers\quanlythucdonController@doaddthucdon'
+    ]);
+    Route::get('/editthucdon/{id}', [
+        'as' => 'editthucdon',
+        'uses' => 'App\Http\Controllers\quanlythucdonController@editthucdon'
+    ]);
+    Route::post('/doeditthucdon', [
+        'as' => 'doeditthucdon',
+        'uses' => 'App\Http\Controllers\quanlythucdonController@doeditthucdon'
+    ]);
+    Route::get('/hiddenthucdon/{id}', [
+        'as' => 'hiddenthucdon',
+        'uses' => 'App\Http\Controllers\quanlythucdonController@hiddenthucdon'
+    ]);
+    Route::get('/showthucdon/{id}', [
+        'as' => 'showthucdon',
+        'uses' => 'App\Http\Controllers\quanlythucdonController@showthucdon'
+    ]);
+    Route::get('/deletethucdon/{id}', [
+        'as' => 'deletethucdon',
+        'uses' => 'App\Http\Controllers\quanlythucdonController@deletethucdon'
+    ]);
+});
+// QUAN LY THUC DON
