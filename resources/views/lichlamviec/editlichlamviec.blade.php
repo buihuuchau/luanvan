@@ -67,9 +67,9 @@
                     <input type="hidden" name="idkhuvuc" value="{{$idkhuvuc}}">
                     <input type="hidden" name="thoigian" value="{{$thoigian}}">
                     @foreach ($thanhvien2 as $key2 => $row2)
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="idthanhvien[]" value="{{$row2->id}}" id="a{{$row2->id}}">
-                        <label class="form-check-label" for="a{{$row2->id}}">
+                    <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" name="idthanhvien[]" value="{{$row2->id}}" id="a{{$row2->id}}">
+                        <label class="custom-control-label" for="a{{$row2->id}}">
                             {{$row2->hoten}}/{{Str::limit($row2->namsinh,4,"")}}/{{$row2->tenvaitro}}
                         </label>
                     </div> 
@@ -87,9 +87,9 @@
                     <input type="hidden" name="idkhuvuc" value="{{$idkhuvuc}}">
                     <input type="hidden" name="thoigian" value="{{$thoigian}}">
                     @foreach ($lichlamviec as $key => $row)
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="idthanhvien[]" value="{{$row->id}}" id="b{{$row->id}}">
-                            <label class="form-check-label" for="b{{$row->id}}">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" name="idthanhvien[]" value="{{$row->id}}" id="b{{$row->id}}">
+                            <label class="custom-control-label" for="b{{$row->id}}">
                             {{$row->hoten}}/{{Str::limit($row->namsinh,4,"")}}/{{$row->tenvaitro}}
                             </label>
                         </div> 

@@ -67,9 +67,9 @@
                             @if(($key+4)%4==0)
                             <tr>
                                 <td>
-                                    <div class="form-check form-check-inline">
-                                        <input type="checkbox" class="form-check-input" id="{{$row->id}}" name="idquyen[]" value="{{$row->id}}">
-                                        <label class="form-check-label" for="{{$row->id}}">{{$row->tenquyen}}</label>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="{{$row->id}}" name="idquyen[]" value="{{$row->id}}">
+                                        <label class="custom-control-label" for="{{$row->id}}">{{$row->tenquyen}}</label>
                                     </div>
                                 </td>
                             </tr>
@@ -88,9 +88,9 @@
                             @if(($key+4)%4==1)
                             <tr>
                                 <td>
-                                    <div class="form-check form-check-inline">
-                                        <input type="checkbox" class="form-check-input" id="{{$row->id}}" name="idquyen[]" value="{{$row->id}}">
-                                        <label class="form-check-label" for="{{$row->id}}">{{$row->tenquyen}}</label>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="{{$row->id}}" name="idquyen[]" value="{{$row->id}}">
+                                        <label class="custom-control-label" for="{{$row->id}}">{{$row->tenquyen}}</label>
                                     </div>
                                 </td>
                             </tr>
@@ -109,9 +109,9 @@
                             @if(($key+4)%4==2)
                             <tr>
                                 <td>
-                                    <div class="form-check form-check-inline">
-                                        <input type="checkbox" class="form-check-input" id="{{$row->id}}" name="idquyen[]" value="{{$row->id}}">
-                                        <label class="form-check-label" for="{{$row->id}}">{{$row->tenquyen}}</label>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="{{$row->id}}" name="idquyen[]" value="{{$row->id}}">
+                                        <label class="custom-control-label" for="{{$row->id}}">{{$row->tenquyen}}</label>
                                     </div>
                                 </td>
                             </tr>
@@ -130,9 +130,9 @@
                             @if(($key+4)%4==3)
                             <tr>
                                 <td>
-                                    <div class="form-check form-check-inline">
-                                        <input type="checkbox" class="form-check-input" id="{{$row->id}}" name="idquyen[]" value="{{$row->id}}">
-                                        <label class="form-check-label" for="{{$row->id}}">{{$row->tenquyen}}</label>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="{{$row->id}}" name="idquyen[]" value="{{$row->id}}">
+                                        <label class="custom-control-label" for="{{$row->id}}">{{$row->tenquyen}}</label>
                                     </div>
                                 </td>
                             </tr>
@@ -144,7 +144,8 @@
             </form>
 
             <div>
-                <h3>Các quyền đang được cấp</h3>
+                <br><br><br>
+                <h3>Các quyền đang được cấp</h3><br>
                 @foreach ($quyen as $key3 => $row3)
                 @foreach ($vaitro_quyen as $key2 => $row2)
                 @if($row3->id==$row2->idquyen)
@@ -153,6 +154,7 @@
                         <input type="checkbox" class="form-check-input" id="{{$row3->id}}" name="idquyen[]" value="{{$row3->id}}" checked disabled>
                         <label class="form-check-label" for="{{$row3->id}}">{{$row3->tenquyen}}</label>
                     </div>
+                    
                 @if(($row3->id)%4==0)    
                     <br>
                 @endif
