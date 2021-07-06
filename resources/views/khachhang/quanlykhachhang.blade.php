@@ -78,7 +78,7 @@
 							@foreach ($khachhang as $key => $row)
 								<tr class="odd">
 									<td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td>
-									<td>{{$row->hoten}}</td>
+									<td>{{$row->hotenkh}}</td>
 									<td>{{$row->sdt}}</td>
 									<td>{{$row->diem}}</td>
 									<td><a href="{{route('editkhachhang',['id'=>$row->id])}}">Sửa thông tin</a></td>

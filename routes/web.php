@@ -423,3 +423,20 @@ Route::prefix('/')->group(function () {
     ]);
 });
 // QUAN LY THUC DON
+
+// DAT BAN / DAT MON
+Route::prefix('/')->group(function () {
+    Route::get('/hoadon', [
+        'as' => 'hoadon',
+        'uses' => 'App\Http\Controllers\orderController@hoadon'
+    ]);
+    Route::post('/xemban', [
+        'as' => 'xemban',
+        'uses' => 'App\Http\Controllers\orderController@xemban'
+    ]);
+    Route::get('/taohoadon', [
+        'as' => 'taohoadon',
+        'uses' => 'App\Http\Controllers\orderController@taohoadon'
+    ]);
+});
+// DAT BAN / DAT MON

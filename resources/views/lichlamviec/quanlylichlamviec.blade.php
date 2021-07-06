@@ -83,7 +83,7 @@
                         </div>
                     </form>
                 </div>
-
+                <div class="col-md-12">
                 <table class="table table-bordered text-center">
                     <thead>
                         <tr>
@@ -121,7 +121,7 @@
                         @endforeach
                     </tbody>
                 </table>
-
+                </div>
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->

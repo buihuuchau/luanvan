@@ -16,7 +16,7 @@ class CreateKhachhangTable extends Migration
         Schema::create('khachhang', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('idquan')->unsigned();
-            $table->string('hoten');
+            $table->string('hotenkh');
             $table->bigInteger('sdt');
             $table->bigInteger('diem')->default('0');
             $table->timestamps();

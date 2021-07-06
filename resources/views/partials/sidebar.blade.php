@@ -95,6 +95,14 @@
               		</p>
             		</a>
           		</li>
+				<li class="nav-item">
+            		<a href="{{route('hoadon')}}" class="nav-link">
+              		<i class="nav-icon fas fa-shopping-cart"></i>
+              		<p>
+               			ORDER
+              		</p>
+            		</a>
+          		</li>
         	</ul>
     	</nav>
     	<!-- /.sidebar-menu -->

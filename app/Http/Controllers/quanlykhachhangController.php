@@ -51,7 +51,7 @@ class quanlykhachhangController extends Controller
         
         $check = DB::table('khachhang')
                     ->where('idquan', $thanhvien->idquan)
-                    ->where('hoten', $request->hoten)
+                    ->where('hotenkh', $request->hotenkh)
                     ->where('sdt', $request->sdt)
                     ->first();
         if($check){
@@ -59,7 +59,7 @@ class quanlykhachhangController extends Controller
         }
         else{
             $khachhang['idquan'] = $thanhvien->idquan;
-            $khachhang['hoten'] = $request->hoten;
+            $khachhang['hotenkh'] = $request->hotenkh;
             $khachhang['sdt'] = $request->sdt;
             DB::table('khachhang')->insert($khachhang);
             return back();
@@ -92,14 +92,14 @@ class quanlykhachhangController extends Controller
         
         $check = DB::table('khachhang')
                     ->where('idquan', $thanhvien->idquan)
-                    ->where('hoten', $request->hoten)
+                    ->where('hotenkh', $request->hotenkh)
                     ->where('sdt', $request->sdt)
                     ->first();
         if($check){
             return back()->withErrors(['Tên hoặc số điện thoại trùng lặp']);
         }
         else{
-            $khachhang['hoten'] = $request->hoten;
+            $khachhang['hotenkh'] = $request->hotenkh;
             $khachhang['sdt'] = $request->sdt;
             DB::table('khachhang')
                 ->where('id', $request->id)

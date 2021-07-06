@@ -66,7 +66,7 @@
                 <input type="hidden" name="id" value="{{$khachhang->id}}">
                 <div class="form-group">
                     <label>Tên khách hàng</label>
-                    <input type="text" class="form-control" name="hoten" value="{{$khachhang->hoten}}" required>
+                    <input type="text" class="form-control" name="hotenkh" value="{{$khachhang->hotenkh}}" required>
                 </div>
                 <div class="form-group">
 					<label>Số điện thoại</label>
