@@ -1,0 +1,93 @@
+@extends('layouts.admin')
+
+@section('title')
+  <title>Tạo hóa đơn</title>
+@endsection
+@section('home')
+	<li class="nav-item d-none d-sm-inline-block">
+		<a href="{{route('thongtinquan')}}" class="nav-link">Home</a>
+    </li>
+@endsection
+@section('dangxuat')
+	<ul class="navbar-nav ml-right">
+      	<li class="nav-item d-none d-sm-inline-block">
+        	<a href="{{route('dangxuatthanhvien')}}" class="nav-link">Đăng xuất</a>
+      	</li>
+    </ul>
+@endsection
+@section('quan')
+	<a href="{{route('dangnhapquan')}}" class="brand-link">
+  		<img src="{{$thanhvien->hinhquan}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      	<span class="brand-text font-weight-light">{{$thanhvien->tenquan}}</span>
+	</a>
+@endsection
+@section('avatar')
+	<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          	<img src="{{$thanhvien->hinhtv}}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          	<a href="{{route('thongtinthanhvien')}}" class="d-block">{{$thanhvien->hoten}}</a>
+        </div>
+    </div>
+@endsection
+
+@section('content')
+      <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0"></h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="{{route('thongtinthanhvien')}}">Thông tin thành viên</a></li>
+                </ol>
+            </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+                <form action="{{route('datmon')}}" method="get">
+                    {{csrf_field()}}
+                    <input type="number" name="idhoadon" value="{{$idhoadon}}">
+                    <div class="form-group">
+                        <label>Chọn món</label>
+                        <select class="form-control" name="idthucdon">
+                        @foreach($thucdon as $key => $row)
+                        <option value="{{$row->id}}">{{$row->tenmon}}</option>
+                        @endforeach
+                        </select>
+                    </div>
+                    <div class="buttons_added">
+                        <input class="minus is-form" type="button" value="-">
+                        <input aria-label="quantity" class="input-qty" max="100" min="1" name="soluong" type="number" value="1">
+                        <input class="plus is-form" type="button" value="+">
+                        <button type="submit" class="btn btn-primary">Đặt món</button>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        
+                    </div>
+
+                </form>
+            </div>
+            
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+@endsection

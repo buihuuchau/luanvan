@@ -40,12 +40,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Hóa đơn</h1>
+                <h1 class="m-0"></h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{route('thongtinthanhvien')}}">Thông tin thành viên</a></li>
-                <li class="breadcrumb-item"><a href="#">Hóa đơn</a></li>
                 </ol>
             </div><!-- /.col -->
             </div><!-- /.row -->
@@ -58,7 +57,7 @@
         <div class="row">
 
             <div class="col-md-12">
-                <form action="{{route('xemban')}}" method="post">
+                <form action="{{route('xemban')}}" method="get">
                     {{csrf_field()}}
                     <div class="form-group">
                         <label>Chọn khu vực</label>
@@ -77,18 +76,42 @@
                     </div>
                 </form>
             </div>
-			
-            @foreach($ban as $key => $row)
-            <span class="border border-success">
-            <form action="" method="post">
 
-            <img src="/storage/hinhanh/ban.png" class="rounded-circle" width="150px" height="100px">
-            <h3 style="text-align: center">{{$row->tenban}}</h3><br>
-            <button type="submit">Tạo hóa đơn</button>
-            </form>
-            <a href="{{route('taohoadon')}}"></a>
-            
-            </span>
+            <div class="col-md-12">
+                @if($errors->any())
+                    <h3>{{$errors->first()}}</h3>
+                @endif
+            </div>
+
+            @foreach($ban as $key => $row)
+
+                    @if($row->trangthai==0)
+                    <div class="card" style="width: 114px; height: 300px;">
+                        <img class="card-img-top" src="/storage/hinhanh/banranh.jpg" alt="Card image cap" width="100px" height="100px">
+                        <div class="card-body">
+                            <a href="" style="font-weight:bold; color:green; font-size:20px;">{{$row->tenban}}</a><br>
+                            <form action="{{route('taohoadon')}}" method="get">
+                                {{csrf_field()}}
+                                <input type="hidden" name="idkhuvuc" value="{{$idkhuvuc}}">
+                                <input type="hidden" name="idban" value="{{$row->id}}">
+                                <button type="submit" class="btn btn-primary">Tạo HD</button>
+                            </form>                    
+                        </div>              
+                    </div>
+                    @elseif($row->trangthai==1)
+                    <div class="card" style="width: 114px; height: 300px;">
+                        <img class="card-img-top" src="/storage/hinhanh/banban.jpg" alt="Card image cap" width="100px" height="100px">
+                        <div class="card-body">
+                            <a href="" style="font-weight:bold; color:red; font-size:20px;">{{$row->tenban}}</a><br>
+                            <a href="{{route('doibanhoadon',['id'=>$row->id])}}" style="font-weight:bold; color:pink; font-size:18px;">Đổi bàn</a><br><!--idban-->
+                            <a href="" style="font-weight:bold; color:blue; font-size:18px;">Đổi món</a><br>
+                            <a href="" style="font-weight:bold; color:orange; font-size:18px;">Tạm tính</a><br>
+                            <a href="" style="font-weight:bold; color:purple; font-size:18px;">Th.Toán</a><br>
+                            <a href="{{route('deletehoadon',['id'=>$row->id])}}" style="font-weight:bold; color:black; font-size:18px;">Xóa</a><br>
+                        </div>              
+                    </div>
+                    @endif
+
             @endforeach
 
         </div>

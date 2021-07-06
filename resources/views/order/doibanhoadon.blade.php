@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-  <title>Tạo hóa đơn</title>
+  <title>Đổi bàn</title>
 @endsection
 @section('home')
 	<li class="nav-item d-none d-sm-inline-block">
@@ -40,12 +40,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Hóa đơn</h1>
+                <h1 class="m-0">Đổi bàn</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{route('thongtinthanhvien')}}">Thông tin thành viên</a></li>
-                <li class="breadcrumb-item"><a href="#">Hóa đơn</a></li>
                 </ol>
             </div><!-- /.col -->
             </div><!-- /.row -->
@@ -58,30 +57,45 @@
         <div class="row">
 
             <div class="col-md-12">
-                <form action="{{route('xemban')}}" method="get">
+                <form action="{{route('doikhuvuchoadon')}}" method="get">
                     {{csrf_field()}}
+                    <input type="hidden" name="id" value="{{$id}}">
+                    <input type="hidden" name="idbancu" value="{{$idbancu}}">
                     <div class="form-group">
                         <label>Chọn khu vực</label>
                         <select class="form-control" name="idkhuvuc">
                         @foreach($khuvuc as $key => $row)
-                            @if($idkhuvuc == $row->id)
-                            <option value="{{$row->id}}" selected>{{$row->tenkhuvuc}}</option>
-                            @else
-                            <option value="{{$row->id}}">{{$row->tenkhuvuc}}</option>
-                            @endif
+                        @if($row->id == $idkhuvuc)
+                        <option value="{{$row->id}}" selected>{{$row->tenkhuvuc}}</option>
+                        @else
+                        <option value="{{$row->id}}">{{$row->tenkhuvuc}}</option>
+                        @endif
                         @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Xem bàn</button>
+                    <button type="submit" class="btn btn-primary">Đổi khu vực</button>
                     </div>
                 </form>
             </div>
+
             @foreach($ban as $key => $row)
-            <span class="border border-success">
-            <img src="/storage/hinhanh/ban.png" class="rounded-circle" width="150px" height="100px">
-            <label>{{$row->tenban}}</label>
-            </span>
+
+                    <div class="card" style="width: 114px; height: 300px;">
+                        <img class="card-img-top" src="/storage/hinhanh/banranh.jpg" alt="Card image cap" width="100px" height="100px">
+                        <div class="card-body">
+                            <a href="" style="font-weight:bold; color:green; font-size:20px;">{{$row->tenban}}</a><br>
+                            <form action="{{route('dodoibanhoadon')}}" method="get">
+                                {{csrf_field()}}
+                                <input type="hidden" name="id" value="{{$id}}">
+                                <input type="hidden" name="idkhuvuc" value="{{$idkhuvuc}}">
+                                <input type="hidden" name="idbancu" value="{{$idbancu}}">
+                                <input type="hidden" name="idban" value="{{$row->id}}">
+                                <button type="submit" class="btn btn-primary">Đổi bàn</button>
+                            </form>                    
+                        </div>              
+                    </div>
+
             @endforeach
 
         </div>

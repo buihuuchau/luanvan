@@ -430,13 +430,34 @@ Route::prefix('/')->group(function () {
         'as' => 'hoadon',
         'uses' => 'App\Http\Controllers\orderController@hoadon'
     ]);
-    Route::post('/xemban', [
+    Route::get('/xemban', [
         'as' => 'xemban',
         'uses' => 'App\Http\Controllers\orderController@xemban'
     ]);
+
     Route::get('/taohoadon', [
         'as' => 'taohoadon',
         'uses' => 'App\Http\Controllers\orderController@taohoadon'
+    ]);
+    Route::get('/datmon', [
+        'as' => 'datmon',
+        'uses' => 'App\Http\Controllers\orderController@datmon'
+    ]);
+    Route::get('/doibanhoadon/{id}', [//idban
+        'as' => 'doibanhoadon',
+        'uses' => 'App\Http\Controllers\orderController@doibanhoadon'
+    ]);
+    Route::get('/doikhuvuchoadon', [
+        'as' => 'doikhuvuchoadon',
+        'uses' => 'App\Http\Controllers\orderController@doikhuvuchoadon'
+    ]);
+    Route::get('/dodoibanhoadon', [
+        'as' => 'dodoibanhoadon',
+        'uses' => 'App\Http\Controllers\orderController@dodoibanhoadon'
+    ]);
+    Route::get('/deletehoadon/{id}', [
+        'as' => 'deletehoadon',
+        'uses' => 'App\Http\Controllers\orderController@deletehoadon'
     ]);
 });
 // DAT BAN / DAT MON
