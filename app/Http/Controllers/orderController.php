@@ -343,4 +343,7 @@ class orderController extends Controller
         
         return redirect()->route('doimonhoadon',['id'=>$idban]);
     }
+
+
+    
 }

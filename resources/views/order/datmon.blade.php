@@ -56,47 +56,23 @@
       <div class="container-fluid">
         <div class="row">
 
-            <div class="col-md-12">
-                <form action="{{route('datmon')}}" method="get">
-                    {{csrf_field()}}
-                    <input type="hidden" name="id" value="{{$id}}"><!-- idhoadon -->
-                    <div class="form-group">
-                        <label>Chọn món</label>
-                        <select class="form-control" name="idthucdon">
-                        @foreach($thucdon as $key => $row)
-                        <option value="{{$row->id}}" style="font-weight:bold; font-size:20px">{{$row->tenmon}}____{{number_format("$row->dongia",0,",",".");}}đ</option>
-                        @endforeach
-                        </select>
-                    </div>
-                    <div class="buttons_added">
-                        <input class="minus is-form" type="button" value="-">
-                        <input aria-label="quantity" class="input-qty" max="100" min="1" name="soluong" type="number" value="1">
-                        <input class="plus is-form" type="button" value="+">
-                        <button type="submit" class="btn btn-primary">Đặt món</button>
-                    </div>
-                </form>
-            </div>
-            <!-- <div class="col-sm-12">
-				<div class="col-md-12 mb-4 text-right">
-					<a style="width:44px" class="btn btn-primary" href="{{route('addban')}}">
-						<i class="fas fa-plus"></i></a>
-				</div>
+            <div class="col-sm-12">
 				<div class="card">
 					<div class="card-body">
-						<table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
+						<table id="example2" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example2_info">
 							<thead>
 								<tr role="row">
-                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">No.</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >LOẠI MÓN</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TÊN MÓN</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ĐƠN GIÁ</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THAO TÁC</th>
+									<th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending">No.</th>
+									<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" >LOẠI MÓN</th>
+									<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" >TÊN MÓN</th>
+									<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" >ĐƠN GIÁ</th>
+									<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" >THAO TÁC</th>
 								</tr>
 							</thead>
 							<tbody>
 							@foreach ($thucdon as $key => $row)
 								<tr class="odd">
-                                    <td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td>
+									<td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td>
                                     @if($row->loaimon==1)
                                     <td>Món Nước</td>
                                     @elseif($row->loaimon==2)
@@ -104,10 +80,9 @@
                                     @elseif($row->loaimon==3)
                                     <td>Món phụ</td>
                                     @endif
-									<td>{{$row->loaimon}}</td>
 									<td>{{$row->tenmon}}</td>
 									<td>{{$row->dongia}}</td>
-									<td>
+									<td class="row">
                                         <form action="{{route('datmon')}}" method="get">
                                             {{csrf_field()}}
                                             <input type="hidden" name="id" value="{{$id}}">
@@ -116,7 +91,7 @@
                                                 <input class="minus is-form" type="button" value="-">
                                                 <input aria-label="quantity" class="input-qty" max="100" min="1" name="soluong" type="number" value="1">
                                                 <input class="plus is-form" type="button" value="+">
-                                                <button type="submit" class="btn btn-primary">Đăt món</button>
+                                                <button type="submit" class="btn btn-primary">Đặt món</button>
                                             </div>
                                         </form>
 									</td>
@@ -126,10 +101,10 @@
 						</table>
 					</div>
 				</div>
-			</div> -->
+			</div>
+            
             @if($chitiet!=null)
             <div class="col-sm-12">
-				
 				<div class="card">
 					<div class="card-body">
 						<table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
