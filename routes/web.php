@@ -435,14 +435,19 @@ Route::prefix('/')->group(function () {
         'uses' => 'App\Http\Controllers\orderController@xemban'
     ]);
 
+
+
     Route::get('/taohoadon', [
         'as' => 'taohoadon',
         'uses' => 'App\Http\Controllers\orderController@taohoadon'
     ]);
-    Route::get('/datmon', [
-        'as' => 'datmon',
-        'uses' => 'App\Http\Controllers\orderController@datmon'
+    Route::get('/deletehoadon/{id}', [
+        'as' => 'deletehoadon',
+        'uses' => 'App\Http\Controllers\orderController@deletehoadon'
     ]);
+
+    
+    
     Route::get('/doibanhoadon/{id}', [//idban
         'as' => 'doibanhoadon',
         'uses' => 'App\Http\Controllers\orderController@doibanhoadon'
@@ -455,9 +460,24 @@ Route::prefix('/')->group(function () {
         'as' => 'dodoibanhoadon',
         'uses' => 'App\Http\Controllers\orderController@dodoibanhoadon'
     ]);
-    Route::get('/deletehoadon/{id}', [
-        'as' => 'deletehoadon',
-        'uses' => 'App\Http\Controllers\orderController@deletehoadon'
+
+
+
+    Route::get('/doimonhoadon/{id}', [//idban
+        'as' => 'doimonhoadon',
+        'uses' => 'App\Http\Controllers\orderController@doimonhoadon'
+    ]);
+    Route::get('/datmon', [
+        'as' => 'datmon',
+        'uses' => 'App\Http\Controllers\orderController@datmon'
+    ]);
+    Route::get('/xoamonhoadon', [//idchitiet
+        'as' => 'xoamonhoadon',
+        'uses' => 'App\Http\Controllers\orderController@xoamonhoadon'
+    ]);
+    Route::get('/doisoluongmonhoadon', [
+        'as' => 'doisoluongmonhoadon',
+        'uses' => 'App\Http\Controllers\orderController@doisoluongmonhoadon'
     ]);
 });
 // DAT BAN / DAT MON

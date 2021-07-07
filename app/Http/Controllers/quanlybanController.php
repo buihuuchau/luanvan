@@ -22,6 +22,7 @@ class quanlybanController extends Controller
                     ->first();
 
         $ban = DB::table('ban')
+                    ->orderBy('tenkhuvuc')
                     ->where('ban.idquan', $thanhvien->idquan)
                     ->join('khuvuc','ban.idkhuvuc','=','khuvuc.id')
                     ->select('ban.*','khuvuc.tenkhuvuc')
@@ -89,6 +90,7 @@ class quanlybanController extends Controller
 
         $khuvuc = DB::table('khuvuc')
                 ->where('idquan',$thanhvien->idquan)
+                ->where('hidden',0)
                 ->get();
         $ban = DB::table('ban')
                 ->where('ban.id',$id)

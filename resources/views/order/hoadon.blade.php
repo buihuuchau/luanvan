@@ -104,7 +104,7 @@
                         <div class="card-body">
                             <a href="" style="font-weight:bold; color:red; font-size:20px;">{{$row->tenban}}</a><br>
                             <a href="{{route('doibanhoadon',['id'=>$row->id])}}" style="font-weight:bold; color:pink; font-size:18px;">Đổi bàn</a><br><!--idban-->
-                            <a href="" style="font-weight:bold; color:blue; font-size:18px;">Đổi món</a><br>
+                            <a href="{{route('doimonhoadon',['id'=>$row->id])}}" style="font-weight:bold; color:blue; font-size:18px;">Đổi món</a><br>
                             <a href="" style="font-weight:bold; color:orange; font-size:18px;">Tạm tính</a><br>
                             <a href="" style="font-weight:bold; color:purple; font-size:18px;">Th.Toán</a><br>
                             <a href="{{route('deletehoadon',['id'=>$row->id])}}" style="font-weight:bold; color:black; font-size:18px;">Xóa</a><br>

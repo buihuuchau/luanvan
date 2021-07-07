@@ -24,6 +24,7 @@ class orderController extends Controller
         $khuvuc = DB::table('khuvuc')
             ->orderBy('tenkhuvuc')
             ->where('idquan',$thanhvien->idquan)
+            ->where('hidden',0)
             ->get();
         $khuvuc2 = DB::table('khuvuc')
             ->orderBy('tenkhuvuc')
@@ -32,6 +33,7 @@ class orderController extends Controller
         $ban = DB::table('ban')
             ->where('idquan',$thanhvien->idquan)
             ->where('idkhuvuc',$khuvuc2->id)
+            ->where('hidden',0)
             ->get();
         $idkhuvuc = $khuvuc2->id;
         return view('order.hoadon',compact('thanhvien','khuvuc','ban','idkhuvuc'));
@@ -49,14 +51,19 @@ class orderController extends Controller
         $khuvuc = DB::table('khuvuc')
                     ->orderBy('tenkhuvuc')
                     ->where('idquan',$thanhvien->idquan)
+                    ->where('hidden',0)
                     ->get();
         $ban = DB::table('ban')
             ->where('idquan',$thanhvien->idquan)
             ->where('idkhuvuc',$request->idkhuvuc)
+            ->where('hidden',0)
             ->get();
         
         return view('order.hoadon',compact('thanhvien','khuvuc','ban','idkhuvuc'));
     }
+
+
+
     public function taohoadon(Request $request){
         $ssidthanhvien = Session::get('ssidthanhvien');
         
@@ -83,40 +90,9 @@ class orderController extends Controller
             DB::table('ban')
                 ->where('id',$request->idban)
                 ->update($ban);
-            $idhoadon = DB::table('hoadon')->insertGetID($hoadon);
-            $thucdon = DB::table('thucdon')
-                ->orderBy('tenmon')
-                ->where('idquan',$thanhvien->idquan)
-                ->get();
-            return view('order.datmon',compact('thanhvien', 'idhoadon','thucdon'));
+            $id = DB::table('hoadon')->insertGetID($hoadon);
+            return back();
         }
-    }
-    public function datmon(Request $request){
-        $ssidthanhvien = Session::get('ssidthanhvien');
-        
-        $thanhvien = DB::table('thanhvien')
-                    ->where('thanhvien.id',$ssidthanhvien)
-                    ->join('quan', 'thanhvien.idquan', '=', 'quan.id')
-                    ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
-                    ->first();
-        
-        $thucdon = DB::table('thucdon')
-            ->orderBy('tenmon')
-            ->where('idquan',$thanhvien->idquan)
-            ->get();
-        $idhoadon = $request->idhoadon;
-        $idthucdon = $request->idthucdon;
-        $chitiet['idhoadon'] = $idhoadon;
-        $chitiet['idthucdon'] = $idthucdon;
-        $chitiet['soluong'] = $request->soluong;
-        $thucdon2 = DB::table('thucdon')
-            ->where('idquan',$thanhvien->idquan)
-            ->where('id', $idthucdon)
-            ->first();
-        $chitiet['thanhtien'] = $thucdon2->dongia * $request->soluong;
-        DB::table('chitiet')->insert($chitiet);
-
-        return view('order.datmon',compact('thanhvien', 'idhoadon','thucdon'));
     }
     public function deletehoadon($id){
         $ssidthanhvien = Session::get('ssidthanhvien');
@@ -153,6 +129,9 @@ class orderController extends Controller
             return back();
         }
     }
+
+
+
     public function doibanhoadon($id){//idban
         $ssidthanhvien = Session::get('ssidthanhvien');
 
@@ -175,11 +154,13 @@ class orderController extends Controller
         $khuvuc = DB::table('khuvuc')
             ->orderBy('tenkhuvuc')
             ->where('idquan',$thanhvien->idquan)
+            ->where('hidden',0)
             ->get();
 
         $ban = DB::table('ban')
             ->where('idquan',$thanhvien->idquan)
             ->where('idkhuvuc',$idkhuvuc)
+            ->where('hidden',0)
             ->where('trangthai',0)
             ->get();
         
@@ -200,11 +181,13 @@ class orderController extends Controller
         $khuvuc = DB::table('khuvuc')
                     ->orderBy('tenkhuvuc')
                     ->where('idquan',$thanhvien->idquan)
+                    ->where('hidden',0)
                     ->get();
         
         $ban = DB::table('ban')
             ->where('idquan',$thanhvien->idquan)
             ->where('idkhuvuc',$idkhuvuc)
+            ->where('hidden',0)
             ->where('trangthai',0)
             ->get();
         
@@ -239,5 +222,125 @@ class orderController extends Controller
             ->update($hoadon);
         
         return redirect()->route('hoadon');
+    }
+
+
+
+    public function doimonhoadon($id){
+        $ssidthanhvien = Session::get('ssidthanhvien');
+        
+        $thanhvien = DB::table('thanhvien')
+                    ->where('thanhvien.id',$ssidthanhvien)
+                    ->join('quan', 'thanhvien.idquan', '=', 'quan.id')
+                    ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
+                    ->first();
+
+        $hoadon = DB::table('hoadon')
+            ->where('idquan',$thanhvien->idquan)
+            ->where('idban',$id)
+            ->where('trangthai',0)
+            ->first();
+        $id = $hoadon->id;//idhoadon
+
+        $thucdon = DB::table('thucdon')
+                    ->orderBy('loaimon')
+                    ->orderBy('tenmon')
+                    ->where('idquan',$thanhvien->idquan)
+                    ->where('hidden',0)
+                    ->get();
+        $chitiet = DB::table('chitiet')
+            ->where('idhoadon',$id)
+            ->join('thucdon','chitiet.idthucdon','=','thucdon.id')
+            ->select('chitiet.*','thucdon.tenmon','thucdon.dongia','thucdon.loaimon')
+            ->get();
+        return view('order.datmon',compact('thanhvien','id','thucdon','chitiet'));
+    }
+    public function datmon(Request $request){
+        $ssidthanhvien = Session::get('ssidthanhvien');
+        
+        $thanhvien = DB::table('thanhvien')
+                    ->where('thanhvien.id',$ssidthanhvien)
+                    ->join('quan', 'thanhvien.idquan', '=', 'quan.id')
+                    ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
+                    ->first();
+        
+        $thucdon = DB::table('thucdon')
+                    ->orderBy('loaimon')
+                    ->orderBy('tenmon')
+                    ->where('idquan',$thanhvien->idquan)
+                    ->where('hidden',0)
+                    ->get();
+        $id = $request->id;
+        $idthucdon = $request->idthucdon;
+        $soluong = $request->soluong;
+        $chitiet2['idhoadon'] = $id;
+        $chitiet2['idthucdon'] = $idthucdon;
+        $chitiet2['soluong'] = $soluong;
+
+        $thucdon2 = DB::table('thucdon')
+            ->where('idquan',$thanhvien->idquan)
+            ->where('id', $idthucdon)
+            ->first();
+        
+        $chitiet2['gia'] = $thucdon2->dongia * $soluong;
+        DB::table('chitiet')->insert($chitiet2);
+
+        $chitiet = DB::table('chitiet')
+            ->where('idhoadon',$id)
+            ->join('thucdon','chitiet.idthucdon','=','thucdon.id')
+            ->select('chitiet.*','thucdon.tenmon','thucdon.dongia','thucdon.loaimon')
+            ->get();
+
+        return view('order.datmon',compact('thanhvien', 'id','thucdon','chitiet'));
+    }
+    public function xoamonhoadon(Request $request){
+        $ssidthanhvien = Session::get('ssidthanhvien');
+        
+        $thanhvien = DB::table('thanhvien')
+                    ->where('thanhvien.id',$ssidthanhvien)
+                    ->join('quan', 'thanhvien.idquan', '=', 'quan.id')
+                    ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
+                    ->first();
+                    
+        $chitiet = DB::table('chitiet')
+            ->where('id',$request->id)
+            ->first();
+        $hoadon = DB::table('hoadon')
+            ->where('id',$chitiet->idhoadon)
+            ->first();
+        $idban = $hoadon->idban;
+            
+        DB::table('chitiet')
+            ->where('id',$request->id)
+            ->where('trangthai',0)
+            ->delete();
+        
+        return redirect()->route('doimonhoadon',['id'=>$idban]);
+    }
+    public function doisoluongmonhoadon(Request $request){
+        $ssidthanhvien = Session::get('ssidthanhvien');
+        
+        $thanhvien = DB::table('thanhvien')
+                    ->where('thanhvien.id',$ssidthanhvien)
+                    ->join('quan', 'thanhvien.idquan', '=', 'quan.id')
+                    ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
+                    ->first();
+        
+        $id = $request->id;//idchitiet
+        $chitiet['soluong'] = $request->soluong;
+        $chitiet['gia'] = $request->dongia * $request->soluong;
+        DB::table('chitiet')
+            ->where('id',$id)
+            ->update($chitiet);
+
+        $chitiet2 = DB::table('chitiet')
+            ->where('id',$request->id)
+            ->first();
+        $hoadon = DB::table('hoadon')
+            ->where('id',$chitiet2->idhoadon)
+            ->first();
+        $idban = $hoadon->idban;
+        
+        return redirect()->route('doimonhoadon',['id'=>$idban]);
     }
 }

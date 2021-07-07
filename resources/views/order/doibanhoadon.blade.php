@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-  <title>Đổi bàn</title>
+  <title>Chỉnh sửa bàn</title>
 @endsection
 @section('home')
 	<li class="nav-item d-none d-sm-inline-block">
