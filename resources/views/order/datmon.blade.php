@@ -5,7 +5,7 @@
 @endsection
 @section('home')
 	<li class="nav-item d-none d-sm-inline-block">
-		<a href="{{route('thongtinquan')}}" class="nav-link">Home</a>
+		<a href="{{route('thongtinthanhvien')}}" class="nav-link">Home</a>
     </li>
 @endsection
 @section('dangxuat')
@@ -17,14 +17,14 @@
 @endsection
 @section('quan')
 	<a href="{{route('dangnhapquan')}}" class="brand-link">
-  		<img src="{{$thanhvien->hinhquan}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+  		<img src="{!!asset($thanhvien->hinhquan)!!}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       	<span class="brand-text font-weight-light">{{$thanhvien->tenquan}}</span>
 	</a>
 @endsection
 @section('avatar')
 	<div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          	<img src="{{$thanhvien->hinhtv}}" class="img-circle elevation-2" alt="User Image">
+          	<img src="{!!asset($thanhvien->hinhtv)!!}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           	<a href="{{route('thongtinthanhvien')}}" class="d-block">{{$thanhvien->hoten}}</a>

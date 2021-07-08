@@ -5,7 +5,7 @@
 @endsection
 @section('home')
 	<li class="nav-item d-none d-sm-inline-block">
-		<a href="{{route('thongtinquan')}}" class="nav-link">Home</a>
+		<a href="{{route('thongtinthanhvien')}}" class="nav-link">Home</a>
     </li>
 @endsection
 @section('dangxuat')
@@ -17,14 +17,14 @@
 @endsection
 @section('quan')
 	<a href="{{route('dangnhapquan')}}" class="brand-link">
-  		<img src="{{$thanhvien->hinhquan}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+  		<img src="{!!asset($thanhvien->hinhquan)!!}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       	<span class="brand-text font-weight-light">{{$thanhvien->tenquan}}</span>
 	</a>
 @endsection
 @section('avatar')
 	<div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          	<img src="{{$thanhvien->hinhtv}}" class="img-circle elevation-2" alt="User Image">
+          	<img src="{!!asset($thanhvien->hinhtv)!!}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           	<a href="{{route('thongtinthanhvien')}}" class="d-block">{{$thanhvien->hoten}}</a>
@@ -86,33 +86,32 @@
             @foreach($ban as $key => $row)
 
                     @if($row->trangthai==0)
-                    <div class="card" style="width: 114px; height: 300px;">
-                        <img class="card-img-top" src="storage/hinhanh/banranh.jpg" alt="Card image cap" width="100px" height="100px">
-                        <div class="card-body">
-                            <a href="" style="font-weight:bold; color:green; font-size:20px;">{{$row->tenban}}</a><br>
-                            <form action="{{route('taohoadon')}}" method="get">
-                                {{csrf_field()}}
-                                <input type="hidden" name="idkhuvuc" value="{{$idkhuvuc}}">
-                                <input type="hidden" name="idban" value="{{$row->id}}">
-                                <button type="submit" class="btn btn-primary">Tạo HD</button>
-                            </form>                    
-                        </div>              
+                    <div class="card" style="width: 114px; height: 260px;">
+                        <form action="{{route('taohoadon')}}" method="get">
+                            {{csrf_field()}}
+                            <input type="hidden" name="idkhuvuc" value="{{$idkhuvuc}}">
+                            <input type="hidden" name="idban" value="{{$row->id}}">
+                            <input type="image" src="{{asset('storage/hinhanh/banranh.jpg')}}" alt="Submit" width="114px" height="100px">
+                        </form>
+                        <p style="font-weight:bold; color:green; font-size:35px; text-align:center;">{{Str::limit($row->tenban,6,"..")}}</p>        
                     </div>
                     @elseif($row->trangthai==1)
-                    <div class="card" style="width: 114px; height: 300px;">
-                        <img class="card-img-top" src="storage/hinhanh/banban.jpg" alt="Card image cap" width="100px" height="100px">
-                        <div class="card-body">
-                            <a href="" style="font-weight:bold; color:red; font-size:20px;">{{$row->tenban}}</a><br>
-                            <a href="{{route('doibanhoadon',['id'=>$row->id])}}" style="font-weight:bold; color:pink; font-size:18px;">Đổi bàn</a><br><!--idban-->
-                            <a href="{{route('doimonhoadon',['id'=>$row->id])}}" style="font-weight:bold; color:blue; font-size:18px;">Đổi món</a><br>
-                            <a href="" style="font-weight:bold; color:orange; font-size:18px;">Tạm tính</a><br>
-                            <a href="" style="font-weight:bold; color:purple; font-size:18px;">Th.Toán</a><br>
-                            <a href="{{route('deletehoadon',['id'=>$row->id])}}" style="font-weight:bold; color:black; font-size:18px;">Xóa</a><br>
-                        </div>              
+                    <div class="card" style="width: 114px; height: 260px;">
+                        <a href="{{route('tamtinhhoadon',['id'=>$row->id])}}">
+                            <img class="card-img-top" src="{{asset('storage/hinhanh/banban.jpg')}}" alt="Card image cap" width="100px" height="105px">
+                        </a>
+                        <a href="{{route('tamtinhhoadon',['id'=>$row->id])}}" style="font-weight:bold; color:red; font-size:35px; text-align:center;">
+                            {{Str::limit($row->tenban,6,"..")}}
+                        </a>  
+                        <a href="{{route('doibanhoadon',['id'=>$row->id])}}" style="font-weight:bold; color:orange; font-size:25px; text-align:center;">Đổi bàn</a><!--idban-->
+                        <a href="{{route('doimonhoadon',['id'=>$row->id])}}" style="font-weight:bold; color:blue; font-size:25px; text-align:center;">Đổi món</a>
+                        <a href="{{route('deletehoadon',['id'=>$row->id])}}" style="font-weight:bold; color:black; font-size:25px; text-align:center;">Xóa</a>
                     </div>
                     @endif
 
             @endforeach
+
+            
 
         </div>
         <!-- /.row -->

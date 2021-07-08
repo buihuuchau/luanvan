@@ -23,6 +23,7 @@ class quanlybanController extends Controller
 
         $ban = DB::table('ban')
                     ->orderBy('tenkhuvuc')
+                    ->orderBy('tenban')
                     ->where('ban.idquan', $thanhvien->idquan)
                     ->join('khuvuc','ban.idkhuvuc','=','khuvuc.id')
                     ->select('ban.*','khuvuc.tenkhuvuc')

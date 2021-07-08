@@ -31,11 +31,14 @@ class orderController extends Controller
             ->where('idquan',$thanhvien->idquan)
             ->first();
         $ban = DB::table('ban')
+            ->orderBy('tenban')
             ->where('idquan',$thanhvien->idquan)
             ->where('idkhuvuc',$khuvuc2->id)
             ->where('hidden',0)
             ->get();
+
         $idkhuvuc = $khuvuc2->id;
+
         return view('order.hoadon',compact('thanhvien','khuvuc','ban','idkhuvuc'));
     }
     public function xemban(Request $request){
@@ -54,11 +57,12 @@ class orderController extends Controller
                     ->where('hidden',0)
                     ->get();
         $ban = DB::table('ban')
+            ->orderBy('tenban')
             ->where('idquan',$thanhvien->idquan)
             ->where('idkhuvuc',$request->idkhuvuc)
             ->where('hidden',0)
             ->get();
-        
+
         return view('order.hoadon',compact('thanhvien','khuvuc','ban','idkhuvuc'));
     }
 
@@ -158,6 +162,7 @@ class orderController extends Controller
             ->get();
 
         $ban = DB::table('ban')
+            ->orderBy('tenban')
             ->where('idquan',$thanhvien->idquan)
             ->where('idkhuvuc',$idkhuvuc)
             ->where('hidden',0)
@@ -185,6 +190,7 @@ class orderController extends Controller
                     ->get();
         
         $ban = DB::table('ban')
+            ->orderBy('tenban')
             ->where('idquan',$thanhvien->idquan)
             ->where('idkhuvuc',$idkhuvuc)
             ->where('hidden',0)
@@ -346,7 +352,118 @@ class orderController extends Controller
 
 
     
-    public function tamtinh(){
+    public function tamtinhhoadon($id){
+        $ssidthanhvien = Session::get('ssidthanhvien');
+        
+        $thanhvien = DB::table('thanhvien')
+                    ->where('thanhvien.id',$ssidthanhvien)
+                    ->join('quan', 'thanhvien.idquan', '=', 'quan.id')
+                    ->select('thanhvien.*','quan.hinhquan','quan.tenquan','quan.diachiquan','quan.website','quan.sdtquan')
+                    ->first();
+
+        $hoadon = DB::table('hoadon')
+                    ->where('hoadon.idquan',$thanhvien->idquan)
+                    ->where('hoadon.idban',$id)
+                    ->where('hoadon.trangthai',0)
+                    ->join('thanhvien', 'hoadon.idthanhvien','=','thanhvien.id')
+                    ->join('khuvuc', 'hoadon.idkhuvuc','=','khuvuc.id')
+                    ->join('ban', 'hoadon.idban','=','ban.id')
+                    ->select('hoadon.*','ban.tenban','khuvuc.tenkhuvuc','thanhvien.hoten')
+                    ->first();
+        $idban = $id;
+        $id = $hoadon->id;//idhoadon
+        $thoigian = $hoadon->thoigian;
+        
+        $idkhachhang = null;
+        $diemkhachhang = null;
+        $diem = 0;
+        $tamtinh = 0;
+
+        $chitiet = DB::table('chitiet')
+            ->where('chitiet.idhoadon',$id)
+            // ->where('trangthai',1)
+            ->join('hoadon', 'chitiet.idhoadon','=','hoadon.id')
+            ->join('thucdon', 'chitiet.idthucdon','thucdon.id')
+            ->join('ban', 'hoadon.idban', '=','ban.id' )
+            ->join('khuvuc','hoadon.idkhuvuc','=','khuvuc.id')
+            ->join('thanhvien','hoadon.idthanhvien','=','thanhvien.id')
+            ->select('chitiet.*','thucdon.tenmon', 'thucdon.dongia','khuvuc.tenkhuvuc','ban.tenban','thanhvien.hoten')
+            ->get();
+        foreach($chitiet as $key => $row){
+            $tamtinh = $tamtinh + $row->gia;
+        }
+       
+        return view('order.thanhtoanhoadon',compact('thanhvien','hoadon','chitiet','tamtinh','id','idban','thoigian','idkhachhang','diemkhachhang','diem'));
+    }
+    public function giamgia(Request $request){
+        $ssidthanhvien = Session::get('ssidthanhvien');
+        
+        $thanhvien = DB::table('thanhvien')
+                    ->where('thanhvien.id',$ssidthanhvien)
+                    ->join('quan', 'thanhvien.idquan', '=', 'quan.id')
+                    ->select('thanhvien.*','quan.hinhquan','quan.tenquan','quan.diachiquan','quan.website','quan.sdtquan')
+                    ->first();
+
+        $id = $request->id;//idhoadon
+        $hoadon = DB::table('hoadon')
+                    ->where('hoadon.idquan',$thanhvien->idquan)
+                    ->where('hoadon.id',$id)
+                    ->where('hoadon.trangthai',0)
+                    ->join('thanhvien', 'hoadon.idthanhvien','=','thanhvien.id')
+                    ->join('khuvuc', 'hoadon.idkhuvuc','=','khuvuc.id')
+                    ->join('ban', 'hoadon.idban','=','ban.id')
+                    ->select('hoadon.*','ban.tenban','khuvuc.tenkhuvuc','thanhvien.hoten')
+                    ->first();
+        
+        $thoigian = $hoadon->thoigian;
+        $idban = $hoadon->idban;
+        $sdt = $request->sdt;
+        $diem = $request->diem;
+        $tamtinh = 0;
+
+        $chitiet = DB::table('chitiet')
+            ->where('chitiet.idhoadon',$id)
+            // ->where('trangthai',1)
+            ->join('hoadon', 'chitiet.idhoadon','=','hoadon.id')
+            ->join('thucdon', 'chitiet.idthucdon','thucdon.id')
+            ->join('ban', 'hoadon.idban', '=','ban.id' )
+            ->join('khuvuc','hoadon.idkhuvuc','=','khuvuc.id')
+            ->join('thanhvien','hoadon.idthanhvien','=','thanhvien.id')
+            ->select('chitiet.*','thucdon.tenmon', 'thucdon.dongia','khuvuc.tenkhuvuc','ban.tenban','thanhvien.hoten')
+            ->get();
+        foreach($chitiet as $key => $row){
+            $tamtinh = $tamtinh + $row->gia;
+        }
+
+        $check = DB::table('khachhang')
+            ->where('sdt',$sdt)
+            ->first();
+        
+
+        if($check==null){
+            return back()->withErrors(['Không có số này']);
+        }
+        else{
+            $idkhachhang = $check->id;
+            $diemkhachhang = $check->diem; 
+        }
+        
+        if($diem > 0 && $diem >= $check->diem){// dung so diem
+            $diem = $check->diem;
+        }
+        if($diem == 0){//dung het so diem
+            $diem = $check->diem;
+        }
+        if($diem <= -1)// khong dung diem
+            $diem = 0;
+
+        if($diem*1000 > $tamtinh){
+            $diem = $tamtinh/1000;
+        }
+
+        return view('order.thanhtoanhoadon',compact('thanhvien','hoadon','chitiet','tamtinh','id','idban','thoigian','idkhachhang','diemkhachhang','diem'));
+    }
+    public function thanhtoanhoadon(Request $request){
         $ssidthanhvien = Session::get('ssidthanhvien');
         
         $thanhvien = DB::table('thanhvien')
@@ -354,13 +471,45 @@ class orderController extends Controller
                     ->join('quan', 'thanhvien.idquan', '=', 'quan.id')
                     ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
                     ->first();
+        $id = $request->id;
+        $idban = $request->idban;
+        $idkhachhang = $request->idkhachhang;
+        $diemkhachhang = $request->diemkhachhang;
+        $diem = $request->diem;
+        $giamgia = $request->giamgia;
+        $thanhtien = $request->thanhtien;
+        if($thanhtien <= 0 && $giamgia == 0){
+            return back()->withErrors('Không thể thanh toán hóa đơn rỗng');
+        }
+        if($thanhtien < 0){
+            return back()->withErrors('Hóa đơn lỗi, xem lại điểm giảm giá');
+        }
+        $ban['trangthai'] = 0;
+        DB::table('ban')
+            ->where('id',$idban)
+            ->update($ban);
 
-        $hoadon = DB::table('hoadon')
-            ->where('idquan',$thanhvien->idquan)
-            ->where('idban',$id)
-            ->where('trangthai',0)
-            ->first();
-        $id = $hoadon->id;//idhoadon
+        $hoadon['idkhachhang'] = $idkhachhang;
+        $hoadon['giamgia'] = $giamgia;
+        $hoadon['thanhtien'] = $thanhtien;
+        $hoadon['trangthai'] = 1;
+        DB::table('hoadon')
+            ->where('id',$id)
+            ->update($hoadon);
+
+        if($diem != 0){
+            $khachhang['diem'] = $diemkhachhang - $diem + $thanhtien/1000;
+            DB::table('khachhang')
+                ->where('id',$idkhachhang)
+                ->update($khachhang);
+        }
+        else{
+            $khachhang['diem'] = $diemkhachhang + $thanhtien/1000;
+            DB::table('khachhang')
+                ->where('id',$idkhachhang)
+                ->update($khachhang);
+        }
         
+        return redirect()->route('hoadon');
     }
 }

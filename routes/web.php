@@ -479,5 +479,20 @@ Route::prefix('/')->group(function () {
         'as' => 'doisoluongmonhoadon',
         'uses' => 'App\Http\Controllers\orderController@doisoluongmonhoadon'
     ]);
+
+
+
+    Route::get('/tamtinhhoadon/{id}', [//idban
+        'as' => 'tamtinhhoadon',
+        'uses' => 'App\Http\Controllers\orderController@tamtinhhoadon'
+    ]);
+    Route::get('/giamgia', [
+        'as' => 'giamgia',
+        'uses' => 'App\Http\Controllers\orderController@giamgia'
+    ]);
+    Route::post('/thanhtoanhoadon', [
+        'as' => 'thanhtoanhoadon',
+        'uses' => 'App\Http\Controllers\orderController@thanhtoanhoadon'
+    ]);
 });
 // DAT BAN / DAT MON
