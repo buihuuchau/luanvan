@@ -346,4 +346,20 @@ class orderController extends Controller
 
 
     
+    public function tamtinh(){
+        $ssidthanhvien = Session::get('ssidthanhvien');
+        
+        $thanhvien = DB::table('thanhvien')
+                    ->where('thanhvien.id',$ssidthanhvien)
+                    ->join('quan', 'thanhvien.idquan', '=', 'quan.id')
+                    ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
+                    ->first();
+
+        $hoadon = DB::table('hoadon')
+            ->where('idquan',$thanhvien->idquan)
+            ->where('idban',$id)
+            ->where('trangthai',0)
+            ->first();
+        $id = $hoadon->id;//idhoadon
+    }
 }

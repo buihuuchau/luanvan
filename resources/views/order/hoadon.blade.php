@@ -87,7 +87,7 @@
 
                     @if($row->trangthai==0)
                     <div class="card" style="width: 114px; height: 300px;">
-                        <img class="card-img-top" src="/storage/hinhanh/banranh.jpg" alt="Card image cap" width="100px" height="100px">
+                        <img class="card-img-top" src="storage/hinhanh/banranh.jpg" alt="Card image cap" width="100px" height="100px">
                         <div class="card-body">
                             <a href="" style="font-weight:bold; color:green; font-size:20px;">{{$row->tenban}}</a><br>
                             <form action="{{route('taohoadon')}}" method="get">
@@ -100,7 +100,7 @@
                     </div>
                     @elseif($row->trangthai==1)
                     <div class="card" style="width: 114px; height: 300px;">
-                        <img class="card-img-top" src="/storage/hinhanh/banban.jpg" alt="Card image cap" width="100px" height="100px">
+                        <img class="card-img-top" src="storage/hinhanh/banban.jpg" alt="Card image cap" width="100px" height="100px">
                         <div class="card-body">
                             <a href="" style="font-weight:bold; color:red; font-size:20px;">{{$row->tenban}}</a><br>
                             <a href="{{route('doibanhoadon',['id'=>$row->id])}}" style="font-weight:bold; color:pink; font-size:18px;">Đổi bàn</a><br><!--idban-->
