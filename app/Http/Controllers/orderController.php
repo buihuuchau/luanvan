@@ -361,5 +361,6 @@ class orderController extends Controller
             ->where('trangthai',0)
             ->first();
         $id = $hoadon->id;//idhoadon
+        
     }
 }
