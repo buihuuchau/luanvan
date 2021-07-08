@@ -131,9 +131,9 @@
 								<tr class="odd">
 									<th class="dtr-control sorting_1" tabindex="0">{{$key+1}}</th>
 									<td>{{$row->tenmon}}</td>
-									<td>{{$row->dongia}}</td>
-									<td>{{$row->soluong}}</td>
-									<td>{{$row->gia}}</td>
+									<td>{{number_format("$row->dongia",0,",",".");}}đ</td>
+									<td>{{number_format("$row->soluong",0,",",".");}}</td>
+									<td>{{number_format("$row->gia",0,",",".");}}đ</td>
 								</tr>
 							@endforeach
                                 <tr>
@@ -148,21 +148,21 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <th>{{$tamtinh}}đ</th>
+                                    <th>{{number_format("$tamtinh",0,",",".");}}đ</th>
                                 </tr>
                                 <tr>
                                     <th>Giảm giá:</th>
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <th>{{$diem * 1000}} đ</th>
+                                    <th><?php $giamgia = $diem*1000 ?>{{number_format("$giamgia",0,",",".");}}đ</th>
                                 </tr>
                                 <tr>
                                     <th>TỔNG:</th>
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <th>{{$tong = $tamtinh-$diem*1000}}đ</th>
+                                    <th><?php $tong = $tamtinh-$diem*1000 ?>{{number_format("$tong",0,",",".");}}đ</th>
                                 </tr>
 							</tbody>
 						</table>
@@ -176,8 +176,8 @@
                     <input type="hidden" name="diem" value="{{$diem}}"><!-- diem-->
                     <input type="hidden" name="idkhachhang" value="{{$idkhachhang}}"><!--idkhachhang -->
                     <input type="hidden" name="diemkhachhang" value="{{$diemkhachhang}}"><!--diemkhachhang -->
-                    <input type="hidden" name="giamgia" value="{{$diem*1000}}"><!--diemkhachhang -->
-                    <input type="hidden" name="thanhtien" value="{{$tong}}"><!--thanhtien -->
+                    <input type="number" name="giamgia" value="{{$giamgia}}"><!--diemkhachhang -->
+                    <input type="number" name="thanhtien" value="{{$tong}}"><!--thanhtien -->
                     <button type="submit" class="btn btn-primary">Thanh toán</button>
                 </form>
 
