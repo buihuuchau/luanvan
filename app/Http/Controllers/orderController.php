@@ -276,12 +276,14 @@ class orderController extends Controller
                     ->where('idquan',$thanhvien->idquan)
                     ->where('hidden',0)
                     ->get();
-        $id = $request->id;
+        $id = $request->id;// idhoadon
         $idthucdon = $request->idthucdon;
         $soluong = $request->soluong;
+        $ghichu = $request->ghichu;
         $chitiet2['idhoadon'] = $id;
         $chitiet2['idthucdon'] = $idthucdon;
         $chitiet2['soluong'] = $soluong;
+        $chitiet2['ghichu'] = $request->ghichu;
 
         $thucdon2 = DB::table('thucdon')
             ->where('idquan',$thanhvien->idquan)

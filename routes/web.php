@@ -496,3 +496,12 @@ Route::prefix('/')->group(function () {
     ]);
 });
 // DAT BAN / DAT MON
+
+// QUAN LY CHE BIEN
+Route::prefix('/')->group(function () {
+    Route::get('/quanlychebien', [
+        'as' => 'quanlychebien',
+        'uses' => 'App\Http\Controllers\quanlychebienController@quanlychebien'
+    ]);
+});
+// QUAN LY CHE BIEN

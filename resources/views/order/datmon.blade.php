@@ -85,12 +85,13 @@
 									<td class="row">
                                         <form action="{{route('datmon')}}" method="get">
                                             {{csrf_field()}}
-                                            <input type="hidden" name="id" value="{{$id}}">
+                                            <input type="hidden" name="id" value="{{$id}}"><!--idhoadon-->
                                             <input type="hidden" name="idthucdon" value="{{$row->id}}">
                                             <div class="buttons_added">
                                                 <input class="minus is-form" type="button" value="-">
                                                 <input aria-label="quantity" class="input-qty" max="100" min="1" name="soluong" type="number" value="1">
                                                 <input class="plus is-form" type="button" value="+">
+                                                <input type="text" name="ghichu" placeholder="Ghi chú" class="small">
                                                 <button type="submit" class="btn btn-primary">Đặt món</button>
                                             </div>
                                         </form>
