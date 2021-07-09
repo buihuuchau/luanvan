@@ -81,6 +81,14 @@
                      </a>
                  </li>
                  <li class="nav-item">
+                    <a href="{{ route('quanlyhoadon') }}" class="nav-link">
+                        <i class="nav-icon fas fa-calculator"></i>
+                        <p>
+                            Quản lý hóa đơn
+                        </p>
+                    </a>
+                </li>
+                 <li class="nav-item">
                      <a href="{{ route('quanlycalam') }}" class="nav-link">
                          <i class="nav-icon fas fa-clock"></i>
                          <p>

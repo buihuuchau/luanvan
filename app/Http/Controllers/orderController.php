@@ -476,7 +476,7 @@ class orderController extends Controller
                     ->join('quan', 'thanhvien.idquan', '=', 'quan.id')
                     ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
                     ->first();
-        $id = $request->id;
+        $id = $request->id;//idhoadon
         $idban = $request->idban;
         $idkhachhang = $request->idkhachhang;
         $diemkhachhang = $request->diemkhachhang;
@@ -514,7 +514,87 @@ class orderController extends Controller
                 ->where('id',$idkhachhang)
                 ->update($khachhang);
         }
-        
+
+
+
+        // luu vao hoa don moi de luu tru
+        $hoadonluu = DB::table('hoadon')
+            ->where('id',$id)
+            ->first();
+        $idquan = $hoadonluu->idquan;
+        $idhoadon = $id;
+        $thoigian = $hoadonluu->thoigian;
+
+        $khuvucluu = DB::table('khuvuc')
+            ->where('id',$hoadonluu->idkhuvuc)
+            ->first();
+        $tenkhuvuc = $khuvucluu->tenkhuvuc;
+
+        $banluu = DB::table('ban')
+            ->where('id',$idban)
+            ->first();
+        $tenban = $banluu->tenban;
+
+        $thanhvienluu = DB::table('thanhvien')
+            ->where('id',$hoadonluu->idthanhvien)
+            ->first();
+        $tenthanhvien = $thanhvien->hoten;
+
+        if($idkhachhang==null){
+            $tenkhachhang = null;
+            $sdtkh =null;
+        }
+        else{
+            $khachhangluu = DB::table('khachhang')
+                ->where('id',$idkhachhang)
+                ->first();
+            $tenkhachhang = $khachhangluu->hotenkh;
+            $sdtkh = $khachhangluu->sdt;
+        }
+
+        $chitiethoadon = DB::table('chitiet')
+            ->where('chitiet.idhoadon',$id)
+            ->where('trangthai',1)//mon da duoc phuc vu
+            ->join('thucdon', 'chitiet.idthucdon','=','thucdon.id')
+            ->get();
+        foreach($chitiethoadon as $key => $row){
+            
+            $hoadonsave['idquan'] = $idquan;
+            $hoadonsave['idhoadon'] = $idhoadon;
+            $hoadonsave['thoigian'] = $thoigian;
+            $hoadonsave['tenkhuvuc'] = $tenkhuvuc;
+            $hoadonsave['tenban'] = $tenban;
+            $hoadonsave['tenthanhvien'] = $tenthanhvien;
+            $hoadonsave['tenkhachhang'] = $tenkhachhang;
+            $hoadonsave['sdtkh'] = $sdtkh;
+            $hoadonsave['loaimon'] = $row->loaimon;
+            $hoadonsave['tenmon'] = $row->tenmon;
+            $hoadonsave['dongia'] = $row->dongia;
+            $hoadonsave['soluong'] = $row->soluong;
+            $hoadonsave['gia'] = $row->gia;
+            DB::table('hoadonluu')->insert($hoadonsave);
+        }
+
+        $hoadonsave2['idquan'] = $idquan;
+        $hoadonsave2['idhoadon'] = $idhoadon;
+        $hoadonsave2['giamgia'] = $giamgia;
+        $hoadonsave2['thanhtien'] = $thanhtien;
+        DB::table('hoadonluu')->insert($hoadonsave2);
+        // luu vao hoa don moi de luu tru
+
+
+
+        //xoa chi tiet va hoa don hien tai
+            DB::table('chitiet')
+                ->where('idhoadon',$idhoadon)
+                ->delete();
+            DB::table('hoadon')
+                ->where('id',$idhoadon)
+                ->delete();
+        //xoa chi tiet va hoa don hien tai
+
+
+
         return redirect()->route('hoadon');
     }
 }

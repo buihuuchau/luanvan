@@ -521,3 +521,12 @@ Route::prefix('/')->group(function () {
     ]);
 });
 // QUAN LY CHE BIEN
+
+// QUAN LY HOA DON
+Route::prefix('/')->group(function () {
+    Route::get('/quanlyhoadon', [
+        'as' => 'quanlyhoadon',
+        'uses' => 'App\Http\Controllers\quanlyhoadonController@quanlyhoadon'
+    ]);
+});
+// QUAN LY HOA DON
