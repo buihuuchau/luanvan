@@ -255,6 +255,7 @@ class orderController extends Controller
                     ->where('hidden',0)
                     ->get();
         $chitiet = DB::table('chitiet')
+            ->orderBy('trangthai','desc')
             ->where('idhoadon',$id)
             ->join('thucdon','chitiet.idthucdon','=','thucdon.id')
             ->select('chitiet.*','thucdon.tenmon','thucdon.dongia','thucdon.loaimon')
@@ -294,6 +295,7 @@ class orderController extends Controller
         DB::table('chitiet')->insert($chitiet2);
 
         $chitiet = DB::table('chitiet')
+            ->orderBy('trangthai','desc')
             ->where('idhoadon',$id)
             ->join('thucdon','chitiet.idthucdon','=','thucdon.id')
             ->select('chitiet.*','thucdon.tenmon','thucdon.dongia','thucdon.loaimon')
@@ -321,6 +323,7 @@ class orderController extends Controller
         DB::table('chitiet')
             ->where('id',$request->id)
             ->where('trangthai',0)
+            ->orWhere('trangthai',2)
             ->delete();
         
         return redirect()->route('doimonhoadon',['id'=>$idban]);
@@ -383,7 +386,7 @@ class orderController extends Controller
 
         $chitiet = DB::table('chitiet')
             ->where('chitiet.idhoadon',$id)
-            // ->where('trangthai',1)
+            ->where('chitiet.trangthai',1)
             ->join('hoadon', 'chitiet.idhoadon','=','hoadon.id')
             ->join('thucdon', 'chitiet.idthucdon','thucdon.id')
             ->join('ban', 'hoadon.idban', '=','ban.id' )
@@ -425,7 +428,7 @@ class orderController extends Controller
 
         $chitiet = DB::table('chitiet')
             ->where('chitiet.idhoadon',$id)
-            // ->where('trangthai',1)
+            ->where('chitiet.trangthai',1)
             ->join('hoadon', 'chitiet.idhoadon','=','hoadon.id')
             ->join('thucdon', 'chitiet.idthucdon','thucdon.id')
             ->join('ban', 'hoadon.idban', '=','ban.id' )

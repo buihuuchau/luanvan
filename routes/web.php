@@ -503,5 +503,21 @@ Route::prefix('/')->group(function () {
         'as' => 'quanlychebien',
         'uses' => 'App\Http\Controllers\quanlychebienController@quanlychebien'
     ]);
+    Route::get('/checkhoanthanh/{id}', [
+        'as' => 'checkhoanthanh',
+        'uses' => 'App\Http\Controllers\quanlychebienController@checkhoanthanh'
+    ]);
+    Route::get('/baohuy/{id}', [
+        'as' => 'baohuy',
+        'uses' => 'App\Http\Controllers\quanlychebienController@baohuy'
+    ]);
+    Route::get('/baohetnguyenlieu', [
+        'as' => 'baohetnguyenlieu',
+        'uses' => 'App\Http\Controllers\quanlychebienController@baohetnguyenlieu'
+    ]);
+    Route::get('/dobaohetnguyenlieu/{id}', [
+        'as' => 'dobaohetnguyenlieu',
+        'uses' => 'App\Http\Controllers\quanlychebienController@dobaohetnguyenlieu'
+    ]);
 });
 // QUAN LY CHE BIEN

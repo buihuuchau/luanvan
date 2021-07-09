@@ -58,10 +58,6 @@
         <div class="row">
 
 			<div class="col-sm-12">
-				<div class="col-md-12 mb-4 text-right">
-					<a style="width:44px" class="btn btn-primary" href="{{route('addkho')}}">
-						<i class="fas fa-plus"></i></a>
-				</div>
 				<div class="card">
 					<div class="card-body">
 						<table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
@@ -69,14 +65,9 @@
 								<tr role="row">
 									<th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">No.</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TÊN NGUYÊN LIỆU</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ĐƠN GIÁ</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ĐƠN VỊ TÍNH</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >SỐ LƯỢNG</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THÀNH TIỀN</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >NGÀY NHẬP</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >NGÀY HẾT</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TRẠNG THÁI</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THAO TÁC</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >BÁO CÁO</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -84,28 +75,9 @@
 								<tr class="odd">
 									<td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td>
 									<td>{{$row->tennguyenlieu}}</td>
-									<td>{{number_format("$row->dongia",0,",",".");}}</td>
-									<td>{{$row->donvitinh}}</td>
 									<td>{{number_format("$row->soluong",0,",",".");}}</td>
-									<td>{{number_format("$row->thanhtien",0,",",".");}}</td>
 									<td>{{$row->ngaynhap}}</td>
-									<td>{{$row->ngayhet}}</td>
-									@if($row->trangthai==1)
-										<td  bgcolor="lightgreen">Còn hàng</td>
-									@elseif($row->trangthai== 2)
-										<td  bgcolor="yellow">Sắp hết, cần kiểm tra</td>
-									@elseif($row->trangthai== 0)
-										<td  bgcolor="lightpink">Hết hàng</td>
-									@endif
-									<td>
-										@if($row->trangthai==1)
-										<a href="{{route('hethangkho',['id'=>$row->id])}}">Hết hàng</a><br>
-										@else
-										<a href="{{route('conhangkho',['id'=>$row->id])}}">Còn hàng</a><br>
-										@endif
-										<a href="{{route('deletekho',['id'=>$row->id])}}"
-											onclick="return confirm('Bạn có chắc chắn muốn xóa')";>Xóa kho</a>
-									</td>
+									<td><a href="{{route('dobaohetnguyenlieu',['id'=>$row->id])}}">Báo hết</a></td>
 								</tr>
 							@endforeach
 							</tbody>

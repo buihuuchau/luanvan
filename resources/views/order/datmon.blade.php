@@ -117,7 +117,8 @@
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ĐƠN GIÁ</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >SỐ LƯỢNG</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >GIÁ</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THAO TÁC</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >GHI CHÚ</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TRẠNG THÁI</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -135,7 +136,17 @@
 									<td>{{$row->dongia}}</td>
 									<td>{{$row->soluong}}</td>
 									<td>{{$row->gia}}</td>
+                                    @if ($row->trangthai==1)
+									<td bgcolor="green" style="color:white">{{$row->ghichu}}</></td>
+                                    @elseif ($row->trangthai==0)
+                                    <td>{{$row->ghichu}}</td>
+                                    @elseif($row->trangthai==2)
+                                    <td bgcolor="red" style="color:white">{{$row->ghichu}}</></td>
+                                    @endif
 									<td class="row">
+                                        @if ($row->trangthai==1)
+                                            <h5   style="color:green">Đã xong</h5>
+                                        @endif
                                         @if ($row->trangthai==0)
                                         <form action="{{route('doisoluongmonhoadon')}}" method="get">
                                             {{csrf_field()}}
@@ -145,11 +156,11 @@
                                                 <input class="minus is-form" type="button" value="-">
                                                 <input aria-label="quantity" class="input-qty" max="100" min="1" name="soluong" type="number" value="{{$row->soluong}}">
                                                 <input class="plus is-form" type="button" value="+">
-                                                <button type="submit" class="btn btn-warning">Đổi số lượng</button>
+                                                <button type="submit" class="btn btn-warning">Đổi số lượng</button>                                                
                                             </div>
                                         </form>
                                         @endif
-                                        @if ($row->trangthai==0)
+                                        @if ($row->trangthai==0 || $row->trangthai==2)
                                         <form action="{{route('xoamonhoadon')}}" method="get">
                                             {{csrf_field()}}
                                             <input type="hidden" name="id" value="{{$row->id}}">
