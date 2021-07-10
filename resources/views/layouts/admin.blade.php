@@ -109,7 +109,12 @@
 		})
 	})
 </script>
-
+{{-- auto reload --}}
+<script type = "text/JavaScript">
+	function AutoRefresh( t ) {
+		setTimeout("location.reload(true);", t);
+	}
+</script>
 
 </body>
 </html>

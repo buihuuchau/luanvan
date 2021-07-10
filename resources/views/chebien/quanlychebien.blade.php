@@ -71,6 +71,8 @@
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
                                                 rowspan="1" colspan="1" aria-sort="ascending">No.</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
+                                                colspan="1">STT HD</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                 colspan="1">TÊN MÓN</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                 colspan="1">SỐ LƯỢNG</th>
@@ -86,6 +88,7 @@
                                         @foreach ($chitiet as $key => $row)
                                             <tr class="odd">
                                                 <td class="dtr-control sorting_1" tabindex="0">{{ $key + 1 }}</td>
+                                                <td>{{ $row->idhoadon }}</td>
                                                 <td>{{ $row->tenmon }}</td>
                                                 <td>{{ $row->soluong }}</td>
                                                 <td>{{ $row->ghichu }}</td>
@@ -122,3 +125,6 @@
     </div>
     <!-- /.content-wrapper -->
 @endsection
+<html>   
+   <body onload = "JavaScript:AutoRefresh(60000);"></body>
+</html>

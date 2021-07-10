@@ -528,5 +528,9 @@ Route::prefix('/')->group(function () {
         'as' => 'quanlyhoadon',
         'uses' => 'App\Http\Controllers\quanlyhoadonController@quanlyhoadon'
     ]);
+    Route::get('/xemhoadon/{id}', [
+        'as' => 'xemhoadon',
+        'uses' => 'App\Http\Controllers\quanlyhoadonController@xemhoadon'
+    ]);
 });
 // QUAN LY HOA DON

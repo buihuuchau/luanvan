@@ -561,12 +561,6 @@ class orderController extends Controller
             
             $hoadonsave['idquan'] = $idquan;
             $hoadonsave['idhoadon'] = $idhoadon;
-            $hoadonsave['thoigian'] = $thoigian;
-            $hoadonsave['tenkhuvuc'] = $tenkhuvuc;
-            $hoadonsave['tenban'] = $tenban;
-            $hoadonsave['tenthanhvien'] = $tenthanhvien;
-            $hoadonsave['tenkhachhang'] = $tenkhachhang;
-            $hoadonsave['sdtkh'] = $sdtkh;
             $hoadonsave['loaimon'] = $row->loaimon;
             $hoadonsave['tenmon'] = $row->tenmon;
             $hoadonsave['dongia'] = $row->dongia;
@@ -577,6 +571,12 @@ class orderController extends Controller
 
         $hoadonsave2['idquan'] = $idquan;
         $hoadonsave2['idhoadon'] = $idhoadon;
+        $hoadonsave2['thoigian'] = $thoigian;
+        $hoadonsave2['tenkhuvuc'] = $tenkhuvuc;
+        $hoadonsave2['tenban'] = $tenban;
+        $hoadonsave2['tenthanhvien'] = $tenthanhvien;
+        $hoadonsave2['tenkhachhang'] = $tenkhachhang;
+        $hoadonsave2['sdtkh'] = $sdtkh;
         $hoadonsave2['giamgia'] = $giamgia;
         $hoadonsave2['thanhtien'] = $thanhtien;
         DB::table('hoadonluu')->insert($hoadonsave2);

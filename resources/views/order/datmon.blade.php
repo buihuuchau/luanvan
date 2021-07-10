@@ -186,3 +186,6 @@
   <!-- /.content-wrapper -->
 
 @endsection
+<html>   
+   <body onload = "JavaScript:AutoRefresh(18000);"></body>
+</html>
