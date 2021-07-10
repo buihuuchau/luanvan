@@ -105,6 +105,14 @@
                      </a>
                  </li>
                  <li class="nav-item">
+                    <a href="{{ route('quanlyngansach') }}" class="nav-link">
+                        <i class="nav-icon fas fa-credit-card"></i>
+                        <p>
+                            Quản lý ngân sách
+                        </p>
+                    </a>
+                </li>
+                 <li class="nav-item">
                      <a href="{{ route('hoadon') }}" class="nav-link">
                          <i class="nav-icon fas fa-shopping-cart"></i>
                          <p>

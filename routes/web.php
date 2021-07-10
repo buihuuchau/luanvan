@@ -534,3 +534,16 @@ Route::prefix('/')->group(function () {
     ]);
 });
 // QUAN LY HOA DON
+
+// QUAN LY NGAN SACH
+Route::prefix('/')->group(function () {
+    Route::get('/quanlyngansach', [
+        'as' => 'quanlyngansach',
+        'uses' => 'App\Http\Controllers\quanlyhoadonController@quanlyngansach'
+    ]);
+    Route::get('/xemhoadon/{id}', [
+        'as' => 'xemhoadon',
+        'uses' => 'App\Http\Controllers\quanlyhoadonController@xemhoadon'
+    ]);
+});
+// QUAN LY NGAN SACH

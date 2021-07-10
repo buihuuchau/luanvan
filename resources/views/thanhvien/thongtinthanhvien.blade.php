@@ -45,6 +45,7 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="">Thông tin thành viên</a></li>
+                <li class="breadcrumb-item"><a href="{{route('dangxuatthanhvien')}}">Đăng xuất</a></li>
                 </ol>
             </div><!-- /.col -->
             </div><!-- /.row -->

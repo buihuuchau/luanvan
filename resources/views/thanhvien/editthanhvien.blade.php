@@ -136,7 +136,7 @@
 
 								<div class="form-group">
 								<label>Ngày vào làm:</label>
-								<input required="true" type="date" class="form-control" name="ngayvaolam" value="{{$thanhvien->ngayvaolam}}" disabled>
+								<input required="true" type="date" class="form-control" name="ngayvaolam" value="{{$thanhvien->ngayvaolam}}">
 								</div>
 
 								<div class="form-group">
