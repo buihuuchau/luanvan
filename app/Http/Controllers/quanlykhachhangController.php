@@ -61,6 +61,7 @@ class quanlykhachhangController extends Controller
             $khachhang['idquan'] = $thanhvien->idquan;
             $khachhang['hotenkh'] = $request->hotenkh;
             $khachhang['sdt'] = $request->sdt;
+            $khachhang['ngaydangky'] = date('Y-m-d');
             DB::table('khachhang')->insert($khachhang);
             return back();
         }

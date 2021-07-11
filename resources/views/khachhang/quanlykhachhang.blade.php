@@ -71,6 +71,7 @@
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >HỌ TÊN</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >SỐ ĐIỆN THOẠI</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ĐIỂM</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >NGÀY ĐĂNG KÝ</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THAO TÁC</th>
 								</tr>
 							</thead>
@@ -81,6 +82,7 @@
 									<td>{{$row->hotenkh}}</td>
 									<td>{{$row->sdt}}</td>
 									<td>{{$row->diem}}</td>
+									<td>{{$row->ngaydangky}}</td>
 									<td><a href="{{route('editkhachhang',['id'=>$row->id])}}">Sửa thông tin</a></td>
 								</tr>
 							@endforeach

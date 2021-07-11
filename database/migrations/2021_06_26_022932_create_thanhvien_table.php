@@ -28,6 +28,7 @@ class CreateThanhvienTable extends Migration
             $table->bigInteger('luong');
             $table->bigInteger('idvaitro')->unsigned();
             $table->bigInteger('hidden')->default(1)->comment('0: Hiện - 1: Ẩn');
+            $table->bigInteger('trangthai')->default(0)->comment('0: Offline - 1: Online');
             $table->timestamps();
         });
     }

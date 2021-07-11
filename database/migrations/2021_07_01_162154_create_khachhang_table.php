@@ -18,6 +18,7 @@ class CreateKhachhangTable extends Migration
             $table->bigInteger('idquan')->unsigned();
             $table->string('hotenkh');
             $table->bigInteger('sdt');
+            $table->date('ngaydangky');
             $table->bigInteger('diem')->default('0');
             $table->timestamps();
         });
