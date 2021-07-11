@@ -87,7 +87,7 @@
 								<td>{{$row->diachi}}</td>
 								<td>{{$row->sdt}}</td>
 								<td>{{$row->ngayvaolam}}</td>
-								<td>{{$row->luong}} vnđ</td>
+								<td>{{number_format("$row->luong",0,",",".");}} vnđ</td>
 								<td>{{$row->tenvaitro}}</td>
 								@foreach ($lichlamviec as $key2 => $row2)
 									<?php	if($row2->idthanhvien==$row->id)	$sudung = $row->id;	?>				

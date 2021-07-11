@@ -72,6 +72,9 @@
 						<div class="panel-body">
 							<form action="{{route('doeditthongtinthanhvien')}}" method="post" enctype="multipart/form-data">
 								{{csrf_field()}}
+								@if($errors->any())
+									<h3>{{$errors->first()}}</h3>
+								@endif
 								<input type="hidden" name="id" value="{{$thanhvien->id}}">
 
 								<img src="{!!asset($thanhvien->hinhtv)!!}" alt="" width="30%" height="30%">

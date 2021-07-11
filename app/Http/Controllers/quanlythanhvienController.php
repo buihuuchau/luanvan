@@ -49,13 +49,39 @@ class quanlythanhvienController extends Controller
         $hinhtv = $request->file('hinhtv')->store('public/hinhanh');
         $linkhinhtv = 'storage'.substr($hinhtv, 6);
         $thanhvien['hinhtv'] = $linkhinhtv;
-        $thanhvien['namsinh'] = $request->namsinh;
+
+        $namsinh = $request->namsinh;// kieu chuoi
+        $namsinh2 = strtotime ( '+18 year' , strtotime ( $namsinh ) ) ;// cong them nam, khong con la kieu chuoi
+        $namsinh3 = date ( 'Y-m-d' , $namsinh2 );// dinh dang lai kieu chuoi
+        $ngayvaolam = $request->ngayvaolam;
+        $today = date("Y-m-d");
+        if (strtotime($today) < strtotime($namsinh3)){
+            return back()->withErrors('Chưa đủ 18 !');
+        }
+        elseif(strtotime($namsinh3) > strtotime($ngayvaolam)){
+            return back()->withErrors('Ngày vào làm không hợp lệ');
+        }
+        else{
+            $thanhvien['namsinh'] = $request->namsinh;
+            $thanhvien['ngayvaolam'] = $request->ngayvaolam;
+        }
+
         $thanhvien['sex'] = $request->sex;
         $thanhvien['diachi'] = $request->diachi;
         $thanhvien['sdt'] = $request->sdt;
-        $thanhvien['ngayvaolam'] = $request->ngayvaolam;
         $thanhvien['luong'] = $request->luong;
         $thanhvien['idvaitro'] = $request->idvaitro;
+
+        
+        
+        request()->validate([
+            'hinhtv' => 'image|mimes:jpeg,png,jpg|max:4096',
+        ],
+        [
+            'hinhtv.image' => 'Hình ảnh phải có dạng jpg,jpeg,png',
+            'hinhtv.max' => 'Hình ảnh phải có độ phân giải dưới 4 mb',
+        ]);
+
         $check = DB::table('thanhvien')
                 ->where('acc',$request->acc)
                 ->first();
@@ -90,7 +116,24 @@ class quanlythanhvienController extends Controller
             $linkhinhtv = 'storage'.substr($hinhtv, 6);
             $thanhvien['hinhtv'] = $linkhinhtv;
         }
-        $thanhvien['namsinh'] = $request->namsinh;
+
+        $namsinh = $request->namsinh;// kieu chuoi
+        $namsinh2 = strtotime ( '+18 year' , strtotime ( $namsinh ) ) ;// cong them nam, khong con la kieu chuoi
+        $namsinh3 = date ( 'Y-m-d' , $namsinh2 );// dinh dang lai kieu chuoi
+        $ngayvaolam = $request->ngayvaolam;
+        $today = date("Y-m-d");
+        if (strtotime($today) < strtotime($namsinh3)){
+            return back()->withErrors('Chưa đủ 18 !');
+        }
+        elseif(strtotime($namsinh3) > strtotime($ngayvaolam)){
+            return back()->withErrors('Ngày vào làm không hợp lệ');
+        }
+        else{
+            $thanhvien['namsinh'] = $request->namsinh;
+            $thanhvien['ngayvaolam'] = $request->ngayvaolam;
+        }
+
+        $thanhvien['sex'] = $request->sex;
         $thanhvien['diachi'] = $request->diachi;
         $thanhvien['sdt'] = $request->sdt;
         $thanhvien['luong'] = $request->luong;
