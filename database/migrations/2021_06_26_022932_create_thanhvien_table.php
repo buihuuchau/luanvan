@@ -24,7 +24,7 @@ class CreateThanhvienTable extends Migration
             $table->string('sex');
             $table->string('diachi');
             $table->bigInteger('sdt');
-            $table->string('ngayvaolam');
+            $table->date('ngayvaolam');
             $table->bigInteger('luong');
             $table->bigInteger('idvaitro')->unsigned();
             $table->bigInteger('hidden')->default(1)->comment('0: Hiện - 1: Ẩn');
