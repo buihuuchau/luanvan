@@ -539,11 +539,19 @@ Route::prefix('/')->group(function () {
 Route::prefix('/')->group(function () {
     Route::get('/quanlyngansach', [
         'as' => 'quanlyngansach',
-        'uses' => 'App\Http\Controllers\quanlyhoadonController@quanlyngansach'
+        'uses' => 'App\Http\Controllers\quanlyngansachController@quanlyngansach'
     ]);
-    Route::get('/xemhoadon/{id}', [
-        'as' => 'xemhoadon',
-        'uses' => 'App\Http\Controllers\quanlyhoadonController@xemhoadon'
+    Route::post('/quanlynhaphang', [
+        'as' => 'quanlynhaphang',
+        'uses' => 'App\Http\Controllers\quanlyngansachController@quanlynhaphang'
+    ]);
+    Route::post('/quanlybanhang', [
+        'as' => 'quanlybanhang',
+        'uses' => 'App\Http\Controllers\quanlyngansachController@quanlybanhang'
+    ]);
+    Route::post('/quanlyluongnhanvien', [
+        'as' => 'quanlyluongnhanvien',
+        'uses' => 'App\Http\Controllers\quanlyngansachController@quanlyluongnhanvien'
     ]);
 });
 // QUAN LY NGAN SACH

@@ -21,6 +21,7 @@ class quanlyhoadonController extends Controller
                     ->first();
 
         $hoadonluu = DB::table('hoadonluu')
+            ->orderBy('id','desc')
             ->where('idquan',$thanhvien->idquan)
             ->get();
         

@@ -1,0 +1,248 @@
+@extends('layouts.admin')
+
+@section('title')
+  <title>Quản lý ngân sách</title>
+@endsection
+@section('home')
+	<li class="nav-item d-none d-sm-inline-block">
+		<a href="{{route('thongtinthanhvien')}}" class="nav-link">Home</a>
+    </li>
+@endsection
+@section('dangxuat')
+	<ul class="navbar-nav ml-right">
+      	<li class="nav-item d-none d-sm-inline-block">
+        	<a href="{{route('dangxuatthanhvien')}}" class="nav-link">Đăng xuất</a>
+      	</li>
+    </ul>
+@endsection
+@section('quan')
+	<a href="{{route('dangnhapquan')}}" class="brand-link">
+  		<img src="{{$thanhvien->hinhquan}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      	<span class="brand-text font-weight-light">{{$thanhvien->tenquan}}</span>
+	</a>
+@endsection
+@section('avatar')
+	<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          	<img src="{{$thanhvien->hinhtv}}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          	<a href="{{route('thongtinthanhvien')}}" class="d-block">{{$thanhvien->hoten}}</a>
+        </div>
+    </div>
+@endsection
+
+@section('content')
+      <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Các chức năng hiện có</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Thông tin thành viên</a></li>
+                </ol>
+            </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+			
+            <div class="col-sm-4">
+                <div class="card">
+                    <form action="{{route('quanlynhaphang')}}" method="post">
+                        {{csrf_field()}}
+                        <label>Từ:</label>
+                        <input type="date" name="tungay" class="form-control">
+                        <label>Đến:</label>
+                        <input type="date" name="denngay" class="form-control">
+                        <div style="text-align:center"><button type="submit" class="btn btn-primary">Quản lý nhập hàng</button></div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <form action="{{route('quanlybanhang')}}" method="post">
+                        {{csrf_field()}}
+                        <label>Từ:</label>
+                        <input type="date" name="tungay" class="form-control">
+                        <label>Đến:</label>
+                        <input type="date" name="denngay" class="form-control">
+                        <div style="text-align:center"><button type="submit" class="btn btn-primary">Quản lý bán hàng</button></div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <form action="{{route('quanlyluongnhanvien')}}" method="post">
+                        {{csrf_field()}}
+                        <label>Từ:</label>
+                        <input type="date" name="tungay" class="form-control">
+                        <label>Đến:</label>
+                        <input type="date" name="denngay" class="form-control">
+                        <div style="text-align:center"><button type="submit" class="btn btn-primary">Quản lý lương nhân viên</button></div>
+                    </form>
+                </div>
+            </div>
+
+            @if($kho!=null)
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">No.</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TÊN NGUYÊN LIỆU</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ĐƠN GIÁ</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ĐƠN VỊ TÍNH</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >SỐ LƯỢNG</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THÀNH TIỀN</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >NGÀY NHẬP</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >NGÀY HẾT</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TRẠNG THÁI</th>
+                                    {{-- <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THAO TÁC</th> --}}
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($kho as $key => $row)
+                                <tr class="odd">
+                                    <td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td>
+                                    <td>{{$row->tennguyenlieu}}</td>
+                                    <td>{{number_format("$row->dongia",0,",",".");}}</td>
+                                    <td>{{$row->donvitinh}}</td>
+                                    <td>{{number_format("$row->soluong",0,",",".");}}</td>
+                                    <td>{{number_format("$row->thanhtien",0,",",".");}}</td>
+                                    <td>{{$row->ngaynhap}}</td>
+                                    <td>{{$row->ngayhet}}</td>
+                                    @if($row->trangthai==1)
+                                        <td  bgcolor="lightgreen">Còn hàng</td>
+                                    @elseif($row->trangthai== 2)
+                                        <td  bgcolor="yellow">Sắp hết, cần kiểm tra</td>
+                                    @elseif($row->trangthai== 0)
+                                        <td  bgcolor="lightpink">Hết hàng</td>
+                                    @endif
+                                    {{-- <td>
+                                        @if($row->trangthai==1)
+                                        <a href="{{route('hethangkho',['id'=>$row->id])}}">Hết hàng</a><br>
+                                        @else
+                                        <a href="{{route('conhangkho',['id'=>$row->id])}}">Còn hàng</a><br>
+                                        @endif
+                                        <a href="{{route('deletekho',['id'=>$row->id])}}"
+                                            onclick="return confirm('Bạn có chắc chắn muốn xóa')";>Xóa kho</a>
+                                    </td> --}}
+                                </tr>
+                            @endforeach
+                            <tr>
+                                <th>Nhập hàng:<br>{{$tungay}}->{{$denngay}}</th>
+                                <th>{{number_format("$tong",0,",",".");}}</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
+                            <thead>
+                                <tr role="row">
+                                    <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THÁNG 1</th>
+                                    <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THÁNG 2</th>
+                                    <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THÁNG 3</th>
+                                    <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THÁNG 4</th>
+                                    <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THÁNG 5</th>
+                                    <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THÁNG 6</th>
+                                    <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THÁNG 7</th>
+                                    <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THÁNG 8</th>
+                                    <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THÁNG 9</th>
+                                    <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THÁNG 10</th>
+                                    <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THÁNG 11</th>
+                                    <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THÁNG 12</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd">
+                                    @foreach ($total as $key => $row)
+                                    <td>{{number_format("$row",0,",",".");}}</td>
+                                    @endforeach
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+            <canvas id="myChart">></canvas>
+            </div>
+            @endif
+            
+
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+<script>
+	var password = document.getElementById("password"),
+	confirm_password = document.getElementById("confirm_password");
+
+	function validatePassword(){
+		if(password.value != confirm_password.value) {
+			confirm_password.setCustomValidity("2 mật khẩu khâc nhau");
+		}
+		else {
+			confirm_password.setCustomValidity('');
+		}
+	}
+	password.onchange = validatePassword;
+	confirm_password.onkeyup = validatePassword;
+</script>
+{{-- Ve bieu do --}}
+@if($kho != null)
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script>
+    var xValues = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
+    var yValues = [{{$thang1}},{{$thang2}},{{$thang3}},{{$thang4}},{{$thang5}},{{$thang6}},{{$thang7}},{{$thang8}},{{$thang9}},{{$thang10}},{{$thang11}},{{$thang12}},0];
+    var barColors = ["red", "orange","yellow","green","blue","brown","purple","pink","red","orange","yellow","green"];
+    
+    new Chart("myChart", {
+      type: "bar",
+      data: {
+        labels: xValues,
+        datasets: [{
+          backgroundColor: barColors,
+          data: yValues
+        }]
+      },
+      options: {
+        legend: {display: false},
+        title: {
+          display: true,
+          text: "Thống kê theo tháng trong năm"
+        }
+      }
+    });
+</script>
+@endif
+{{-- Ve bieu do end--}}
+@endsection
