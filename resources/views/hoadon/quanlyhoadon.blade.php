@@ -82,7 +82,7 @@
 							</thead>
 							<tbody>
 							@foreach ($hoadonluu as $key => $row)
-                                @if($row->thoigian != null)
+                                @if($row->tenkhuvuc != null)
 								<tr class="odd">
 									<td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td>
 									<td>{{$row->idhoadon}}</td>

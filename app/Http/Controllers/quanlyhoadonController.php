@@ -39,7 +39,7 @@ class quanlyhoadonController extends Controller
         $hoadonluu1 = DB::table('hoadonluu')
                     ->where('idquan',$thanhvien->idquan)
                     ->where('idhoadon',$id)
-                    ->whereNotNull('thoigian')
+                    ->whereNotNull('thanhtien')
                     ->first();
         $hoadonluu2 = DB::table('hoadonluu')
                     ->where('idquan',$thanhvien->idquan)

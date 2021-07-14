@@ -64,6 +64,7 @@
 		// "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],//cac chuc nang khac
 		"buttons": ["colvis"]
 		}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
 		$('#example2').DataTable({
 		"paging": true,
 		"lengthChange": true,
@@ -75,7 +76,20 @@
 		// "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
 		"buttons": ["colvis"]
 		}).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+
 		$('#example3').DataTable({
+		"paging": true,
+		"lengthChange": true,
+		"searching": true,
+		"ordering": true,
+		"info": true,
+		"autoWidth": false,
+		"responsive": true,
+		// "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+		"buttons": ["colvis"]
+		}).buttons().container().appendTo('#example3_wrapper .col-md-6:eq(0)');
+
+		$('#example4').DataTable({
 		"paging": false,
 		"lengthChange": false,
 		"searching": false,
@@ -85,7 +99,7 @@
 		"responsive": false,
 		// "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
 		"buttons": ["print"]
-		}).buttons().container().appendTo('#example3_wrapper .col-md-6:eq(0)');
+		}).buttons().container().appendTo('#example4_wrapper .col-md-6:eq(0)');
   	});
 </script>
 <!-- Nut tang giam so luong -->

@@ -561,6 +561,7 @@ class orderController extends Controller
             
             $hoadonsave['idquan'] = $idquan;
             $hoadonsave['idhoadon'] = $idhoadon;
+            $hoadonsave['thoigian'] = $thoigian;
             $hoadonsave['loaimon'] = $row->loaimon;
             $hoadonsave['tenmon'] = $row->tenmon;
             $hoadonsave['dongia'] = $row->dongia;
