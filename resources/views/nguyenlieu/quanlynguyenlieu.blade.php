@@ -59,9 +59,49 @@
 
 			<div class="col-sm-12">
 				<div class="col-md-12 mb-4 text-right">
-					<a style="width:44px" class="btn btn-primary" href="{{route('addnguyenlieu')}}">
-						<i class="fas fa-plus"></i></a>
+					
+					<button type="button" class="btn btn-primary" data-toggle="modal"
+						data-target="#exampleModalCenter">
+						Thêm nguyên liệu
+					</button>
+					<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+						aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLongTitle">Thêm nguyên liệu</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<form action="{{route('doaddnguyenlieu')}}" method="post">
+									<div class="modal-body">
+										{{csrf_field()}}
+										<div class="form-group">
+											<label>Tên nguyên liệu</label>
+											<input type="text" class="form-control" name="tennguyenlieu" required><br>
+											<label>Xuất xứ</label>
+											<input type="text" class="form-control" name="xuatxu" required><br>
+											<label>Đơn vị tính</label>
+											<input type="text" class="form-control" name="donvitinh" required><br>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Close</button>
+										<button type="submit" class="btn btn-primary">Thêm</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+
 				</div>
+
+				@if($errors->any())
+				<h3>{{$errors->first()}}</h3>
+				@endif
+
 				<div class="card">
 					<div class="card-body">
 						<table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">

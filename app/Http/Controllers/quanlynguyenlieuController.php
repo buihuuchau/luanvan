@@ -31,16 +31,16 @@ class quanlynguyenlieuController extends Controller
         return view('nguyenlieu.quanlynguyenlieu',compact('thanhvien','nguyenlieu','kho','sudung'));
     }
 
-    public function addnguyenlieu(){
-        $ssidthanhvien = Session::get('ssidthanhvien');
+    // public function addnguyenlieu(){
+    //     $ssidthanhvien = Session::get('ssidthanhvien');
 
-        $thanhvien = DB::table('thanhvien')
-            ->where('thanhvien.id',$ssidthanhvien)
-            ->join('quan','thanhvien.idquan','=','quan.id')
-            ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
-            ->first();
-        return view('nguyenlieu.addnguyenlieu',compact('thanhvien'));
-    }
+    //     $thanhvien = DB::table('thanhvien')
+    //         ->where('thanhvien.id',$ssidthanhvien)
+    //         ->join('quan','thanhvien.idquan','=','quan.id')
+    //         ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
+    //         ->first();
+    //     return view('nguyenlieu.addnguyenlieu',compact('thanhvien'));
+    // }
 
     public function doaddnguyenlieu(Request $request){
         $ssidthanhvien = Session::get('ssidthanhvien');

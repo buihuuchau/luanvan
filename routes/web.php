@@ -125,10 +125,10 @@ Route::prefix('/')->group(function () {
         'as' => 'quanlykhachhang',
         'uses' => 'App\Http\Controllers\quanlykhachhangController@quanlykhachhang'
     ]);
-    Route::get('/addkhachhang', [
-        'as' => 'addkhachhang',
-        'uses' => 'App\Http\Controllers\quanlykhachhangController@addkhachhang'
-    ]);
+    // Route::get('/addkhachhang', [
+    //     'as' => 'addkhachhang',
+    //     'uses' => 'App\Http\Controllers\quanlykhachhangController@addkhachhang'
+    // ]);
     Route::post('/doaddkhachhang', [
         'as' => 'doaddkhachhang',
         'uses' => 'App\Http\Controllers\quanlykhachhangController@doaddkhachhang'
@@ -150,10 +150,10 @@ Route::prefix('/')->group(function () {
         'as' => 'quanlykhuvuc',
         'uses' => 'App\Http\Controllers\quanlykhuvucController@quanlykhuvuc'
     ]);
-    Route::get('/addkhuvuc', [
-        'as' => 'addkhuvuc',
-        'uses' => 'App\Http\Controllers\quanlykhuvucController@addkhuvuc'
-    ]);
+    // Route::get('/addkhuvuc', [
+    //     'as' => 'addkhuvuc',
+    //     'uses' => 'App\Http\Controllers\quanlykhuvucController@addkhuvuc'
+    // ]);
     Route::post('/doaddkhuvuc', [
         'as' => 'doaddkhuvuc',
         'uses' => 'App\Http\Controllers\quanlykhuvucController@doaddkhuvuc'
@@ -187,10 +187,10 @@ Route::prefix('/')->group(function () {
         'as' => 'quanlyban',
         'uses' => 'App\Http\Controllers\quanlybanController@quanlyban'
     ]);
-    Route::get('/addban', [
-        'as' => 'addban',
-        'uses' => 'App\Http\Controllers\quanlybanController@addban'
-    ]);
+    // Route::get('/addban', [
+    //     'as' => 'addban',
+    //     'uses' => 'App\Http\Controllers\quanlybanController@addban'
+    // ]);
     Route::post('/doaddban', [
         'as' => 'doaddban',
         'uses' => 'App\Http\Controllers\quanlybanController@doaddban'
@@ -224,10 +224,10 @@ Route::prefix('/')->group(function () {
         'as' => 'quanlynguyenlieu',
         'uses' => 'App\Http\Controllers\quanlynguyenlieuController@quanlynguyenlieu'
     ]);
-    Route::get('/addnguyenlieu', [
-        'as' => 'addnguyenlieu',
-        'uses' => 'App\Http\Controllers\quanlynguyenlieuController@addnguyenlieu'
-    ]);
+    // Route::get('/addnguyenlieu', [
+    //     'as' => 'addnguyenlieu',
+    //     'uses' => 'App\Http\Controllers\quanlynguyenlieuController@addnguyenlieu'
+    // ]);
     Route::post('/doaddnguyenlieu', [
         'as' => 'doaddnguyenlieu',
         'uses' => 'App\Http\Controllers\quanlynguyenlieuController@doaddnguyenlieu'
@@ -261,10 +261,10 @@ Route::prefix('/')->group(function () {
         'as' => 'quanlykho',
         'uses' => 'App\Http\Controllers\quanlykhoController@quanlykho'
     ]);
-    Route::get('/addkho', [
-        'as' => 'addkho',
-        'uses' => 'App\Http\Controllers\quanlykhoController@addkho'
-    ]);
+    // Route::get('/addkho', [
+    //     'as' => 'addkho',
+    //     'uses' => 'App\Http\Controllers\quanlykhoController@addkho'
+    // ]);
     Route::post('/doaddkho', [
         'as' => 'doaddkho',
         'uses' => 'App\Http\Controllers\quanlykhoController@doaddkho'
@@ -290,10 +290,10 @@ Route::prefix('/')->group(function () {
         'as' => 'quanlycalam',
         'uses' => 'App\Http\Controllers\quanlycalamController@quanlycalam'
     ]);
-    Route::get('/addcalam', [
-        'as' => 'addcalam',
-        'uses' => 'App\Http\Controllers\quanlycalamController@addcalam'
-    ]);
+    // Route::get('/addcalam', [
+    //     'as' => 'addcalam',
+    //     'uses' => 'App\Http\Controllers\quanlycalamController@addcalam'
+    // ]);
     Route::post('/doaddcalam', [
         'as' => 'doaddcalam',
         'uses' => 'App\Http\Controllers\quanlycalamController@doaddcalam'
@@ -393,10 +393,10 @@ Route::prefix('/')->group(function () {
         'as' => 'quanlythucdon',
         'uses' => 'App\Http\Controllers\quanlythucdonController@quanlythucdon'
     ]);
-    Route::get('/addthucdon', [
-        'as' => 'addthucdon',
-        'uses' => 'App\Http\Controllers\quanlythucdonController@addthucdon'
-    ]);
+    // Route::get('/addthucdon', [
+    //     'as' => 'addthucdon',
+    //     'uses' => 'App\Http\Controllers\quanlythucdonController@addthucdon'
+    // ]);
     Route::post('/doaddthucdon', [
         'as' => 'doaddthucdon',
         'uses' => 'App\Http\Controllers\quanlythucdonController@doaddthucdon'

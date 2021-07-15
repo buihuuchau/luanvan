@@ -21,6 +21,12 @@ class quanlykhoController extends Controller
                     ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
                     ->first();
 
+        $nguyenlieu = DB::table('nguyenlieu')
+                    ->orderBy('tennguyenlieu')
+                    ->where('idquan',$thanhvien->idquan)
+                    ->where('hidden',0)
+                    ->get();
+
         $kho = DB::table('kho')
                     ->orderBy('id','desc')
                     ->where('kho.idquan', $thanhvien->idquan)
@@ -28,26 +34,26 @@ class quanlykhoController extends Controller
                     ->select('kho.*','nguyenlieu.tennguyenlieu','nguyenlieu.xuatxu','nguyenlieu.donvitinh')
                     ->get();
 
-        return view('kho.quanlykho', compact('thanhvien','kho'));
+        return view('kho.quanlykho', compact('thanhvien','nguyenlieu','kho'));
     }
 
-    public function addkho(){
-        $ssidthanhvien = Session::get('ssidthanhvien');
+    // public function addkho(){
+    //     $ssidthanhvien = Session::get('ssidthanhvien');
 
-        $thanhvien = DB::table('thanhvien')
-                    ->where('thanhvien.id',$ssidthanhvien)
-                    ->join('quan', 'thanhvien.idquan', '=', 'quan.id')
-                    ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
-                    ->first();
+    //     $thanhvien = DB::table('thanhvien')
+    //                 ->where('thanhvien.id',$ssidthanhvien)
+    //                 ->join('quan', 'thanhvien.idquan', '=', 'quan.id')
+    //                 ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
+    //                 ->first();
 
-        $nguyenlieu = DB::table('nguyenlieu')
-                    ->orderBy('tennguyenlieu')
-                    ->where('idquan',$thanhvien->idquan)
-                    ->where('hidden',0)
-                    ->get();
+    //     $nguyenlieu = DB::table('nguyenlieu')
+    //                 ->orderBy('tennguyenlieu')
+    //                 ->where('idquan',$thanhvien->idquan)
+    //                 ->where('hidden',0)
+    //                 ->get();
 
-        return view('kho.addkho',compact('thanhvien','nguyenlieu'));
-    }
+    //     return view('kho.addkho',compact('thanhvien','nguyenlieu'));
+    // }
 
     public function doaddkho(Request $request){
         Carbon::setLocale('vi');

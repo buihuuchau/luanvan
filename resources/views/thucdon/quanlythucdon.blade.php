@@ -59,9 +59,65 @@
 
 			<div class="col-sm-12">
 				<div class="col-md-12 mb-4 text-right">
-					<a style="width:44px" class="btn btn-primary" href="{{route('addthucdon')}}">
-						<i class="fas fa-plus"></i></a>
+					
+					<button type="button" class="btn btn-primary" data-toggle="modal"
+					data-target="#exampleModalCenter">
+					Thêm thực đơn
+					</button>
+					<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+						aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLongTitle">Thêm thực đơn</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<form action="{{route('doaddthucdon')}}" method="post" enctype="multipart/form-data">
+									<div class="modal-body">
+										{{csrf_field()}}
+										<div class="form-group">
+											<label>Chọn loại món</label>
+											<select class="form-control" name="loaimon">
+												<option value="1">Món nước</option>
+												<option value="2">Món ăn</option>
+												<option value="3">Món phụ</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label>Tên món</label>
+											<input type="text" class="form-control" name="tenmon" required>
+										</div>
+										<div class="form-group">
+											<label>Đơn giá</label>
+											<input type="number" class="form-control" name="dongia" required>
+										</div>
+										<div class="form-group">
+											<label>Hình ảnh món:</label>
+											<input required="true" type="file" class="form-control" name="hinhmon">
+										</div>
+										<div class="form-group">
+											<label>Mô tả</label>
+											<input type="text" class="form-control" name="mota" required><br>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Close</button>
+										<button type="submit" class="btn btn-primary">Thêm</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+
 				</div>
+
+				@if($errors->any())
+				<h3>{{$errors->first()}}</h3>
+				@endif
+
 				<div class="card">
 					<div class="card-body">
 						<table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">

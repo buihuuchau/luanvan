@@ -58,10 +58,6 @@
         <div class="row">
 
 			<div class="col-sm-12">
-				<div class="col-md-12 mb-4 text-right">
-					<a style="width:44px" class="btn btn-primary" href="{{route('addban')}}">
-						<i class="fas fa-plus"></i></a>
-				</div>
 				<div class="card">
 					<div class="card-body">
 						<table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">

@@ -32,17 +32,17 @@ class quanlythucdonController extends Controller
         return view('thucdon.quanlythucdon', compact('thanhvien','thucdon','chitiet','sudung'));
     }
 
-    public function addthucdon(){
-        $ssidthanhvien = Session::get('ssidthanhvien');
+    // public function addthucdon(){
+    //     $ssidthanhvien = Session::get('ssidthanhvien');
 
-        $thanhvien = DB::table('thanhvien')
-                    ->where('thanhvien.id',$ssidthanhvien)
-                    ->join('quan', 'thanhvien.idquan', '=', 'quan.id')
-                    ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
-                    ->first();
+    //     $thanhvien = DB::table('thanhvien')
+    //                 ->where('thanhvien.id',$ssidthanhvien)
+    //                 ->join('quan', 'thanhvien.idquan', '=', 'quan.id')
+    //                 ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
+    //                 ->first();
 
-        return view('thucdon.addthucdon',compact('thanhvien'));
-    }
+    //     return view('thucdon.addthucdon',compact('thanhvien'));
+    // }
 
     public function doaddthucdon(Request $request){
         $ssidthanhvien = Session::get('ssidthanhvien');

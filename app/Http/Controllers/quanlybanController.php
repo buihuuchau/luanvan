@@ -21,6 +21,12 @@ class quanlybanController extends Controller
                     ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
                     ->first();
 
+        $khuvuc = DB::table('khuvuc')
+                    ->orderBy('tenkhuvuc')
+                    ->where('idquan',$thanhvien->idquan)
+                    ->where('hidden',0)
+                    ->get();
+
         $ban = DB::table('ban')
                     ->orderBy('tenkhuvuc')
                     ->orderBy('tenban')
@@ -34,26 +40,26 @@ class quanlybanController extends Controller
                     ->get();
         $sudung = null;
 
-        return view('ban.quanlyban', compact('thanhvien','ban','hoadon','sudung'));
+        return view('ban.quanlyban', compact('thanhvien','khuvuc','ban','hoadon','sudung'));
     }
 
-    public function addban(){
-        $ssidthanhvien = Session::get('ssidthanhvien');
+    // public function addban(){
+    //     $ssidthanhvien = Session::get('ssidthanhvien');
 
-        $thanhvien = DB::table('thanhvien')
-                    ->where('thanhvien.id',$ssidthanhvien)
-                    ->join('quan', 'thanhvien.idquan', '=', 'quan.id')
-                    ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
-                    ->first();
+    //     $thanhvien = DB::table('thanhvien')
+    //                 ->where('thanhvien.id',$ssidthanhvien)
+    //                 ->join('quan', 'thanhvien.idquan', '=', 'quan.id')
+    //                 ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
+    //                 ->first();
 
-        $khuvuc = DB::table('khuvuc')
-                    ->orderBy('tenkhuvuc')
-                    ->where('idquan',$thanhvien->idquan)
-                    ->where('hidden',0)
-                    ->get();
+    //     $khuvuc = DB::table('khuvuc')
+    //                 ->orderBy('tenkhuvuc')
+    //                 ->where('idquan',$thanhvien->idquan)
+    //                 ->where('hidden',0)
+    //                 ->get();
 
-        return view('ban.addban',compact('thanhvien','khuvuc'));
-    }
+    //     return view('ban.addban',compact('thanhvien','khuvuc'));
+    // }
 
     public function doaddban(Request $request){
         $ssidthanhvien = Session::get('ssidthanhvien');

@@ -28,17 +28,17 @@ class quanlykhachhangController extends Controller
         return view('khachhang.quanlykhachhang', compact('thanhvien','khachhang'));
     }
 
-    public function addkhachhang(){
-        $ssidthanhvien = Session::get('ssidthanhvien');
+    // public function addkhachhang(){
+    //     $ssidthanhvien = Session::get('ssidthanhvien');
 
-        $thanhvien = DB::table('thanhvien')
-                    ->where('thanhvien.id',$ssidthanhvien)
-                    ->join('quan', 'thanhvien.idquan', '=', 'quan.id')
-                    ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
-                    ->first();
+    //     $thanhvien = DB::table('thanhvien')
+    //                 ->where('thanhvien.id',$ssidthanhvien)
+    //                 ->join('quan', 'thanhvien.idquan', '=', 'quan.id')
+    //                 ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
+    //                 ->first();
 
-        return view('khachhang.addkhachhang',compact('thanhvien'));
-    }
+    //     return view('khachhang.addkhachhang',compact('thanhvien'));
+    // }
 
     public function doaddkhachhang(Request $request){
         $ssidthanhvien = Session::get('ssidthanhvien');
