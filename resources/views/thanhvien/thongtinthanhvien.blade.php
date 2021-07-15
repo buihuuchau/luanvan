@@ -79,10 +79,15 @@
 							<h2 class="text-center">Thông tin chi tiết</h2>
 						</div>
 						<div class="panel-body">
+							<div class="row">
+								<img src="{{$thanhvien->hinhtv}}" alt="" width="300px" height="300px" style="margin-right: 100px">
+								<form action="{{route('chitietluong')}}" method="get">
+									<input type="hidden" name="id" value="{{$thanhvien->id}}">
+									<input type="image" src="{{asset('storage/hinhanh/lichcongtac.jpg')}}" alt="Submit" width="200px" height="200px">
+								</form>
+							</div>
 							<form action="{{route('suathongtinthanhvien')}}" method="post" enctype="multipart/form-data">
 								{{csrf_field()}}
-								<img src="{{$thanhvien->hinhtv}}" alt="" width="30%" height="30%">
-
 								<div class="form-group">
 								<label>Họ tên thành viên:</label>
 								<input required="true" type="text" class="form-control" name="hoten" value="{{$thanhvien->hoten}}">
@@ -154,7 +159,7 @@
 								<div class="col text-center">
 								<button class="btn btn-danger">Lưu chỉnh sửa</button>
 								</div>
-							</form>	
+							</form>
 						</div>
 					</div>
 					<br><br><br><br><br>

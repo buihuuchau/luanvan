@@ -143,7 +143,7 @@
 								</div>
 
 								<div class="form-group">
-								<label>Lương:</label>
+								<label>Lương/Buổi:</label>
 								<input required="true" type="number" class="form-control" name="luong" value="{{$thanhvien->luong}}">
 								</div>
 

@@ -549,9 +549,17 @@ Route::prefix('/')->group(function () {
         'as' => 'quanlybanhang',
         'uses' => 'App\Http\Controllers\quanlyngansachController@quanlybanhang'
     ]);
-    Route::post('/quanlyluongnhanvien', [
-        'as' => 'quanlyluongnhanvien',
-        'uses' => 'App\Http\Controllers\quanlyngansachController@quanlyluongnhanvien'
+    Route::post('/quanlyluong', [
+        'as' => 'quanlyluong',
+        'uses' => 'App\Http\Controllers\quanlyngansachController@quanlyluong'
+    ]);
+    Route::get('/chitietluong', [
+        'as' => 'chitietluong',
+        'uses' => 'App\Http\Controllers\quanlyngansachController@chitietluong'
+    ]);
+    Route::get('/xemchitietluong', [
+        'as' => 'xemchitietluong',
+        'uses' => 'App\Http\Controllers\quanlyngansachController@xemchitietluong'
     ]);
 });
 // QUAN LY NGAN SACH

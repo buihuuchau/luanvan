@@ -25,10 +25,12 @@ class quanlyngansachController extends Controller
 
         $kho = null;
         $hoadonluu = null;
+        $luong = null;
 
 
-        return view('ngansach.quanlyngansach',compact('thanhvien','kho','hoadonluu'));
+        return view('ngansach.quanlyngansach',compact('thanhvien','kho','hoadonluu','luong'));
     }
+
     public function quanlynhaphang(Request $request){
         $ssidthanhvien = Session::get('ssidthanhvien');
 
@@ -92,9 +94,10 @@ class quanlyngansachController extends Controller
 
 
         $hoadonluu = null;
+        $luong = null;
 
 
-        return view('ngansach.quanlyngansach', compact('thanhvien','kho','tong','tungay','denngay','total','hoadonluu',
+        return view('ngansach.quanlyngansach', compact('thanhvien','kho','tong','tungay','denngay','total','hoadonluu','luong',
             'thang1','thang2','thang3','thang4','thang5','thang6','thang7','thang8','thang9','thang10','thang11','thang12'));
     }
 
@@ -109,6 +112,7 @@ class quanlyngansachController extends Controller
 
 
         $kho = null;
+        $luong = null;
 
 
         $tungay = $request->tungay;
@@ -222,11 +226,128 @@ class quanlyngansachController extends Controller
         $tonghoadon = count($hoadonluu4);
 
         
-        return view('ngansach.quanlyngansach', compact('thanhvien','kho','hoadonluu','tonggiamgia','tongthanhtien','tungay','denngay','totalgiamgia','totalthanhtien',
+        return view('ngansach.quanlyngansach', compact('thanhvien','kho','hoadonluu','luong','tonggiamgia','tongthanhtien','tungay','denngay','totalgiamgia','totalthanhtien',
         'thang1giamgia','thang2giamgia','thang3giamgia','thang4giamgia','thang5giamgia','thang6giamgia',
         'thang7giamgia','thang8giamgia','thang9giamgia','thang10giamgia','thang11giamgia','thang12giamgia',
         'thang1thanhtien','thang2thanhtien','thang3thanhtien','thang4thanhtien','thang5thanhtien','thang6thanhtien',
         'thang7thanhtien','thang8thanhtien','thang9thanhtien','thang10thanhtien','thang11thanhtien','thang12thanhtien',
         'banchay','nhanvien','tongmon','tonghoadon'));
+    }
+
+    public function quanlyluong(Request $request){
+        $ssidthanhvien = Session::get('ssidthanhvien');
+
+        $thanhvien = DB::table('thanhvien')
+                    ->where('thanhvien.id',$ssidthanhvien)
+                    ->join('quan', 'thanhvien.idquan', '=', 'quan.id')
+                    ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
+                    ->first();
+
+
+        $kho = null;
+        $hoadonluu = null;
+
+
+        $tungay = $request->tungay;
+        $denngay = $request->denngay;
+        if($tungay==null){
+            $tungay = date('Y-m-01');
+        }
+        if($denngay==null){
+            $denngay = date('Y-m-t');
+        }
+
+
+        $luong = array();
+        $i = 0;
+        $thanhvien2 = DB::table('thanhvien')
+            ->where('thanhvien.idquan',$thanhvien->idquan)
+            ->join('vaitro', 'thanhvien.idvaitro', '=', 'vaitro.id')
+            ->select('thanhvien.*','vaitro.tenvaitro')
+            ->get();
+        foreach ($thanhvien2 as $key => $row){
+            $lichlamviec = DB::table('lichlamviec')
+                ->where('lichlamviec.idquan',$row->idquan)
+                ->where('idthanhvien',$row->id)
+                ->where('diemdanh',1)
+                ->whereBetween('thoigian',[$tungay,$denngay])
+                ->get();
+            $lichlamviec2 = DB::table('lichlamviec')
+                ->where('lichlamviec.idquan',$row->idquan)
+                ->where('idthanhvien',$row->id)
+                ->where('diemdanh',0)
+                ->whereBetween('thoigian',[$tungay,$denngay])
+                ->get();
+            $luong[$i]['id'] = $row->id;
+            $luong[$i]['hoten'] = $row->hoten;
+            $luong[$i]['chucvu'] = $row->tenvaitro;
+            $luong[$i]['comat'] = count($lichlamviec);
+            $luong[$i]['vang'] = count($lichlamviec2);
+            $luong[$i]['sobuoi'] = count($lichlamviec) + count($lichlamviec2);
+            $luong[$i]['thulao'] = $row->luong * count($lichlamviec);
+            $i++;
+        }
+
+
+        return view('ngansach.quanlyngansach', compact('thanhvien','kho','hoadonluu','luong','tungay','denngay'));
+    }
+
+    public function chitietluong(Request $request){
+        $ssidthanhvien = Session::get('ssidthanhvien');
+        $id = $request->id;
+        
+        $thanhvien = DB::table('thanhvien')
+            ->where('thanhvien.id',$ssidthanhvien)
+            ->join('quan','thanhvien.idquan','=','quan.id')
+            ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
+            ->first();
+        $khuvuc = DB::table('khuvuc')
+            ->where('idquan',$thanhvien->idquan)
+            ->where('hidden',0)
+            ->get();
+        $calam = DB::table('calam')
+            ->where('idquan',$thanhvien->idquan)
+            ->where('hidden',0)
+            ->get();
+        $lichlamviec = DB::table('lichlamviec')
+            ->orderBy('hoten')
+            ->where('lichlamviec.idquan',$thanhvien->idquan)
+            ->where('thoigian',date('Y-m-d'))
+            ->where('idthanhvien',$id)
+            ->join('thanhvien', 'lichlamviec.idthanhvien','=','thanhvien.id')
+            ->select('lichlamviec.*','thanhvien.hoten')
+            ->get();
+        $date = date('Y-m-d');
+        return view('ngansach.chitietluong',compact('thanhvien','khuvuc','calam','lichlamviec','date','id'));
+    }
+
+    public function xemchitietluong(Request $request){
+        $ssidthanhvien = Session::get('ssidthanhvien');
+        $date = $request->thoigian;
+        $id = $request->id;
+
+        $thanhvien = DB::table('thanhvien')
+            ->where('thanhvien.id',$ssidthanhvien)
+            ->join('quan','thanhvien.idquan','=','quan.id')
+            ->select('thanhvien.*','quan.hinhquan','quan.tenquan')
+            ->first();
+        $khuvuc = DB::table('khuvuc')
+            ->where('idquan',$thanhvien->idquan)
+            ->where('hidden',0)
+            ->get();
+        $calam = DB::table('calam')
+            ->where('idquan',$thanhvien->idquan)
+            ->where('hidden',0)
+            ->get();
+        $lichlamviec = DB::table('lichlamviec')
+            ->orderBy('hoten')
+            ->where('lichlamviec.idquan',$thanhvien->idquan)
+            ->where('thoigian',$date)
+            ->where('idthanhvien',$id)
+            ->join('thanhvien', 'lichlamviec.idthanhvien','=','thanhvien.id')
+            ->select('lichlamviec.*','thanhvien.hoten')
+            ->get();
+        
+        return view('ngansach.chitietluong',compact('thanhvien','khuvuc','calam','lichlamviec','date','id'));
     }
 }

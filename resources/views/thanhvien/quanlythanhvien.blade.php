@@ -66,7 +66,7 @@
 								<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ĐỊA CHỈ</th>
 								<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >SỐ ĐIỆN THOẠI</th>
 								<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >NGÀY VÀO LÀM</th>
-								<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >LƯƠNG</th>
+								<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >LƯƠNG/BUỔI</th>
 								<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >VAI TRÒ</th>
 								<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TRẠNG THÁI</th>
 								<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THAO TÁC</th>

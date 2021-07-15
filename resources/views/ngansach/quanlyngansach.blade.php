@@ -83,7 +83,7 @@
             </div>
             <div class="col-sm-4">
                 <div class="card">
-                    <form action="{{route('quanlyluongnhanvien')}}" method="post">
+                    <form action="{{route('quanlyluong')}}" method="post">
                         {{csrf_field()}}
                         <label>Từ:</label>
                         <input type="date" name="tungay" class="form-control">
@@ -306,11 +306,11 @@
                             @foreach ($banchay as $key => $row)
                                 <tr class="odd">
                                     <td>{{$row['tenmon']}}</td>
-                                    <td>{{$row['soluong']}}</td>
+                                    <td>{{number_format($row['soluong'],0,",",".")}}</td>
                                     @if($tongmon == 0)
                                     <td>0%</td>
                                     @else
-                                    <td>{{$row['soluong']/$tongmon*100}}%</td>
+                                    <td>{{number_format($row['soluong']/$tongmon*100,2,",",".")}}%</td>
                                     @endif
                                 </tr>
                             @endforeach
@@ -336,11 +336,11 @@
                             @foreach ($nhanvien as $key => $row)
                                 <tr class="odd">
                                     <td>{{$row['tenthanhvien']}}</td>
-                                    <td>{{$row['sohoadon']}}</td>
+                                    <td>{{number_format($row['sohoadon'],0,",",".")}}</td>
                                     @if($tonghoadon == 0)
                                     <td>0%</td>
                                     @else
-                                    <td>{{$row['sohoadon']/$tonghoadon*100}}%</td>
+                                    <td>{{number_format($row['sohoadon']/$tonghoadon*100,2,",",".")}}%</td>
                                     @endif
                                 </tr>
                             @endforeach
@@ -352,6 +352,63 @@
             
             @endif        
             {{-- xuly quanlybanhang --}}
+
+
+            {{-- xuly quanlyluongnhanvien --}}
+            @if($luong!=null)
+            <div class="col-sm-12"><h1 style="text-align:center">Thống kê lương nhân viên</h1></div>
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">No.</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >HỌ TÊN</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >CHỨC VỤ</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >CÓ MẶT</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >VẮNG</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TỔNG SỐ BUỔI</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >LƯƠNG</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THAO TÁC</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($luong as $key => $row)
+                                <tr class="odd">
+                                    <td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td>
+                                    <td>{{$row['hoten']}}</td>
+                                    <td>{{$row['chucvu']}}</td>
+                                    <td>{{$row['comat']}}</td>
+                                    <td>{{$row['vang']}}</td>
+                                    <td>{{number_format($row['sobuoi'],0,",",".")}}</td>
+                                    <td>{{number_format($row['thulao'],0,",",".")}}</td>
+                                    <td>
+                                        <form action="{{route('chitietluong')}}" method="get">
+                                            {{csrf_field()}}
+                                            <input type="hidden" name="id" value="{{$row['id']}}">
+                                            <button type="submit" class="btn btn-success">Xem chi tiết</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            <tr>
+                                <th>Tính lương:<br>{{$tungay}}->{{$denngay}}</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            @endif
+            {{-- xuly quanlyluongnhanvien --}}
 
             
 
