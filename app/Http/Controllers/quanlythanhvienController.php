@@ -18,6 +18,7 @@ class quanlythanhvienController extends Controller
                 ->where('id',$ssidquan)
                 ->first();
         $thanhvien = DB::table('thanhvien')
+                    ->orderBy('hoten')
                     ->where('thanhvien.idquan', $ssidquan)
                     ->join('vaitro', 'thanhvien.idvaitro', '=', 'vaitro.id')
                     ->select('thanhvien.*','vaitro.tenvaitro')
