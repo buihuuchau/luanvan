@@ -56,33 +56,27 @@
       <div class="container-fluid">
         <div class="row">
 
+            <div class="col-md-12"><h1 style="text-align:center">MENU</h1></div>
             <div class="col-sm-12">
 				<div class="card">
 					<div class="card-body">
 						<table id="example2" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example2_info">
 							<thead>
 								<tr role="row">
-									<th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending">No.</th>
-									<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" >LOẠI MÓN</th>
+									{{-- <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending">No.</th> --}}
 									<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" >TÊN MÓN</th>
 									<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" >ĐƠN GIÁ</th>
 									<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" >THAO TÁC</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" >LOẠI MÓN</th>
 								</tr>
 							</thead>
 							<tbody>
 							@foreach ($thucdon as $key => $row)
 								<tr class="odd">
-									<td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td>
-                                    @if($row->loaimon==1)
-                                    <td>Món Nước</td>
-                                    @elseif($row->loaimon==2)
-                                    <td>Món Ăn</td>
-                                    @elseif($row->loaimon==3)
-                                    <td>Món phụ</td>
-                                    @endif
+									{{-- <td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td> --}}
 									<td>{{$row->tenmon}}</td>
 									<td>{{$row->dongia}}</td>
-									<td class="row">
+									<td>
                                         <form action="{{route('datmon')}}" method="get">
                                             {{csrf_field()}}
                                             <input type="hidden" name="id" value="{{$id}}"><!--idhoadon-->
@@ -91,40 +85,11 @@
                                                 <input class="minus is-form" type="button" value="-">
                                                 <input aria-label="quantity" class="input-qty" max="100" min="1" name="soluong" type="number" value="1">
                                                 <input class="plus is-form" type="button" value="+">
-                                                <input type="text" name="ghichu" placeholder="Ghi chú" class="small">
+                                                <input type="text" name="ghichu" style="width:100px">
                                                 <button type="submit" class="btn btn-primary">Đặt món</button>
                                             </div>
                                         </form>
 									</td>
-								</tr>
-							@endforeach
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-            
-            @if($chitiet!=null)
-            <div class="col-sm-12">
-				<div class="card">
-					<div class="card-body">
-						<table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
-							<thead>
-								<tr role="row">
-									<th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">No.</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >LOẠI MÓN</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TÊN MÓN</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ĐƠN GIÁ</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >SỐ LƯỢNG</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >GIÁ</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >GHI CHÚ</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TRẠNG THÁI</th>
-								</tr>
-							</thead>
-							<tbody>
-							@foreach ($chitiet as $key => $row)
-								<tr class="odd">
-									<td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td>
                                     @if($row->loaimon==1)
                                     <td>Món Nước</td>
                                     @elseif($row->loaimon==2)
@@ -132,10 +97,37 @@
                                     @elseif($row->loaimon==3)
                                     <td>Món phụ</td>
                                     @endif
+								</tr>
+							@endforeach
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+            <div class="col-md-12"><h1 style="text-align:center">Các món đã order</h1></div>
+            @if($chitiet!=null)
+            <div class="col-sm-12">
+				<div class="card">
+					<div class="card-body">
+						<table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
+							<thead>
+								<tr role="row">
+									{{-- <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">No.</th> --}}
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TÊN MÓN</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >SỐ LƯỢNG</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >GHI CHÚ</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TRẠNG THÁI</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >LOẠI MÓN</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ĐƠN GIÁ</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >GIÁ</th>
+								</tr>
+							</thead>
+							<tbody>
+							@foreach ($chitiet as $key => $row)
+								<tr class="odd">
+									{{-- <td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td> --}}
 									<td>{{$row->tenmon}}</td>
-									<td>{{$row->dongia}}</td>
 									<td>{{$row->soluong}}</td>
-									<td>{{$row->gia}}</td>
                                     @if ($row->trangthai==1)
 									<td bgcolor="green" style="color:white">{{$row->ghichu}}</></td>
                                     @elseif ($row->trangthai==0)
@@ -168,6 +160,15 @@
                                         </form>
                                         @endif
 									</td>
+                                    @if($row->loaimon==1)
+                                    <td>Món Nước</td>
+                                    @elseif($row->loaimon==2)
+                                    <td>Món Ăn</td>
+                                    @elseif($row->loaimon==3)
+                                    <td>Món phụ</td>
+                                    @endif
+									<td>{{$row->dongia}}</td>
+									<td>{{$row->gia}}</td>
 								</tr>
 							@endforeach
 							</tbody>
@@ -187,5 +188,5 @@
 
 @endsection
 <html>   
-   <body onload = "JavaScript:AutoRefresh(18000);"></body>
+   <body onload = "JavaScript:AutoRefresh(180000);"></body>
 </html>

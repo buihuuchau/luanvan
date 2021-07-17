@@ -122,8 +122,8 @@
                                     role="grid" aria-describedby="example1_info">
                                     <thead>
                                         <tr role="row">
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
-                                                rowspan="1" colspan="1" aria-sort="ascending">No.</th>
+                                            {{-- <th class="sorting sorting_asc" tabindex="0" aria-controls="example1"
+                                                rowspan="1" colspan="1" aria-sort="ascending">No.</th> --}}
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
                                                 colspan="1">HỌ TÊN</th>
                                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1"
@@ -139,7 +139,7 @@
                                     <tbody>
                                         @foreach ($khachhang as $key => $row)
                                             <tr class="odd">
-                                                <td class="dtr-control sorting_1" tabindex="0">{{ $key + 1 }}</td>
+                                                {{-- <td class="dtr-control sorting_1" tabindex="0">{{ $key + 1 }}</td> --}}
                                                 <td>{{ $row->hotenkh }}</td>
                                                 <td>{{ $row->sdt }}</td>
                                                 <td>{{ $row->diem }}</td>

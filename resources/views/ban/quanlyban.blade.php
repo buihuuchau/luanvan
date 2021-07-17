@@ -111,21 +111,20 @@
 						<table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
 							<thead>
 								<tr role="row">
-									<th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">No.</th>
+									{{-- <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">No.</th> --}}
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TÊN KHU VỰC</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TÊN BÀN</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TRẠNG THÁI</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ẨN / HIỆN</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THAO TÁC</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TRẠNG THÁI</th>
 								</tr>
 							</thead>
 							<tbody>
 							@foreach ($ban as $key => $row)
 								<tr class="odd">
-									<td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td>
+									{{-- <td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td> --}}
 									<td>{{$row->tenkhuvuc}}</td>
 									<td>{{$row->tenban}}</td>
-									<td>{{$row->trangthai}}</td>
 									@foreach ($hoadon as $key2 => $row2)
 										<?php	if($row2->idban==$row->id)	$sudung = $row->id;	?>				
 									@endforeach
@@ -151,6 +150,7 @@
 											onclick="return confirm('Bạn có chắc chắn muốn xóa')";>Xóa bàn</a>
 										@endif
 									</td>
+									<td>{{$row->trangthai}}</td>
 								</tr>
 							@endforeach
 							</tbody>

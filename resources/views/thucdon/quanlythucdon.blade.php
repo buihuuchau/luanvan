@@ -123,28 +123,20 @@
 						<table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
 							<thead>
 								<tr role="row">
-									<th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">No.</th>
-									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >LOẠI MÓN</th>
+									{{-- <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">No.</th> --}}
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TÊN MÓN</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ĐƠN GIÁ</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >HÌNH ẢNH</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >MÔ TẢ</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >ẨN / HIỆN</th>
+									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >LOẠI MÓN</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THAO TÁC</th>
 								</tr>
 							</thead>
 							<tbody>
 							@foreach ($thucdon as $key => $row)
 								<tr class="odd">
-									<td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td>
-									@if ($row->loaimon==1)
-										<td>Món nước</td>
-									@elseif($row->loaimon==2)
-										<td>Món ăn</td>
-									@elseif($row->loaimon==3)
-										<td>Món phụ</td>
-									@endif
-									
+									{{-- <td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td> --}}
 									<td>{{$row->tenmon}}</td>
 									<td>{{number_format("$row->dongia",0,",",".");}}</td>
 									<td><img src="{{$row->hinhmon}}" alt="" width="40px" height="60px"></td>
@@ -174,6 +166,13 @@
 											onclick="return confirm('Bạn có chắc chắn muốn xóa')";>Xóa thực đơn</a>
 										@endif
 									</td>
+									@if ($row->loaimon==1)
+										<td>Món nước</td>
+									@elseif($row->loaimon==2)
+										<td>Món ăn</td>
+									@elseif($row->loaimon==3)
+										<td>Món phụ</td>
+									@endif
 								</tr>
 							@endforeach
 							</tbody>

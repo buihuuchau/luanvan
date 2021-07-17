@@ -57,7 +57,7 @@
 						<table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
 							<thead>
 								<tr role="row">
-									<th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">No.</th>
+									{{-- <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">No.</th> --}}
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >TÊN VAI TRÒ</th>
 									<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >THAO TÁC</th>
 								</tr>
@@ -65,7 +65,7 @@
 							<tbody>
 							@foreach ($vaitro as $key => $row)
 								<tr class="odd">
-									<td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td>
+									{{-- <td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td> --}}
 									<td>{{$row->tenvaitro}}</td>
 									@foreach ($thanhvien2 as $key2 => $row2)
 										<?php	if($row2->idvaitro==$row->id)	$sudung = $row->id;	?>				

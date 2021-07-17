@@ -58,7 +58,7 @@
 						<table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
 							<thead>
 							<tr role="row">
-								<th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">No.</th>
+								{{-- <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">No.</th> --}}
 								<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >HỌ TÊN</th>
 								<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >HÌNH ẢNH</th>
 								<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >NĂM SINH</th>
@@ -75,7 +75,7 @@
 							<tbody>
 							@foreach ($thanhvien as $key => $row)
 							<tr class="odd">
-								<td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td>
+								{{-- <td class="dtr-control sorting_1" tabindex="0">{{$key+1}}</td> --}}
 								<td>{{$row->hoten}}</td>
 								<td><img src="{{$row->hinhtv}}" alt="" width="40px" height="60px"></td>
 								<td>{{$row->namsinh}}</td>

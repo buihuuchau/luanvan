@@ -30,6 +30,14 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('dangxuatquan') }}" class="nav-link">
+                            <i class="fas fa-sign-out-alt">&nbsp;&nbsp;&nbsp;</i>
+                            <p>
+                                Đăng xuất
+                            </p>
+                        </a>
+                    </li>
                 @endif
 
                 @if($ssidthanhvien = Session::get('ssidthanhvien'))
@@ -178,6 +186,15 @@
                         @endif
 
                     @endforeach
+
+                    <li class="nav-item">
+                        <a href="{{ route('dangxuatthanhvien') }}" class="nav-link">
+                            <i class="fas fa-sign-out-alt">&nbsp;&nbsp;&nbsp;</i>
+                            <p>
+                                Đăng xuất
+                            </p>
+                        </a>
+                    </li>
 
                 @endif
             </ul>
