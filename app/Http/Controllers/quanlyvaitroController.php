@@ -60,12 +60,124 @@ class quanlyvaitroController extends Controller
             $vaitro['idquan'] = $ssidquan;
             $vaitro['tenvaitro'] = $request->tenvaitro;
             $id = DB::table('vaitro')->insertGetID($vaitro);
-            $quyen = $request->input('idquyen');
-            foreach ($quyen as $key => $row){
+
+            $idquyenban = $request->input('idquyenban');
+            if($idquyenban!=null){
+                foreach ($idquyenban as $key => $row){
                 $vaitro_quyen['idvaitro'] = $id;
                 $vaitro_quyen['idquyen'] = $row;
                 DB::table('vaitro_quyen')->insert($vaitro_quyen);
+                }
             }
+            
+            $idquyencalam = $request->input('idquyencalam');
+            if($idquyencalam!=null){
+                foreach ($idquyencalam as $key => $row){
+                $vaitro_quyen['idvaitro'] = $id;
+                $vaitro_quyen['idquyen'] = $row;
+                DB::table('vaitro_quyen')->insert($vaitro_quyen);
+                }
+            }
+
+            $idquyenhoadon = $request->input('idquyenhoadon');
+            if($idquyenhoadon!=null){
+                foreach ($idquyenhoadon as $key => $row){
+                $vaitro_quyen['idvaitro'] = $id;
+                $vaitro_quyen['idquyen'] = $row;
+                DB::table('vaitro_quyen')->insert($vaitro_quyen);
+                }
+            }
+
+            $idquyenkhachhang = $request->input('idquyenkhachhang');
+            if($idquyenkhachhang!=null){
+                foreach ($idquyenkhachhang as $key => $row){
+                $vaitro_quyen['idvaitro'] = $id;
+                $vaitro_quyen['idquyen'] = $row;
+                DB::table('vaitro_quyen')->insert($vaitro_quyen);
+                }
+            }
+
+            $idquyenkho = $request->input('idquyenkho');
+            if($idquyenkho!=null){
+                foreach ($idquyenkho as $key => $row){
+                $vaitro_quyen['idvaitro'] = $id;
+                $vaitro_quyen['idquyen'] = $row;
+                DB::table('vaitro_quyen')->insert($vaitro_quyen);
+                }
+            }
+
+            $idquyenkhuvuc = $request->input('idquyenkhuvuc');
+            if($idquyenkhuvuc!=null){
+                foreach ($idquyenkhuvuc as $key => $row){
+                $vaitro_quyen['idvaitro'] = $id;
+                $vaitro_quyen['idquyen'] = $row;
+                DB::table('vaitro_quyen')->insert($vaitro_quyen);
+                }
+            }
+
+            $idquyenlichlamviec = $request->input('idquyenlichlamviec');
+            if($idquyenlichlamviec!=null){
+                foreach ($idquyenlichlamviec as $key => $row){
+                $vaitro_quyen['idvaitro'] = $id;
+                $vaitro_quyen['idquyen'] = $row;
+                DB::table('vaitro_quyen')->insert($vaitro_quyen);
+                }
+            }
+
+            $idquyennguyenlieu = $request->input('idquyennguyenlieu');
+            if($idquyennguyenlieu!=null){
+                foreach ($idquyennguyenlieu as $key => $row){
+                $vaitro_quyen['idvaitro'] = $id;
+                $vaitro_quyen['idquyen'] = $row;
+                DB::table('vaitro_quyen')->insert($vaitro_quyen);
+                }
+            }
+
+            $idquyenquan = $request->input('idquyenquan');
+            if($idquyenquan!=null){
+                foreach ($idquyenquan as $key => $row){
+                $vaitro_quyen['idvaitro'] = $id;
+                $vaitro_quyen['idquyen'] = $row;
+                DB::table('vaitro_quyen')->insert($vaitro_quyen);
+                }
+            }
+
+            $idquyenthanhvien = $request->input('idquyenthanhvien');
+            if($idquyenthanhvien!=null){
+                foreach ($idquyenthanhvien as $key => $row){
+                $vaitro_quyen['idvaitro'] = $id;
+                $vaitro_quyen['idquyen'] = $row;
+                DB::table('vaitro_quyen')->insert($vaitro_quyen);
+                }
+            }
+
+            $idquyenthucdon = $request->input('idquyenthucdon');
+            if($idquyenthucdon!=null){
+                foreach ($idquyenthucdon as $key => $row){
+                $vaitro_quyen['idvaitro'] = $id;
+                $vaitro_quyen['idquyen'] = $row;
+                DB::table('vaitro_quyen')->insert($vaitro_quyen);
+                }
+            }
+
+            $idquyenvaitro = $request->input('idquyenvaitro');
+            if($idquyenvaitro!=null){
+                foreach ($idquyenvaitro as $key => $row){
+                $vaitro_quyen['idvaitro'] = $id;
+                $vaitro_quyen['idquyen'] = $row;
+                DB::table('vaitro_quyen')->insert($vaitro_quyen);
+                }
+            }
+
+            $idquyenquanly = $request->input('idquyenquanly');
+            if($idquyenquanly!=null){
+                foreach ($idquyenquanly as $key => $row){
+                $vaitro_quyen['idvaitro'] = $id;
+                $vaitro_quyen['idquyen'] = $row;
+                DB::table('vaitro_quyen')->insert($vaitro_quyen);
+                }
+            }
+
             return back();
         }
     }
@@ -84,7 +196,12 @@ class quanlyvaitroController extends Controller
             ->where('idvaitro',$id)
             ->get();
 
-        return view('vaitro.editvaitro',compact('quan','vaitro','quyen','vaitro_quyen'));
+        $check = DB::table('vaitro_quyen')
+            ->join('quyen', 'vaitro_quyen.idquyen', '=','quyen.id')
+            ->where('idvaitro',$id)
+            ->get();
+
+        return view('vaitro.editvaitro',compact('quan','vaitro','quyen','vaitro_quyen','check'));
     }
 
     public function doeditvaitro(Request $request){
@@ -97,12 +214,125 @@ class quanlyvaitroController extends Controller
             ->where('idvaitro',$request->id)
             ->delete();
 
-        $quyen = $request->input('idquyen');
-        foreach ($quyen as $key => $row){
-            $vaitro_quyen['idvaitro'] = $request->id;
+        $id = $request->id;
+
+        $idquyenban = $request->input('idquyenban');
+        if($idquyenban!=null){
+            foreach ($idquyenban as $key => $row){
+            $vaitro_quyen['idvaitro'] = $id;
             $vaitro_quyen['idquyen'] = $row;
             DB::table('vaitro_quyen')->insert($vaitro_quyen);
+            }
         }
+        
+        $idquyencalam = $request->input('idquyencalam');
+        if($idquyencalam!=null){
+            foreach ($idquyencalam as $key => $row){
+            $vaitro_quyen['idvaitro'] = $id;
+            $vaitro_quyen['idquyen'] = $row;
+            DB::table('vaitro_quyen')->insert($vaitro_quyen);
+            }
+        }
+
+        $idquyenhoadon = $request->input('idquyenhoadon');
+        if($idquyenhoadon!=null){
+            foreach ($idquyenhoadon as $key => $row){
+            $vaitro_quyen['idvaitro'] = $id;
+            $vaitro_quyen['idquyen'] = $row;
+            DB::table('vaitro_quyen')->insert($vaitro_quyen);
+            }
+        }
+
+        $idquyenkhachhang = $request->input('idquyenkhachhang');
+        if($idquyenkhachhang!=null){
+            foreach ($idquyenkhachhang as $key => $row){
+            $vaitro_quyen['idvaitro'] = $id;
+            $vaitro_quyen['idquyen'] = $row;
+            DB::table('vaitro_quyen')->insert($vaitro_quyen);
+            }
+        }
+
+        $idquyenkho = $request->input('idquyenkho');
+        if($idquyenkho!=null){
+            foreach ($idquyenkho as $key => $row){
+            $vaitro_quyen['idvaitro'] = $id;
+            $vaitro_quyen['idquyen'] = $row;
+            DB::table('vaitro_quyen')->insert($vaitro_quyen);
+            }
+        }
+
+        $idquyenkhuvuc = $request->input('idquyenkhuvuc');
+        if($idquyenkhuvuc!=null){
+            foreach ($idquyenkhuvuc as $key => $row){
+            $vaitro_quyen['idvaitro'] = $id;
+            $vaitro_quyen['idquyen'] = $row;
+            DB::table('vaitro_quyen')->insert($vaitro_quyen);
+            }
+        }
+
+        $idquyenlichlamviec = $request->input('idquyenlichlamviec');
+        if($idquyenlichlamviec!=null){
+            foreach ($idquyenlichlamviec as $key => $row){
+            $vaitro_quyen['idvaitro'] = $id;
+            $vaitro_quyen['idquyen'] = $row;
+            DB::table('vaitro_quyen')->insert($vaitro_quyen);
+            }
+        }
+
+        $idquyennguyenlieu = $request->input('idquyennguyenlieu');
+        if($idquyennguyenlieu!=null){
+            foreach ($idquyennguyenlieu as $key => $row){
+            $vaitro_quyen['idvaitro'] = $id;
+            $vaitro_quyen['idquyen'] = $row;
+            DB::table('vaitro_quyen')->insert($vaitro_quyen);
+            }
+        }
+
+        $idquyenquan = $request->input('idquyenquan');
+        if($idquyenquan!=null){
+            foreach ($idquyenquan as $key => $row){
+            $vaitro_quyen['idvaitro'] = $id;
+            $vaitro_quyen['idquyen'] = $row;
+            DB::table('vaitro_quyen')->insert($vaitro_quyen);
+            }
+        }
+
+        $idquyenthanhvien = $request->input('idquyenthanhvien');
+        if($idquyenthanhvien!=null){
+            foreach ($idquyenthanhvien as $key => $row){
+            $vaitro_quyen['idvaitro'] = $id;
+            $vaitro_quyen['idquyen'] = $row;
+            DB::table('vaitro_quyen')->insert($vaitro_quyen);
+            }
+        }
+
+        $idquyenthucdon = $request->input('idquyenthucdon');
+        if($idquyenthucdon!=null){
+            foreach ($idquyenthucdon as $key => $row){
+            $vaitro_quyen['idvaitro'] = $id;
+            $vaitro_quyen['idquyen'] = $row;
+            DB::table('vaitro_quyen')->insert($vaitro_quyen);
+            }
+        }
+
+        $idquyenvaitro = $request->input('idquyenvaitro');
+        if($idquyenvaitro!=null){
+            foreach ($idquyenvaitro as $key => $row){
+            $vaitro_quyen['idvaitro'] = $id;
+            $vaitro_quyen['idquyen'] = $row;
+            DB::table('vaitro_quyen')->insert($vaitro_quyen);
+            }
+        }
+
+        $idquyenquanly = $request->input('idquyenquanly');
+        if($idquyenquanly!=null){
+            foreach ($idquyenquanly as $key => $row){
+            $vaitro_quyen['idvaitro'] = $id;
+            $vaitro_quyen['idquyen'] = $row;
+            DB::table('vaitro_quyen')->insert($vaitro_quyen);
+            }
+        }
+
         return back();
     }
 
