@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use DB;
 use Session;
 
-class Quanlynhaphnag
+class Quanlynhaphang
 {
     /**
      * Handle an incoming request.
