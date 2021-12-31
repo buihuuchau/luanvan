@@ -55,7 +55,7 @@ Route::prefix('/')->group(function () {
 });
 // QUAN LY QUAN
 
-// QUAN LY THANH VIENn
+// QUAN LY THANH VIEN
 Route::prefix('/')->group(function () {
     Route::get('/quanlythanhvien', [
         'as' => 'quanlythanhvien',
