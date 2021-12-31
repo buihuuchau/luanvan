@@ -31,7 +31,7 @@ Route::prefix('/')->group(function () {
     Route::get('/dangnhapquan', [
         'as' => 'dangnhapquan',
         'uses' => 'App\Http\Controllers\quanController@dangnhapquan'
-    ]); 
+    ]);
     Route::post('/dodangnhapquan', [
         'as' => 'dodangnhapquan',
         'uses' => 'App\Http\Controllers\quanController@dodangnhapquan'
@@ -55,7 +55,7 @@ Route::prefix('/')->group(function () {
 });
 // QUAN LY QUAN
 
-// QUAN LY THANH VIEN
+// QUAN LY THANH VIENn
 Route::prefix('/')->group(function () {
     Route::get('/quanlythanhvien', [
         'as' => 'quanlythanhvien',
@@ -110,7 +110,7 @@ Route::prefix('/')->group(function () {
     Route::get('/dangxuatthanhvien', [
         'as' => 'dangxuatthanhvien',
         'uses' => 'App\Http\Controllers\quanlythanhvienController@dangxuatthanhvien'
-    ]);       
+    ]);
     Route::post('/suathongtinthanhvien', [
         'as' => 'suathongtinthanhvien',
         'uses' => 'App\Http\Controllers\quanlythanhvienController@suathongtinthanhvien'
@@ -280,7 +280,7 @@ Route::prefix('/')->group(function () {
         'uses' => 'App\Http\Controllers\quanlynguyenlieuController@deletenguyenlieu',
         'middleware' => 'XoaNguyenlieu::class'
     ]);
-});   
+});
 // QUAN LY NGUYEN LIEU
 
 // QUAN LY KHO
@@ -358,7 +358,7 @@ Route::prefix('/')->group(function () {
         'uses' => 'App\Http\Controllers\quanlycalamController@deletecalam',
         'middleware' => 'XoaCalam::class'
     ]);
-});   
+});
 // QUAN LY CA LAM
 
 // QUAN LY LICH LAM VIEC
@@ -403,7 +403,7 @@ Route::prefix('/')->group(function () {
         'uses' => 'App\Http\Controllers\quanlylichlamviecController@copylichlamviec',
         'middleware' => 'SuaLichlamviec::class'
     ]);
-});  
+});
 // QUAN LY LICH LAM VIEC
 
 //QUAN LY VAI TRO
@@ -505,9 +505,9 @@ Route::prefix('/')->group(function () {
         'middleware' => 'XoaHoadon::class'
     ]);
 
-    
-    
-    Route::get('/doibanhoadon/{id}', [//idban
+
+
+    Route::get('/doibanhoadon/{id}', [ //idban
         'as' => 'doibanhoadon',
         'uses' => 'App\Http\Controllers\orderController@doibanhoadon',
         'middleware' => 'SuaHoadon::class'
@@ -525,7 +525,7 @@ Route::prefix('/')->group(function () {
 
 
 
-    Route::get('/doimonhoadon/{id}', [//idban
+    Route::get('/doimonhoadon/{id}', [ //idban
         'as' => 'doimonhoadon',
         'uses' => 'App\Http\Controllers\orderController@doimonhoadon',
         'middleware' => 'SuaHoadon::class'
@@ -535,7 +535,7 @@ Route::prefix('/')->group(function () {
         'uses' => 'App\Http\Controllers\orderController@datmon',
         'middleware' => 'SuaHoadon::class'
     ]);
-    Route::get('/xoamonhoadon', [//idchitiet
+    Route::get('/xoamonhoadon', [ //idchitiet
         'as' => 'xoamonhoadon',
         'uses' => 'App\Http\Controllers\orderController@xoamonhoadon',
         'middleware' => 'SuaHoadon::class'
@@ -548,7 +548,7 @@ Route::prefix('/')->group(function () {
 
 
 
-    Route::get('/tamtinhhoadon/{id}', [//idban
+    Route::get('/tamtinhhoadon/{id}', [ //idban
         'as' => 'tamtinhhoadon',
         'uses' => 'App\Http\Controllers\orderController@tamtinhhoadon',
         'middleware' => 'SuaHoadon::class'
