@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('login.dangkyquan');
 // });
-// QUAN LY QUANn
+// QUAN LY QUAN
 Route::prefix('/')->group(function () {
     Route::get('/dangkyquan', [
         'as' => 'dangkyquan',
